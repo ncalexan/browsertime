@@ -14,6 +14,7 @@ export ANDROID_SERIAL
 
 URL=${@: -1}
 URL=${URL#"https://"}
+URL=${URL#"http://"}
 
 # N.B.: yargs doesn't parse `--firefox.android.intentArgument --ez`
 # properly, so always use `=--ez`!
@@ -36,7 +37,7 @@ if [[ $BROWSER == *"firefox"* ]] ; then
             --firefox.android.intentArgument="data:," \
             --firefox.profileTemplate $TMP/gecko-profile-turbo-$turbo \
             --browser firefox \
-            --resultDir "$RESULT_TOP_DIR/firefox.turbo-$turbo/$URL" \
+            --resultDir "$RESULT_TOP_DIR/firefox/$turbo/$URL" \
             "$@"
     done
 fi
@@ -55,7 +56,7 @@ if [[ $BROWSER == *"chrome"* ]] ; then
             --chrome.android.package "org.mozilla.tv.firefox.debug" \
             --chrome.android.activity="org.mozilla.tv.firefox.MainActivity --ez TURBO_MODE false -a android.intent.action.VIEW" \
             --browser chrome \
-            --resultDir "$RESULT_TOP_DIR/chrome.turbo-$turbo/$URL" \
+            --resultDir "$RESULT_TOP_DIR/chrome/$turbo/$URL" \
             "$@"
     done
 fi
