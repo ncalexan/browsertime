@@ -10,6 +10,6 @@ cat "$FILE" | while read -r url; do
     # I'm pretty sure I'm not quoting arguments correctly, but I don't
     # know how to do it correctly.
     if [[ -n $url ]] && [[ $url != \#* ]] ; then
-        /bin/bash one.sh $ARGS "$url"
+        /bin/bash one.sh $ARGS "$url" || echo "Failed to process $url; ignoring."
     fi
 done
