@@ -3,7 +3,8 @@ set -x -e -v
 
 # Invoke like `env ANDROID_SERIAL=... bash one.sh -n 3 -vv https://google.com`.
 
-: PACKAGE ${PACKAGE:=org.mozilla.tv.firefox.gecko.debug}
+: GECKODRIVER_PATH ${GECKODRIVER_PATH:=/Users/nalexander/Mozilla/gecko/target/debug/geckodriver}
+: CHROMEDRIVER_PATH ${CHROMEDRIVER_PATH:=/Users/nalexander/Downloads/chromedriver-2.32}
 # : EXTERNAL ${EXTERNAL:=/mnt/sdcard}
 : TMP ${TMP:=/tmp}
 : RESULT_TOP_DIR ${RESULT_TOP_DIR:=browsertime-results}
@@ -24,7 +25,7 @@ if [[ $BROWSER == *"firefox"* ]] ; then
         env RUST_BACKTRACE=1 RUST_LOG=trace bin/browsertime.js \
             --android \
             --skipHar \
-            --firefox.geckodriverPath "/Users/nalexander/Mozilla/gecko/target/debug/geckodriver" \
+            --firefox.geckodriverPath="$GECKODRIVER_PATH" \
             --firefox.android.deviceSerial="$ANDROID_SERIAL" \
             --firefox.android.package "org.mozilla.tv.firefox.gecko.debug" \
             --firefox.android.activity "org.mozilla.tv.firefox.MainActivity" \
@@ -51,7 +52,7 @@ if [[ $BROWSER == *"chrome"* ]] ; then
         bin/browsertime.js \
             --android \
             --skipHar \
-            --chrome.chromedriverPath "/Users/nalexander/Downloads/chromedriver-2.32" \
+            --chrome.chromedriverPath="$CHROMEDRIVER_PATH" \
             --chrome.android.deviceSerial="$ANDROID_SERIAL" \
             --chrome.android.package "org.mozilla.tv.firefox.debug" \
             --chrome.android.activity="org.mozilla.tv.firefox.MainActivity --ez TURBO_MODE false -a android.intent.action.VIEW" \
