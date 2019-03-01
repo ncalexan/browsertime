@@ -1,7 +1,7 @@
 #!/bin/bash
 set -x -e -v
 
-: TEMPLATE ${TEMPLATE:=/Users/nalexander/Devel/browsertime/browsersupport}
+: TEMPLATE ${TEMPLATE:=/Users/nalexander/Devel/browsertime/browsersupport/firefox-profile}
 : PACKAGE ${PACKAGE:=org.mozilla.tv.firefox.gecko.debug}
 : EXTERNAL ${EXTERNAL:=/mnt/sdcard}
 : TMP ${TMP:=/tmp}
