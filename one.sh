@@ -8,8 +8,8 @@ set -x -e -v
 # : EXTERNAL ${EXTERNAL:=/mnt/sdcard}
 : TMP ${TMP:=/tmp}
 : RESULT_TOP_DIR ${RESULT_TOP_DIR:=browsertime-results}
-: ANDROID_SERIAL ${ANDROID_SERIAL:=ZX1G227GMF}
-export ANDROID_SERIAL
+# : ANDROID_SERIAL ${ANDROID_SERIAL:=ZX1G227GMF}
+# export ANDROID_SERIAL
 : TURBO ${TURBO:=true false}
 : BROWSER ${BROWSER:=firefox chrome}
 
@@ -20,13 +20,21 @@ URL=${URL#"http://"}
 # N.B.: yargs doesn't parse `--firefox.android.intentArgument --ez`
 # properly, so always use `=--ez`!
 
+if [[ -n $ANDROID_SERIAL ]] ; then
+    DEVICE_SERIAL_ARGS="--firefox.android.deviceSerial=$ANDROID_SERIAL --chrome.android.deviceSerial=$ANDROID_SERIAL"
+else
+    DEVICE_SERIAL_ARGS=
+fi
+
+# PROXY_ARGS="--proxy.http localhost:4040 --proxy.https localhost:4040"
+PROXY_ARGS="--proxy.http 192.168.1.141:4040 --proxy.https 192.168.1.141:4040"
+
 if [[ $BROWSER == *"firefox"* ]] ; then
     for turbo in $TURBO ; do
         env RUST_BACKTRACE=1 RUST_LOG=trace bin/browsertime.js \
             --android \
             --skipHar \
             --firefox.geckodriverPath="$GECKODRIVER_PATH" \
-            --firefox.android.deviceSerial="$ANDROID_SERIAL" \
             --firefox.android.package "org.mozilla.tv.firefox.gecko.debug" \
             --firefox.android.activity "org.mozilla.tv.firefox.MainActivity" \
             --firefox.android.intentArgument=--ez \
@@ -39,6 +47,8 @@ if [[ $BROWSER == *"firefox"* ]] ; then
             --firefox.profileTemplate $TMP/gecko-profile-turbo-$turbo \
             --browser firefox \
             --resultDir "$RESULT_TOP_DIR/firefox/$turbo/$URL" \
+            $DEVICE_SERIAL_ARGS \
+            $PROXY_ARGS \
             "$@"
     done
 fi
@@ -53,11 +63,12 @@ if [[ $BROWSER == *"chrome"* ]] ; then
             --android \
             --skipHar \
             --chrome.chromedriverPath="$CHROMEDRIVER_PATH" \
-            --chrome.android.deviceSerial="$ANDROID_SERIAL" \
             --chrome.android.package "org.mozilla.tv.firefox.debug" \
             --chrome.android.activity="org.mozilla.tv.firefox.MainActivity --ez TURBO_MODE false -a android.intent.action.VIEW" \
             --browser chrome \
             --resultDir "$RESULT_TOP_DIR/chrome/$turbo/$URL" \
+            $DEVICE_SERIAL_ARGS \
+            $PROXY_ARGS \
             "$@"
     done
 fi

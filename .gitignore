@@ -6,5 +6,5 @@ doc/sequence-diagrams/*.png
 *.log
 *.iml
 .vscode
-/browsertime-results/
+/browsertime-results*/
 .tern-project

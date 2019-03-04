@@ -50,7 +50,7 @@ promise.consume(function* () {
             .androidActivity('org.mozilla.tv.firefox.MainActivity'))
         .build();
 
-    yield driver.get('http://www.google.com/ncr');
+    yield driver.get('data:text/html;');
     yield driver.wait(until.titleIs('Google'), 2000);
     yield driver.findElement(By.name('q')).sendKeys('webdriver', Key.RETURN);
     yield driver.wait(until.titleIs('webdriver - Google Search'), 2000);

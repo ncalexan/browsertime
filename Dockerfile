@@ -13,6 +13,8 @@ COPY docker/webpagereplay/deterministic.js /webpagereplay/scripts/deterministic.
 COPY docker/webpagereplay/LICENSE /webpagereplay/
 
 RUN sudo apt-get update && sudo apt-get install libnss3-tools \
+  libgconf-2-4 \
+  socat \
   net-tools -y && \
   mkdir -p $HOME/.pki/nssdb && \
   certutil -d $HOME/.pki/nssdb -N
@@ -27,8 +29,8 @@ WORKDIR /usr/src/app
 VOLUME /browsertime
 
 COPY package.* /usr/src/app/
-RUN npm install --production
 COPY . /usr/src/app
+RUN npm install --production
 
 ## This is to avoid click the OK button
 RUN mkdir -m 0750 /root/.android
