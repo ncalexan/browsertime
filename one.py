@@ -8,6 +8,7 @@ import argparse
 from collections import OrderedDict
 from contextlib import contextmanager
 import errno
+import functools
 import itertools
 import json
 import mozprocess
@@ -207,7 +208,19 @@ class VehicleConfiguration(object):
 
     def result_dir(self, url_result_dir):
         return os.path.join(url_result_dir, '{}-{}'.format(self.browser, self.turbo))
-        
+
+
+def verify_browsertime_results(path, expected, *args, **kwargs):
+    if not os.path.exists(path):
+        log.warn('record_verify path not found', path=path)
+        raise RuntimeError('record_verify path not found')
+
+    actual = len(json.load(open(path, 'rt')))
+    if actual != expected:
+        log.warn('record_verify wrong number of results', actual=actual, expected=expected)
+        raise RuntimeError('record_verify wrong number of results')
+
+    return 0
 
 def test_one_url(vehicle_configuration, wpr_configuration, result_dir, url):
     ensureParentDir(result_dir)
@@ -221,6 +234,7 @@ def test_one_url(vehicle_configuration, wpr_configuration, result_dir, url):
         wpr_extra_args=wpr_configuration.extra_args,
         output_prefix=result_dir if result_dir.endswith(os.sep) else result_dir + os.sep,
         record=record,
+        record_verify=functools.partial(verify_browsertime_results, os.path.join(result_dir, 'record', 'browsertime.json'), 1),
         replay=replay,
         logtag='browsertime')
 
@@ -242,17 +256,7 @@ def main(args):
                         help='Web Page Replay Go root directory ' +
                         '(contains wpr_{cert,key}.pem, deterministic.js, ' +
                         'wpr-* binaries)')
-    # parser.add_argument('--root',
-    #                     default=default_root,
-    #                     help='Web Page Replay Go root directory ' +
-    #                     '(contains wpr_{cert,key}.pem, deterministic.js,' +
-    #                     'wpr-* binaries)')
     parser.add_argument('--wpr-args', default='', help='wpr args')
-    # parser.add_argument('--record', required=True, help='record')
-    # parser.add_argument('--replay', required=True, help='replay')
-    # parser.add_argument('--output-prefix',
-    #                     default='/tmp/rnr-',
-    #                     help='Output prefix (end with / to create directory)')
     parser.add_argument('--wpr-host', default=None, help='wpr host to bind')
 
     parser.add_argument('--iterations', '-n', default=1, type=int, help='XXX') # xxx
@@ -282,6 +286,11 @@ def main(args):
                         action='store_true',
                         default=False,
                         help='Force writing to existing result directory')
+
+    parser.add_argument('--no-continue',
+                        action='store_true',
+                        default=False,
+                        help='Do not continue after first failing configuration.')
 
     parser.add_argument('urls', nargs='+', help='URLs') # xxx
 
@@ -321,6 +330,32 @@ def main(args):
         '--skipHar',
     ]
 
+    shared_browsertime_args.extend(['-v'] * args.verbose)
+
+
+    # From `docker/scripts/start.sh`.  We must use this wait script for both
+    # record and replay, because the default script uses `Date.now()`, which WPR
+    # makes deterministic!
+    WAIT_SCRIPT = 'return (function() {try { var end = window.performance.timing.loadEventEnd; var start= window.performance.timing.navigationStart; return (end > 0) && (performance.now() > end - start + %d);} catch(e) {return true;}})()' % (10000,)
+    shared_browsertime_args.extend(['--pageCompleteCheck', WAIT_SCRIPT])
+
+    shared_browsertime_args.extend(['--preURL', 'data:text/html,', '--preURLDelay', '5000'])
+
+    if args.wpr or args.wpr_root:
+        import socket
+        def get_ip():
+            s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+            try:
+                # doesn't even have to be reachable
+                s.connect(('10.255.255.255', 1))
+                return s.getsockname()[0]
+            except:
+                return '127.0.0.1'
+            finally:
+                s.close()
+
+    host = args.wpr_host or get_ip()
+
     # browser {firefox, chrome} x turbo {on, off}.
     configurations = OrderedDict()
 
@@ -337,7 +372,7 @@ def main(args):
                 '--firefox.android.intentArgument=-a',
                 '--firefox.android.intentArgument=android.intent.action.VIEW',
                 '--firefox.android.intentArgument=-d',
-                '--firefox.android.intentArgument="data:,"',
+                '--firefox.android.intentArgument=data:text/html,',
                 '--firefox.android.intentArgument=--ez',
                 '--firefox.android.intentArgument=TURBO_MODE',
                 '--firefox.android.intentArgument={}'.format(turbo),
@@ -351,7 +386,7 @@ def main(args):
                 # N.B.: chromedriver doesn't have an official way to pass intent
                 # arguments, but it does have an unsanitized injection at
                 # https://github.com/bayandin/chromedriver/blob/5a2b8f793391c80c9d1a1b0004f28be0a2be9ab2/chrome/adb_impl.cc#L212.
-                '--chrome.android.activity', 'org.mozilla.tv.firefox.MainActivity --ez TURBO_MODE {} -a android.intent.action.VIEW'.format(turbo),
+                '--chrome.android.activity', 'org.mozilla.tv.firefox.MainActivity --ez TURBO_MODE {} --es HTTP_PROXY_HOST {} --ei HTTP_PROXY_PORT {} -a android.intent.action.VIEW'.format(turbo, host, 4444),
             ],
         }
 
@@ -396,9 +431,6 @@ def main(args):
         record = list(shared_browsertime_args)
         record.extend(extras['extra_browsertime_args'])
 
-        # From `docker/scripts/start.sh`.
-        WAIT_SCRIPT = 'return (function() {try { var end = window.performance.timing.loadEventEnd; var start= window.performance.timing.navigationStart; return (end > 0) && (performance.now() > end - start + %d);} catch(e) {return true;}})()' % (5000,)
-        record.extend(['--pageCompleteCheck', WAIT_SCRIPT])
         record.extend(['-n', str(1)])
 
         # TODO: proxy!
@@ -409,23 +441,9 @@ def main(args):
 
         live = list(replay)
 
-        if args.wpr or args.wpr_root:
-            import socket
-            def get_ip():
-                s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-                try:
-                    # doesn't even have to be reachable
-                    s.connect(('10.255.255.255', 1))
-                    return s.getsockname()[0]
-                except:
-                    return '127.0.0.1'
-                finally:
-                    s.close()
-
-        host = args.wpr_host or get_ip()
         for variant in (record, replay):
-            variant.extend(['--proxy.http', '{}:4040'.format(host)])
-            variant.extend(['--proxy.https', '{}:4040'.format(host)])
+            variant.extend(['--proxy.http', '{}:4444'.format(host)]) # XXX
+            variant.extend(['--proxy.https', '{}:4444'.format(host)])
 
         for variant, name in ((record, 'record'), (replay, 'replay'), (live, 'live')):
             variant.extend(['--info.extra', json.dumps({'browser': browser, 'turbo': turbo, 'proxy': name})])
@@ -441,7 +459,7 @@ def main(args):
         url_log = log.new(url_index=url_index, url=url)
         url_log.info('testing URL')
         print("x")
-        
+
         if args.wpr or args.wpr_root:
             wpr_configuration = WprConfiguration(args.wpr, args.wpr_root, shlex.split(args.wpr_args) + ['--host', host]) # '0.0.0.0'
 
@@ -455,11 +473,21 @@ def main(args):
 
                 vehicle_result_dir = vehicle_configuration.result_dir(os.path.join(url_result_dir, "vehicle-{:02d}".format(vehicle_index + 1)))
                 try:
+                    if FOOTER:
+                        FOOTER.clear()
+
+                    if FOOTER:
+                        FOOTER.write([('green', 'url {:02d}/{:02d}'.format(url_index, len(urls))),
+                                      ('green', 'vehicle {:02d}/{:02d}'.format(vehicle_index, len(wanted_configurations)))])
+
                     test_one_url(vehicle_configuration, wpr_configuration, vehicle_result_dir, url)
-                except Exception as e:
+                except RuntimeError as e:
                     error_file = os.path.join(vehicle_result_dir, "error")
                     ensureParentDir(error_file)
                     print(e, file=open(error_file, 'wt'))
+
+                    if args.no_continue:
+                        raise
         else:
             raise NotImplementedError
             # import pprint

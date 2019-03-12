@@ -19,9 +19,6 @@ def walk(root, verbose=0):
     for root, _, fs in os.walk(root):
         for f in fs:
             if f == 'browsertime.json':
-                _, browser, turbo, _ = root.split('/', 3)
-                turbo = turbo == 'true'
-
                 path = os.path.join(root, f)
                 if verbose > 0:
                     print('Processing {}...'.format(path), file=sys.stderr)
@@ -30,10 +27,13 @@ def walk(root, verbose=0):
                     j = json.load(open(path, 'rt'))
                     for entry in j:
                         site = entry['info']['url'].lower()
+                        proxy = entry['info']['extra']['proxy']
+                        browser = entry['info']['extra']['browser']
+                        turbo = entry['info']['extra']['turbo']
                         for i, run in enumerate(entry['browserScripts']):
                             pageLoadTime = run['timings']['pageTimings']['pageLoadTime']
                             timestamp = entry['timestamps'][i]
-                            yield (site, browser, turbo, i + 1, timestamp, pageLoadTime)
+                            yield (site, browser, turbo, proxy, timestamp, pageLoadTime)
                 except Exception as e:
                     print('Processing {}... ERROR: {}'.format(path, e), file=sys.stderr)
 
@@ -63,15 +63,16 @@ def walk(root, verbose=0):
 
 def main(args):
     parser = argparse.ArgumentParser()
-    parser.add_argument("--dir", "-D", default="browsertime-results",
-                        help="Directory to crawl for results")
+    parser.add_argument("--dir", "-D", nargs='*', default=["browsertime-results"],
+                        help="Directory or directories to crawl for results")
     parser.add_argument("--verbose", "-v", action='count',
                         help="Be verbose (can be repeated)")
     args = parser.parse_args(args)
 
     writer = csv.writer(sys.stdout)
-    writer.writerow(('site', 'browser', 'turbo', 'run', 'timestamp', 'pageLoadTime'))
-    writer.writerows(sorted(walk(args.dir, args.verbose)))
+    writer.writerow(('run', 'site', 'browser', 'turbo', 'proxy', 'timestamp', 'pageLoadTime'))
+
+    writer.writerows(sorted(itertools.chain.from_iterable(((i + 1,) + measurement for measurement in walk(d, args.verbose)) for i, d in enumerate(args.dir))))
 
 
 if __name__ == '__main__':

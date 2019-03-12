@@ -12,6 +12,8 @@ pandas = "*"
 blessings = "*"
 structlog = "*"
 colorama = "*"
+mozterm = "*"
+jupyter = "*"
 
 [requires]
 python_version = "2.7"
