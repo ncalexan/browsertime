@@ -12,7 +12,7 @@ Invoke like:
 `pipenv run python with_wpr.py -v --wpr /path/to/wpr --record 'curl --proxy localhost:4040 http://example.com' --replay 'curl --proxy localhost https://example.com'` # noqa
 """
 
-from __future__ import absolute_import, unicode_literals, print_function
+from __future__ import absolute_import, print_function, unicode_literals
 
 
 import argparse
@@ -82,7 +82,9 @@ def record_and_replay(
         wpr, wpr_root, wpr_extra_args=[],
         output_prefix='wpr',
         record=None, record_args=[], record_kwargs={},
-        replay=None, replay_args=[], replay_kwargs={}):
+        record_verify=None,
+        replay=None, replay_args=[], replay_kwargs={},
+        replay_verify=None):
     r"""Invoke `record(*record_args, **record_kwargs)` with `wpr record
     ...` running, and then invoke `replay(*replay_args,
     **replay_kwargs)` with `wpr replay ...` running.
@@ -100,9 +102,12 @@ def record_and_replay(
     wpr_args = ['--http_connect_proxy_port', str(4040),
                 '--http_port', str(8080),
                 '--https_port', str(8081),
-                '--https_cert_file', 'wpr_cert.pem',
-                '--https_key_file', 'wpr_key.pem',
                 '--inject_scripts', 'deterministic.js']
+    if '--https_cert_file' not in wpr_extra_args:
+        wpr_args.extend(['--https_cert_file', 'wpr_cert.pem'])
+    if '--https_key_file' not in wpr_extra_args:
+        wpr_args.extend(['--https_key_file', 'wpr_key.pem'])
+
     wpr_args.extend(wpr_extra_args)
 
     archive_path = os.path.abspath('{}archive.wprgo'.format(output_prefix))
@@ -132,6 +137,13 @@ def record_and_replay(
             status = record(*record_args, **record_kwargs)
             if status:
                 raise RuntimeError("Recording failed: ", status)
+            print("record_verify", bool(record_verify))
+            if record_verify:
+                status = record_verify(*record_args, **record_kwargs)
+                print("record_verify status", status)
+
+                if status:
+                    raise RuntimeError("Record verifying failed: ", status)
         finally:
             if record_proc.poll():
                 raise RuntimeError("Record proxy failed: ", record_proc.poll())
@@ -148,6 +160,10 @@ def record_and_replay(
             status = replay(*replay_args, **replay_kwargs)
             if status:
                 raise RuntimeError("Replaying failed: ", status)
+            if replay_verify:
+                status = replay_verify(*replay_args, **replay_kwargs)
+                if status:
+                    raise RuntimeError("Replay verifying failed: ", status)
         finally:
             if replay_proc.poll():
                 raise RuntimeError("Replay proxy failed: ", replay_proc.poll())
@@ -160,7 +176,9 @@ def record_and_replay_processes(
         wpr, wpr_root, wpr_extra_args=[],
         output_prefix='wpr',
         record=None,
+        record_verify=None,
         replay=None,
+        replay_verify=None,
         logtag=None):
     r"""Execute `record` with `wpr record ...` running, and then execute
     `replay` with `wpr replay ...` running.
@@ -189,9 +207,11 @@ def record_and_replay_processes(
         record=execute,
         record_args=record,
         record_kwargs={'logfile': record_logfile},
+        record_verify=record_verify,
         replay=execute,
         replay_args=replay,
-        replay_kwargs={'logfile': replay_logfile})
+        replay_kwargs={'logfile': replay_logfile},
+        replay_verify=replay_verify)
 
 
 ROOT = os.path.abspath(os.path.dirname(__file__))
