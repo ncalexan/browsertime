@@ -1,0 +1,465 @@
+---
+title: "browsertime: GeckoView vs system WebView on the Fire TV Cube and Pendant"
+author: Nick Alexander
+date: March 13, 2019
+output:
+  html_document:
+    mathjax: "js/MathJax.js"
+    toc: true
+    toc_float: true
+    theme: cosmo
+    includes:
+      in_header: "html/header.html"
+---
+<style>
+select {
+    width: 30%;
+    right: 10px;
+    height: 30px;
+}
+</style>
+
+```{r setup, include=FALSE}
+library('reticulate')
+venv <- system("pipenv --venv", inter = TRUE)
+use_virtualenv(venv, required = TRUE)
+py_config()
+library(DT)
+library(dplyr)
+```
+
+```{r}
+btr <- read.csv('firetv-all.csv')
+by_site <- btr %>%
+  filter(proxy == 'replay') %>%
+  select(-proxy, -timestamp)
+complete <- by_site %>%
+  group_by(run, device, site) %>%
+  filter(n() == 20) %>%
+  ungroup()
+```
+
+```{r gv_over_wv}
+xx <- complete %>%
+  group_by(browser, run, device, site, turbo) %>%
+  filter(browser == 'firefox') %>%
+  group_by(run, device, site, turbo) %>%
+  summarise(pageLoadTime_mean=mean(pageLoadTime), pageLoadTime_rsd=sd(pageLoadTime)/mean(pageLoadTime)*100)
+
+yy <- complete %>%
+  group_by(browser, run, device, site, turbo) %>%
+  filter(browser == 'chrome') %>%
+  group_by(run, device, site, turbo) %>%
+  summarise(pageLoadTime_mean=mean(pageLoadTime), pageLoadTime_rsd=sd(pageLoadTime)/mean(pageLoadTime)*100)
+
+gv_over_wv <- inner_join(xx, yy, by=c("run", "device", "site", "turbo"))
+gv_over_wv$speed_pct <- xx$pageLoadTime_mean/yy$pageLoadTime_mean
+gv_over_wv$noise_pct <- xx$pageLoadTime_rsd/yy$pageLoadTime_rsd
+
+gv_over_wv <- gv_over_wv %>% ungroup() %>% select(-starts_with('pageLoadTime'))
+```
+
+```{r}
+gv_over_wv %>% filter(turbo == 'true') %>% group_by(run, device) %>% summarise(mean(speed_pct), mean(noise_pct))
+```
+
+```{r}
+gv_over_wv %>% filter(turbo == 'false') %>% group_by(run, device) %>% summarise(mean(speed_pct), mean(noise_pct))
+```
+
+
+
+```{python setup, include=FALSE}
+import pandas as pdp
+import numpy as np
+
+def rsd(column):
+    "Compute the relative standard deviation, as a floating point percentage."
+    return 100 * column.std() / column.mean()
+
+btr = pd.read_csv('firetv-all.csv')
+by_site = btr[btr.proxy == 'replay'].drop(columns=['proxy', 'timestamp'])
+complete = by_site \
+    .groupby(['run', 'device', 'site']) \
+    .filter(lambda x: len(x.groupby(['browser', 'turbo'])) == 4)
+means = complete \
+    .groupby(['run', 'device', 'site', 'browser', 'turbo']) \
+    .agg([np.mean, rsd]) \
+    .reset_index()
+    
+means.columns = ["_".join(y for y in x if y) for x in means.columns.ravel()]
+    
+# means.columns = df.columns.droplevel(0)
+# means = means.rename({('pageLoadTime', 'mean'): 'time'})
+
+df = means.set_index(['browser', 'run', 'device', 'site', 'turbo'])
+gv_over_wv = (df.loc['firefox'] / df.loc['chrome']) \
+    .reset_index().set_index(['run', 'device', 'turbo', 'site']).sort_index()
+
+gv_over_wv_means = gv_over_wv.groupby(['run', 'device', 'turbo']).agg(np.mean).reset_index()
+gv_over_wv_means_csv = gv_over_wv_means.to_csv(header=True, index=False)
+
+df = means.set_index(['turbo', 'run', 'device', 'site', 'browser'])
+turbo_true_over_turbo_false = (df.loc[True] / df.loc[False]) \
+    .reset_index().set_index(['run', 'device', 'browser', 'site']).sort_index()
+
+turbo_means = turbo_true_over_turbo_false.groupby(['run', 'device', 'browser']).agg(np.mean).reset_index()
+turbo_means_csv = turbo_means.to_csv(header=True, index=False)
+```
+
+```{python, results='asis'}
+# print(gv_over_wv.groupby(['run', 'device', 'turbo']).agg(np.mean).reset_index().to_html())
+print(gv_over_wv_means.to_html())
+    #.style.set_caption("pageLoadTime: with turbo vs. without")\
+    #.format("{:.2%}", subset='pageLoadTime')
+```
+
+This report analyses performance measurements from the
+[browsertime](https://github.com/sitespeedio/browsertime) test harness
+across the Fire TV vehicle powered by different rendering engines.
+
+---
+
+## Conclusions
+
+### GeckoView vs. WebView
+
+The data produce mixed results.
+
+1. GeckoView fires the `load` event (as measured by `pageLoadTime`/the `loadEventStart` timestamp) generally after the system WebView does.  This effect is larger on the FireTV Cube, which we consider to be less powerful than the FireTV Pendant.  This suggests that Gecko has significant room to improve on low-end devices.
+
+```{r}
+py$gv_over_wv_means
+```
+
+```{r}
+#library(rpivotTable)
+df <- read.csv(text=py$gv_over_wv_means_csv)
+#rpivotTable(df)
+
+# dfagg[order(-dfagg$`Percent Organic`)], options=list(dom='t'),
+#           caption='Table 1: Average SAP and Organic Search Share by Country')
+datatable(df[df$turbo == "true"], options=list(dom='t'), caption='Table 1: GeckoView over WebView pageLoadTime, turbo enabled (lower is better)')
+
+
+# %>% formatPercentage(c(3, 4))
+
+# , caption='Table 1: Average SAP and Organic Search Share by Country')
+# colnames(df)
+# %>%
+#   formatPercentage(c(2, 3, 4)) %>%
+#   formatStyle("Organic Share of SAP",
+#     fontWeight = "bold") %>% 
+#   formatStyle('Country',
+#   target = 'row',
+#   backgroundColor = styleEqual("US", "#ffbf89"))
+
+```
+
+
+---
+
+## Methodology
+
+### Vehicles tested
+
+The data were collected from the following vehicle configurations:
+
+| vehicle | engine | turbo mode |
+| --- | --- | --- |
+| Firefox for Fire TV | GeckoView | enabled |
+| Firefox for Fire TV | GeckoView | disabled |
+| Firefox for Fire TV | WebView | enabled |
+| Firefox for Fire TV | WebView | disabled |
+
+### Sites tested
+
+22 of the 25 sites in the [product mobile
+corpus](https://docs.google.com/spreadsheets/d/1wqGfLaEKVDjfA-y4gZfcFRtjU3G0HzOxlcFTMlJGEJw/edit?ts=5bdb67e1#gid=596602279)
+were tested.  The sites not tested were:
+
+| site | reason |
+| --- | --- |
+| https://m.facebook.com/Cristiano | requires a login |
+| https://hubs.mozilla.com/spES8RP/treasured-spirited-huddle | Web Sockets break record and replay proxy |
+| https://www.allrecipes.com | fails to render in WebView due to invalid protocol error |
+
+Some sites witnessed transient network errors: in these cases the
+number of recorded measurements is fewer than expected.  No site was
+measured fewer than 5 times.
+
+The entire corpus was tested end-to-end twice in succession.
+
+### Single site test
+
+For each site, the four vehicle configurations were tested as follows:
+
+1. An initial recording of the live site was captured.  The record and
+replay proxy was started in recording mode, and browsertime with
+`--iterations 1` launched the vehicle and (cold-)loaded the site under test.
+The replay proxy was stopped and an archive of the network activity
+captured.
+
+2. The record and replay proxy was started in replay mode, backed by
+the archive of captured network activity.  browsertime, with
+`--iterations 5` launched the vehicle and cold-loaded the site under
+test the specified number of times.  Between each cold-load the
+vehicle was force-stopped and its on-device package-data cleared.
+
+3. For each cold-load, browsertime reports a wide range of timings,
+mostly from the [Performance Timing API](XXX).
+
+---
+
+## Results
+
+### Raw data
+
+The data collected for the following tests is available:
+
+| target device | folder |
+| --- | --- |
+| Fire TV Cube | https://drive.google.com/open?id=1-1jfdNQU-CR4h7BBQRHKpW3T0DAO6vqW |
+| Fire TV Pendant | https://drive.google.com/open?id=1xW_bwcK6TnvRqot3h9XZdsc10Uyf6fKe |
+| Fire TV Cube (repeat) | https://drive.google.com/open?id=14xtHSG5Z6FoXiwjjworPxD3zsqAWLcJp |
+
+### Processed data
+
+The data from the three test runs above can be found in the following
+[CSV file](XXX).  The columns of the CSV are as follows:
+
+| column | description |
+| --- | --- |
+`device` | the target device, either "Fire TV Cube (WebView 59)" or "Fire TV Pendant (WebView 59)" |
+| `run` | the test run number |
+| `site` | the URL of the page being loaded |
+| `browser` | the tested engine, either "firefox" (meaning GeckoView) or "chrome" (meaning system WebView) |
+| `turbo` | whether Turbo Mode was enabled, either "true" (meaning Turbo View was enabled) or "false" (meaning Turbo View was disabled) |
+| `proxy` | the proxy state, either "record" (meaning the pageload was from the live network and the proxy was recording) or "replay" (meaning the pageload was from the replaying proxy and not from the live network) |
+| `timestamp` | the local timestamp when the pageload was initiated |
+| `pageLoadTime` | the [`loadEventStart`](https://developer.mozilla.org/en-US/docs/Web/API/PerformanceNavigationTiming/loadEventStart) timestamp reported by the engine under test, as captured [by this JavaScript code](https://github.com/sitespeedio/browsertime/blob/master/browserscripts/timings/pageTimings.js) |
+
+---
+
+## Inter-vehicle reliability
+
+### Test harness
+
+The data were collected using an ad-hoc Python harness driving the
+[browsertime]() testing suite.  browsertime drives the underlying
+vehicles using Web Driver automation; for WebView this means
+`chromedriver` driving the engine via the Chrome Debug Protocol and
+for GeckoView this means `geckodriver` driving the engine over the
+Marionette protocol.
+
+The version of browsertime used was lightly modified to support
+Android-specific WebView engine configuration and to support the
+GeckoView engine.  None of these modifications are believed to impact
+engine performance.
+
+The version of `geckodriver` was heavily modified to support the
+GeckoView engine over the `adb` TCP/IP protocol.  These modifications
+principally concern launching the target vehicle and connecting to the
+underlying protocol handler; any impact on engine performance has to
+do with servicing the underlying protocol and ambient engine
+configuration (for example, custom profiles in GeckoView).
+
+### Network weather
+
+Both mitmproxy and Web Page Replay Go were used to minimize the impact
+of network weather.  Because older versions of `adb` do not allow to
+reverse port-forward over TCP/IP [link], the test host and the target
+device were always on the same network.  Because Web Page Replay Go is
+not a true HTTP proxy [link] but instead requires transparent
+port-mapping [link] and because Gecko does not support such
+port-mapping [link], mitmproxy was used to perform the port-mapping
+[link to script].  Record and replay were provided by wpr-go, although
+it is likely that mitmproxy could provide this function.
+
+Using a proxy and a custom CA certificate for both WebView and
+GeckoView sacrifices real-world characteristics for cross-engine
+consistency.  GeckoView requires a true HTTP proxy for this type of
+record and replay, and such a proxy requires either a custom CA
+certificate or for the browser to allow insecure connections.
+Allowing insecure connections is decidely _not_ real-world, hence we
+took the lesser of two evils.
+
+### Record and replay differences
+
+The turbo mode option should change the network activity captured by
+the record and replay proxy.  However, it is also possible that the
+two engines witness different network activity -- for example, by User
+Agent sniffing sites.  This means that each individual site and
+vehicle configuration should have stable network activity, but between
+vehicle configuraitons there could be network activity differences.
+
+### Live site differences
+
+Some of the sites serve dynamic content and/or advertisements.  This
+means that between the first and second whole-corpus iteration, the
+underlying network archives may have changed significantly.
+
+### Gecko profile conditioning
+
+It is well known that the Gecko profile significantly impacts the
+performance of the Gecko engine: preferences, certificate databases,
+and the network cache itself can have major impacts on measurements.
+
+To minimize volatility, for each GeckoView-based vehicle
+configuration, i.e., for both turbo enabled and turbo disabled, a
+Gecko profile was conditioned as follows.  First, a profile template
+with `cert9.db` and `key4.db` containing the custom CA certificate
+used by the record and replay proxy was produced.  Second, this
+template was copied to the target device, and the vehicle was started
+from a cleared state with this profile.  The single page
+`http://example.com` was visited and then browser was idle for 2
+minutes.  The vehicle was then force-stopped and the conditioned
+profile retrieved from the device.
+
+This conditioned profile was then copied to the device at the
+beginning of every test run: that is, every cold pageload started with
+exactly the same Gecko profile.
+
+---
+
+## Future work
+
+---
+
+## Versions
+
+| package | version | link |
+| ------- | --- | --- |
+| mitmproxy | 4.0.4 | |
+| wpr-go | | XXX ede50ff4d |
+| browsertime | | XXX |
+| chromedriver| 2.32 | |
+| geckodriver | | XXX |
+| firefox-tv | | xxx |
+| GeckoView | XXX | |
+| system WebView | 59.XXX |
+
+
+This report explores the newly added organic search telemetry as part of [Bug 1482234](https://bugzilla.mozilla.org/show_bug.cgi?id=1482234). In the past, we've only recorded searches made from Search Access Points (SAPs), which originate from part of the Firefox UI. Organic searches are those made in content directly from the search partner (i.e. navigating to google.com and performing a search in google.com's UI).
+
+Organic searches are not tagged with a partner code and thus, **we do not currently generate revenue from organic search**.
+
+---
+
+## Data
+
+
+
+This analysis is based on a 1% sample of the `search_clients_daily` table, covering 4 weeks of data from 2018-08-10 to 2018-09-07. The data-extraction code can be found [here](https://dbc-caf9527b-e073.cloud.databricks.com/#notebook/31673/command/31678).
+
+**Notes**:
+
+* This data is only available for Google at this time
+* SAP searches in this report are the sum of the `tagged_sap` and `tagged_follow_on` fields**\***
+* Organic searches involve only the `organic` field, which includes both organic-direct and organic-follow-on searches.
+
+**\* This report compares in-content (tagged) SAP searches to in-content Organic searches, giving us the best “apples-to-apples” comparison estimates. All future mentions of “SAP” refer to tagged SAP searches.**
+
+---
+
+## Summary
+
+Table 1 shows the average daily share of searches that are SAP versus Organic by the top 10 countries. The bolded **Organic Share of SAP** column shows the ratio of Organic searches to SAP (organic / sap). The table is sorted by this column in descending order.
+
+Take for instance the seventh row, which shows these data for the US:
+
+* On average, organic searches made up 31% of all Firefox searches in the US.
+* On average, we recorded 0.45 organic searches for every 1 SAP search in the US.
+
+
+
+```{r, echo=F}
+library(RJSONIO)
+library(data.table)
+library(DT)
+
+lines <- fromJSON("./data/organic-searches.json") 
+listed_lines <- json_file <- lapply(lines, function(x) {
+                                x[sapply(x, is.null)] <- NA
+                                unlist(x)})
+df <- data.table(do.call('rbind', listed_lines))
+
+
+df$pct_sap <- as.numeric(df$pct_sap)
+df$pct_organic <- as.numeric(df$pct_organic)
+df$pct_organic_of_sap <- as.numeric(df$pct_organic_of_sap)
+df$pct_excl_organic <- as.numeric(df$pct_excl_organic)
+df$pct_excl_sap <- as.numeric(df$pct_excl_sap)
+df$pct_mixed <- as.numeric(df$pct_mixed)
+
+dfagg <- df[,.("Percent SAP"=round(mean(pct_sap), 2), 
+      "Percent Organic"=round(mean(pct_organic), 2), 
+      "Organic Share of SAP"=round(mean(pct_organic_of_sap), 2)),
+     by=.(Country=country)]
+
+dfagg_excl<- df[,.("Percent Only SAP"=round(mean(pct_excl_sap), 2), 
+      "Percent Only Organic"=round(mean(pct_excl_organic), 2), 
+      "Percent Mixed"=round(mean(pct_mixed), 2)),
+     by=.(Country=country)]
+
+
+datatable(dfagg[order(-dfagg$`Percent Organic`)], options=list(dom='t'),
+          caption='Table 1: Average SAP and Organic Search Share by Country') %>%
+  formatPercentage(c(2, 3, 4)) %>%
+  formatStyle("Organic Share of SAP",
+    fontWeight = "bold") %>% 
+  formatStyle('Country',
+  target = 'row',
+  backgroundColor = styleEqual("US", "#ffbf89"))
+
+```
+
+Table 2 shows the average daily share of **users** that exclusively use SAP search, exclusively use Organic search, and some mixture of the two for the top 10 countries. These data are for users that made at least 1 search, so each row should roughly sum to 100%. 
+
+Looking at the seventh row for the US, we can make the following statement:
+
+* On average, for users in the US that searched: 
+    + 52% only used SAP search
+    + 39% only used organic search
+    + 9% used both organic and SAP search
+
+
+```{r, echo=F}
+
+datatable(dfagg_excl[order(-dfagg_excl$`Percent Only Organic`)], options=list(dom='t'),
+          caption='Table 2: Average Share of Users who exclusively use SAP search, Organic search, and a Mixture') %>%
+  formatPercentage(c(2, 3, 4)) %>%
+  formatStyle("Percent Only Organic",
+    fontWeight = "bold") %>% 
+  formatStyle('Country',
+  target = 'row',
+  backgroundColor = styleEqual("US", "#ffbf89"))
+```
+
+---
+
+## Over Time
+
+This section shows the same data broken out by date. This allows us understand the stability of these metrics, which seem stable throughout their (albeit short) existence.
+
+Use the drop down menu to select a specific country to isolate. Once a country is selected, all three charts below will update accordingly.
+
+```{r, echo=F}
+htmltools::includeHTML("./html/organic-search.html")
+```
+
+## Conclusion
+
+We recorded a significant number of organic searches in the top 10 countries as compared to our standard SAP searches (See Table 1). For every 100 US SAP searches we see another 45 organic searches. Additionally, 39% of US daily users that searched **only** used organic search in the observed time period.
+
+These numbers are even larger for other markets. Take India for example, in which **nearly half of all searches in India are organic searches.** 
+
+These results suggest that there are huge potential monetization opportunities in our key markets if organic searchers start using SAP search more often. Part of this effort is already in motion via the [Search Nudges](https://sql.telemetry.mozilla.org/dashboard/search-nudges-experiment?p_study_name_58658=searchNudgesExperiment&p_start_date_58658=20180827&p_version_58658=1.8.2) shield experiment, in which users are gently reminded of the option of searching through the URL bar.
+
+#### Future Work
+
+The next step in this analysis involves looking at these data for users with a custom home page and/or a custom newtab page. Setting the home/newtab page to i.e. google.com could have significant impact on a user's search volume. 
+
+The details are outlined in [Bug 1489625](https://bugzilla.mozilla.org/show_bug.cgi?id=1489625), however, analysis is currently blocked on [Bug 1272388](https://bugzilla.mozilla.org/show_bug.cgi?id=1272388).
+
+
