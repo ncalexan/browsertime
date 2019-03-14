@@ -4,7 +4,6 @@ author: Nick Alexander
 date: March 13, 2019
 output:
   html_document:
-    mathjax: "js/MathJax.js"
     toc: true
     toc_float: true
     theme: cosmo
