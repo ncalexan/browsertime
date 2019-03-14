@@ -11,6 +11,7 @@ output:
     includes:
       in_header: "html/header.html"
 ---
+
 <style>
 select {
     width: 30%;
@@ -20,16 +21,13 @@ select {
 </style>
 
 ```{r setup, include=FALSE}
-library('reticulate')
-venv <- system("pipenv --venv", inter = TRUE)
-use_virtualenv(venv, required = TRUE)
-py_config()
-library(DT)
+library(glue)
 library(dplyr)
-```
+library(DT)
+library(ggplot2)
+library(stringr)
 
-```{r}
-btr <- read.csv('firetv-all.csv')
+btr <- read.csv('data/firetv.csv')
 by_site <- btr %>%
   filter(proxy == 'replay') %>%
   select(-proxy, -timestamp)
@@ -39,7 +37,15 @@ complete <- by_site %>%
   ungroup()
 ```
 
-```{r gv_over_wv}
+This report analyses performance measurements from the [browsertime](https://github.com/sitespeedio/browsertime) test harness across the Fire TV vehicle powered by different rendering engines.
+
+This report was commissioned to try to replicate similar measurements performed using a different test harness and methodology, the [nimbledroid test suite](https://github.com/npark-mozilla/focus-nimbledroid/blob/master/fftv-tests/app/src/androidTest/java/com/nimbledroid/blackboxtest/EspressoTests.java).  As data was collected, the focus of the project shifted away from validating the nimbledroid test suite, and in fact the tested site corpus is almost entirely disjoint from the site corpus tested by the nimbledroid test suite.  Prior to shifting the corpus, however, the browsertime measurements were consonant with the nimbledroid measurements.
+
+## Conclusions
+
+### browsertime reports that GeckoView is slower than WebView 
+
+```{r gv_over_wv, include=FALSE}
 xx <- complete %>%
   group_by(browser, run, device, site, turbo) %>%
   filter(browser == 'firefox') %>%
@@ -59,105 +65,99 @@ gv_over_wv$noise_pct <- xx$pageLoadTime_rsd/yy$pageLoadTime_rsd
 gv_over_wv <- gv_over_wv %>% ungroup() %>% select(-starts_with('pageLoadTime'))
 ```
 
-```{r}
-gv_over_wv %>% filter(turbo == 'true') %>% group_by(run, device) %>% summarise(mean(speed_pct), mean(noise_pct))
+When running with **Turbo Mode disabled, GeckoView is perhaps 10% slower than WebView on the more powerful FireTV Pendant and perhaps 50% slower than WebView on the underpowered FireTV Cube.**  It seems that GeckoView is also much more variable than WebView -- perhaps as much as 200% more.
+
+```{r, echo=FALSE}
+turbo_off <- gv_over_wv %>% filter(turbo == 'false') %>% group_by(run, device) %>% summarise(`speed penalty`=mean(speed_pct), `noise penalty`=mean(noise_pct))
+datatable(turbo_off, options=list(dom='t'), caption=('GeckoView pageload penalties with Turbo Mode disabled (lower is better)' %>% glue())) %>% formatPercentage(c(3, 4))
 ```
 
-```{r}
-gv_over_wv %>% filter(turbo == 'false') %>% group_by(run, device) %>% summarise(mean(speed_pct), mean(noise_pct))
+The performance gap does decrease with **Turbo Mode enabled: GeckoView is perhaps level with WebView on the FireTV Pendant and perhaps 40% slower than WebView on the FireTV Cube**.  However, GeckoView becomes significantly more variable than WebView.  This is very surprising because the set of processed resources should be smaller than with Turbo Mode disabled, which one expects to translate to less variability.
+
+```{r, echo=FALSE}
+turbo_on <- gv_over_wv %>% filter(turbo == 'true') %>% group_by(run, device) %>% summarise(`speed penalty`=mean(speed_pct), `noise penalty`=mean(noise_pct))
+datatable(turbo_off, options=list(dom='t'), caption=('GeckoView pageload penalties with Turbo Mode enabled (lower is better)' %>% glue())) %>% formatPercentage(c(3, 4))
 ```
 
+### browsertime reports that Turbo Mode improves performance at the expense of variability
 
+```{r turbo, include=FALSE}
+xx <- complete %>%
+  group_by(turbo, run, device, site, browser) %>%
+  filter(turbo == 'true') %>%
+  group_by(run, device, site, browser) %>%
+  summarise(pageLoadTime_mean=mean(pageLoadTime), pageLoadTime_rsd=sd(pageLoadTime)/mean(pageLoadTime)*100)
 
-```{python setup, include=FALSE}
-import pandas as pdp
-import numpy as np
+yy <- complete %>%
+  group_by(turbo, run, device, site, browser) %>%
+  filter(turbo == 'false') %>%
+  group_by(run, device, site, browser) %>%
+  summarise(pageLoadTime_mean=mean(pageLoadTime), pageLoadTime_rsd=sd(pageLoadTime)/mean(pageLoadTime)*100)
 
-def rsd(column):
-    "Compute the relative standard deviation, as a floating point percentage."
-    return 100 * column.std() / column.mean()
+turbo_improvement <- inner_join(xx, yy, by=c("run", "device", "site", "browser"))
+turbo_improvement$speed_pct <- xx$pageLoadTime_mean/yy$pageLoadTime_mean
+turbo_improvement$noise_pct <- xx$pageLoadTime_rsd/yy$pageLoadTime_rsd
 
-btr = pd.read_csv('firetv-all.csv')
-by_site = btr[btr.proxy == 'replay'].drop(columns=['proxy', 'timestamp'])
-complete = by_site \
-    .groupby(['run', 'device', 'site']) \
-    .filter(lambda x: len(x.groupby(['browser', 'turbo'])) == 4)
-means = complete \
-    .groupby(['run', 'device', 'site', 'browser', 'turbo']) \
-    .agg([np.mean, rsd]) \
-    .reset_index()
-    
-means.columns = ["_".join(y for y in x if y) for x in means.columns.ravel()]
-    
-# means.columns = df.columns.droplevel(0)
-# means = means.rename({('pageLoadTime', 'mean'): 'time'})
-
-df = means.set_index(['browser', 'run', 'device', 'site', 'turbo'])
-gv_over_wv = (df.loc['firefox'] / df.loc['chrome']) \
-    .reset_index().set_index(['run', 'device', 'turbo', 'site']).sort_index()
-
-gv_over_wv_means = gv_over_wv.groupby(['run', 'device', 'turbo']).agg(np.mean).reset_index()
-gv_over_wv_means_csv = gv_over_wv_means.to_csv(header=True, index=False)
-
-df = means.set_index(['turbo', 'run', 'device', 'site', 'browser'])
-turbo_true_over_turbo_false = (df.loc[True] / df.loc[False]) \
-    .reset_index().set_index(['run', 'device', 'browser', 'site']).sort_index()
-
-turbo_means = turbo_true_over_turbo_false.groupby(['run', 'device', 'browser']).agg(np.mean).reset_index()
-turbo_means_csv = turbo_means.to_csv(header=True, index=False)
+turbo_improvement <- turbo_improvement %>% ungroup() %>% select(-starts_with('pageLoadTime'))
 ```
 
-```{python, results='asis'}
-# print(gv_over_wv.groupby(['run', 'device', 'turbo']).agg(np.mean).reset_index().to_html())
-print(gv_over_wv_means.to_html())
-    #.style.set_caption("pageLoadTime: with turbo vs. without")\
-    #.format("{:.2%}", subset='pageLoadTime')
+With GeckoView: enabling turbo mode produces a performance increase, more significant on the underpowered FireTV Cube, and a significant noise increase.
+
+```{r, echo=FALSE}
+gv.noise_improvement <- turbo_improvement %>% filter(browser == 'firefox') %>% group_by(run, device) %>% summarise(`speed improvement`=mean(speed_pct), `noise penalty`=mean(noise_pct))
+datatable(gv.noise_improvement, options=list(dom='t'), caption=('GeckoView speed improvements and noise penalities with turbo mode enabled (lower is better)' %>% glue())) %>% formatPercentage(c(3, 4))
 ```
 
-This report analyses performance measurements from the
-[browsertime](https://github.com/sitespeedio/browsertime) test harness
-across the Fire TV vehicle powered by different rendering engines.
+We see the same general behaviour with WebView: a performance increase on the underpowered FireTV Cube and a noise increase.
 
----
-
-## Conclusions
-
-### GeckoView vs. WebView
-
-The data produce mixed results.
-
-1. GeckoView fires the `load` event (as measured by `pageLoadTime`/the `loadEventStart` timestamp) generally after the system WebView does.  This effect is larger on the FireTV Cube, which we consider to be less powerful than the FireTV Pendant.  This suggests that Gecko has significant room to improve on low-end devices.
-
-```{r}
-py$gv_over_wv_means
+```{r, echo=FALSE}
+webview_noise_improvement <- turbo_improvement %>% filter(browser == 'chrome') %>% group_by(run, device) %>% summarise(`speed change`=mean(speed_pct), `noise penalty`=mean(noise_pct))
+datatable(webview_noise_improvement, options=list(dom='t'), caption=('WebView speed improvements and noise penalities with turbo mode enabled (lower is better)' %>% glue())) %>% formatPercentage(c(3, 4))
 ```
 
-```{r}
-#library(rpivotTable)
-df <- read.csv(text=py$gv_over_wv_means_csv)
-#rpivotTable(df)
+## Recommendations for Future Work
 
-# dfagg[order(-dfagg$`Percent Organic`)], options=list(dom='t'),
-#           caption='Table 1: Average SAP and Organic Search Share by Country')
-datatable(df[df$turbo == "true"], options=list(dom='t'), caption='Table 1: GeckoView over WebView pageLoadTime, turbo enabled (lower is better)')
+1.  The value of the `load` event, as measured by the `loadEventStart` timestamp captured by `pageLoadTime`, is questionable.  The next step is to capture similar numbers
 
+2.  GeckoView fires the `load` eventgenerally after the system WebView does.  This effect is larger on the FireTV Cube, which we consider to be less powerful than the FireTV Pendant, which suggests that Gecko has significant room to improve on low-end devices.
 
-# %>% formatPercentage(c(3, 4))
+3.  The impact of Turbo Mode is surprising: it is counter-intuitive that reducing the total set of resources to process increases variability.  More investigation into how the Content Blocking system is working in Firefox TV and in GeckoView itself is needed.  It may also be the case that more valuable visual metrics improve while the Web Performance API metrics are stable.
 
-# , caption='Table 1: Average SAP and Organic Search Share by Country')
-# colnames(df)
-# %>%
-#   formatPercentage(c(2, 3, 4)) %>%
-#   formatStyle("Organic Share of SAP",
-#     fontWeight = "bold") %>% 
-#   formatStyle('Country',
-#   target = 'row',
-#   backgroundColor = styleEqual("US", "#ffbf89"))
+4.  Quantifying the differences in the content served to GeckoView and WebView for the corpus under test could let us be more confident that measured differences are truly delivered by the underlying engines.
 
+## Per-device, per-site engine comparisons
+
+The following graphs give some insight into how GeckoView and WebView compare on the sites in the test corpus.
+
+### Turbo Mode enabled
+
+```{r, echo=FALSE, fig.height=40}
+xx <- complete %>% filter(complete$turbo == 'true') %>% group_by(device, run, site) %>% summarize(m=mean(pageLoadTime)) %>% ungroup() %>% arrange(m) %>% inner_join(complete, by=c('device', 'run', 'site'))
+xx$site <- sub('https://', '', xx$site)
+xx$site <- sub('http://', '', xx$site)
+xx$site <- xx$site %>% str_trunc(30) %>% str_pad(30, 'right')
+
+p <- ggplot(xx, aes(x=reorder(site, m), y=pageLoadTime))
+p <- p + geom_boxplot(aes(fill=browser))
+p <- p + facet_wrap(vars(device, run), ncol=1, scales='free', labeller=labeller(.multi_line=FALSE)) + theme(axis.text.x=element_text(angle=-67.5, hjust=0, vjust=0)) + xlab('site')
+p <- p + theme(legend.justification = c(0, 1), legend.position = c(0.04, 0.995))
+p
 ```
 
+### Turbo Mode disabled
 
----
+```{r, echo=FALSE, fig.height=40}
+xx <- complete %>% filter(complete$turbo == 'false') %>% group_by(device, run, site) %>% summarize(m=mean(pageLoadTime)) %>% ungroup() %>% arrange(m) %>% inner_join(complete, by=c('device', 'run', 'site'))
+xx$site <- sub('https://', '', xx$site)
+xx$site <- sub('http://', '', xx$site)
+xx$site <- xx$site %>% str_trunc(30) %>% str_pad(30, 'right')
+
+p <- ggplot(xx, aes(x=reorder(site, m), y=pageLoadTime))
+p <- p + geom_boxplot(aes(fill=browser))
+p <- p + facet_wrap(vars(device, run), ncol=1, scales='free', labeller=labeller(.multi_line=FALSE)) + theme(axis.text.x=element_text(angle=-67.5, hjust=0, vjust=0)) + xlab('site')
+p <- p + theme(legend.justification = c(0, 1), legend.position = c(0.04, 0.995))
+p
+```
 
 ## Methodology
 
@@ -171,6 +171,8 @@ The data were collected from the following vehicle configurations:
 | Firefox for Fire TV | GeckoView | disabled |
 | Firefox for Fire TV | WebView | enabled |
 | Firefox for Fire TV | WebView | disabled |
+
+All vehicle configurations **shared a single User Agent string**.  See [this issue](https://github.com/mozilla-mobile/firefox-tv/issues/1879).
 
 ### Sites tested
 
@@ -209,8 +211,6 @@ vehicle was force-stopped and its on-device package-data cleared.
 3. For each cold-load, browsertime reports a wide range of timings,
 mostly from the [Performance Timing API](XXX).
 
----
-
 ## Results
 
 ### Raw data
@@ -238,8 +238,6 @@ The data from the three test runs above can be found in the following
 | `proxy` | the proxy state, either "record" (meaning the pageload was from the live network and the proxy was recording) or "replay" (meaning the pageload was from the replaying proxy and not from the live network) |
 | `timestamp` | the local timestamp when the pageload was initiated |
 | `pageLoadTime` | the [`loadEventStart`](https://developer.mozilla.org/en-US/docs/Web/API/PerformanceNavigationTiming/loadEventStart) timestamp reported by the engine under test, as captured [by this JavaScript code](https://github.com/sitespeedio/browsertime/blob/master/browserscripts/timings/pageTimings.js) |
-
----
 
 ## Inter-vehicle reliability
 
@@ -320,12 +318,6 @@ This conditioned profile was then copied to the device at the
 beginning of every test run: that is, every cold pageload started with
 exactly the same Gecko profile.
 
----
-
-## Future work
-
----
-
 ## Versions
 
 | package | version | link |
@@ -338,128 +330,3 @@ exactly the same Gecko profile.
 | firefox-tv | | xxx |
 | GeckoView | XXX | |
 | system WebView | 59.XXX |
-
-
-This report explores the newly added organic search telemetry as part of [Bug 1482234](https://bugzilla.mozilla.org/show_bug.cgi?id=1482234). In the past, we've only recorded searches made from Search Access Points (SAPs), which originate from part of the Firefox UI. Organic searches are those made in content directly from the search partner (i.e. navigating to google.com and performing a search in google.com's UI).
-
-Organic searches are not tagged with a partner code and thus, **we do not currently generate revenue from organic search**.
-
----
-
-## Data
-
-
-
-This analysis is based on a 1% sample of the `search_clients_daily` table, covering 4 weeks of data from 2018-08-10 to 2018-09-07. The data-extraction code can be found [here](https://dbc-caf9527b-e073.cloud.databricks.com/#notebook/31673/command/31678).
-
-**Notes**:
-
-* This data is only available for Google at this time
-* SAP searches in this report are the sum of the `tagged_sap` and `tagged_follow_on` fields**\***
-* Organic searches involve only the `organic` field, which includes both organic-direct and organic-follow-on searches.
-
-**\* This report compares in-content (tagged) SAP searches to in-content Organic searches, giving us the best “apples-to-apples” comparison estimates. All future mentions of “SAP” refer to tagged SAP searches.**
-
----
-
-## Summary
-
-Table 1 shows the average daily share of searches that are SAP versus Organic by the top 10 countries. The bolded **Organic Share of SAP** column shows the ratio of Organic searches to SAP (organic / sap). The table is sorted by this column in descending order.
-
-Take for instance the seventh row, which shows these data for the US:
-
-* On average, organic searches made up 31% of all Firefox searches in the US.
-* On average, we recorded 0.45 organic searches for every 1 SAP search in the US.
-
-
-
-```{r, echo=F}
-library(RJSONIO)
-library(data.table)
-library(DT)
-
-lines <- fromJSON("./data/organic-searches.json") 
-listed_lines <- json_file <- lapply(lines, function(x) {
-                                x[sapply(x, is.null)] <- NA
-                                unlist(x)})
-df <- data.table(do.call('rbind', listed_lines))
-
-
-df$pct_sap <- as.numeric(df$pct_sap)
-df$pct_organic <- as.numeric(df$pct_organic)
-df$pct_organic_of_sap <- as.numeric(df$pct_organic_of_sap)
-df$pct_excl_organic <- as.numeric(df$pct_excl_organic)
-df$pct_excl_sap <- as.numeric(df$pct_excl_sap)
-df$pct_mixed <- as.numeric(df$pct_mixed)
-
-dfagg <- df[,.("Percent SAP"=round(mean(pct_sap), 2), 
-      "Percent Organic"=round(mean(pct_organic), 2), 
-      "Organic Share of SAP"=round(mean(pct_organic_of_sap), 2)),
-     by=.(Country=country)]
-
-dfagg_excl<- df[,.("Percent Only SAP"=round(mean(pct_excl_sap), 2), 
-      "Percent Only Organic"=round(mean(pct_excl_organic), 2), 
-      "Percent Mixed"=round(mean(pct_mixed), 2)),
-     by=.(Country=country)]
-
-
-datatable(dfagg[order(-dfagg$`Percent Organic`)], options=list(dom='t'),
-          caption='Table 1: Average SAP and Organic Search Share by Country') %>%
-  formatPercentage(c(2, 3, 4)) %>%
-  formatStyle("Organic Share of SAP",
-    fontWeight = "bold") %>% 
-  formatStyle('Country',
-  target = 'row',
-  backgroundColor = styleEqual("US", "#ffbf89"))
-
-```
-
-Table 2 shows the average daily share of **users** that exclusively use SAP search, exclusively use Organic search, and some mixture of the two for the top 10 countries. These data are for users that made at least 1 search, so each row should roughly sum to 100%. 
-
-Looking at the seventh row for the US, we can make the following statement:
-
-* On average, for users in the US that searched: 
-    + 52% only used SAP search
-    + 39% only used organic search
-    + 9% used both organic and SAP search
-
-
-```{r, echo=F}
-
-datatable(dfagg_excl[order(-dfagg_excl$`Percent Only Organic`)], options=list(dom='t'),
-          caption='Table 2: Average Share of Users who exclusively use SAP search, Organic search, and a Mixture') %>%
-  formatPercentage(c(2, 3, 4)) %>%
-  formatStyle("Percent Only Organic",
-    fontWeight = "bold") %>% 
-  formatStyle('Country',
-  target = 'row',
-  backgroundColor = styleEqual("US", "#ffbf89"))
-```
-
----
-
-## Over Time
-
-This section shows the same data broken out by date. This allows us understand the stability of these metrics, which seem stable throughout their (albeit short) existence.
-
-Use the drop down menu to select a specific country to isolate. Once a country is selected, all three charts below will update accordingly.
-
-```{r, echo=F}
-htmltools::includeHTML("./html/organic-search.html")
-```
-
-## Conclusion
-
-We recorded a significant number of organic searches in the top 10 countries as compared to our standard SAP searches (See Table 1). For every 100 US SAP searches we see another 45 organic searches. Additionally, 39% of US daily users that searched **only** used organic search in the observed time period.
-
-These numbers are even larger for other markets. Take India for example, in which **nearly half of all searches in India are organic searches.** 
-
-These results suggest that there are huge potential monetization opportunities in our key markets if organic searchers start using SAP search more often. Part of this effort is already in motion via the [Search Nudges](https://sql.telemetry.mozilla.org/dashboard/search-nudges-experiment?p_study_name_58658=searchNudgesExperiment&p_start_date_58658=20180827&p_version_58658=1.8.2) shield experiment, in which users are gently reminded of the option of searching through the URL bar.
-
-#### Future Work
-
-The next step in this analysis involves looking at these data for users with a custom home page and/or a custom newtab page. Setting the home/newtab page to i.e. google.com could have significant impact on a user's search volume. 
-
-The details are outlined in [Bug 1489625](https://bugzilla.mozilla.org/show_bug.cgi?id=1489625), however, analysis is currently blocked on [Bug 1272388](https://bugzilla.mozilla.org/show_bug.cgi?id=1272388).
-
-

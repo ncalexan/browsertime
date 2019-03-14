@@ -33,32 +33,14 @@ def walk(root, verbose=0):
                         for i, run in enumerate(entry['browserScripts']):
                             pageLoadTime = run['timings']['pageTimings']['pageLoadTime']
                             timestamp = entry['timestamps'][i]
-                            yield (site, browser, turbo, proxy, timestamp, pageLoadTime)
+                            yield {'site': site, 'browser': browser, 'turbo': turbo,
+                                   'proxy': proxy, 'timestamp': timestamp,
+                                   'pageLoadTime': pageLoadTime}
                 except Exception as e:
                     print('Processing {}... ERROR: {}'.format(path, e), file=sys.stderr)
 
                 if verbose > 0:
                     print('Processing {}... DONE'.format(path), file=sys.stderr)
-
-
-# def complete(i):
-#     runs = defaultdict(lambda: defaultdict(lambda: defaultdict(dict)))
-#     for run in i:
-#         (site, browser, turbo, i, pageLoadTime) = run
-#         runs[site][browser][turbo][(i, pageLoadTime)] = run
-
-#     for _, site in runs.items():
-#         complete = True
-#         complete &= len(site.items()) == 2
-#         for _, browser in site.items():
-#             complete &= len(browser.items()) == 2
-#             for _, turbo in browser.items():
-#                 complete &= len(turbo.items()) == 4
-
-#         for _, browser in site.items():
-#             for _, turbo in browser.items():
-#                 for _, run in turbo.items():
-#                     yield (complete,) + run
 
 
 def main(args):
@@ -69,10 +51,17 @@ def main(args):
                         help="Be verbose (can be repeated)")
     args = parser.parse_args(args)
 
-    writer = csv.writer(sys.stdout)
-    writer.writerow(('run', 'site', 'browser', 'turbo', 'proxy', 'timestamp', 'pageLoadTime'))
+    def walk_dirs(dirs):
+        for i, d in enumerate(dirs):
+            run_extras = json.load(open(os.path.join(d, 'run.json'), 'rt'))
+            for measurement in walk(d, args.verbose):
+                measurement.update(run_extras)
+                measurement['run'] = i + 1
+                yield measurement
 
-    writer.writerows(sorted(itertools.chain.from_iterable(((i + 1,) + measurement for measurement in walk(d, args.verbose)) for i, d in enumerate(args.dir))))
+    writer = csv.DictWriter(sys.stdout, ('device', 'run', 'site', 'browser', 'turbo', 'proxy', 'timestamp', 'pageLoadTime'))
+    writer.writeheader()
+    writer.writerows(walk_dirs(args.dir))
 
 
 if __name__ == '__main__':
