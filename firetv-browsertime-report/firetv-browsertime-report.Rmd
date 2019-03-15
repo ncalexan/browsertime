@@ -75,7 +75,7 @@ The performance gap does decrease with **Turbo Mode enabled: GeckoView is perhap
 
 ```{r, echo=FALSE}
 turbo_on <- gv_over_wv %>% filter(turbo == 'true') %>% group_by(run, device) %>% summarise(`speed penalty`=mean(speed_pct), `noise penalty`=mean(noise_pct))
-datatable(turbo_off, options=list(dom='t'), caption=('GeckoView pageload penalties with Turbo Mode enabled (lower is better)' %>% glue())) %>% formatPercentage(c(3, 4))
+datatable(turbo_on, options=list(dom='t'), caption=('GeckoView pageload penalties with Turbo Mode enabled (lower is better)' %>% glue())) %>% formatPercentage(c(3, 4))
 ```
 
 ### browsertime reports that Turbo Mode improves performance at the expense of variability
