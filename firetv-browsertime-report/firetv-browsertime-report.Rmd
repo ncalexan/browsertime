@@ -329,3 +329,7 @@ exactly the same Gecko profile.
 | firefox-tv | | xxx |
 | GeckoView | XXX | |
 | system WebView | 59.XXX |
+
+Clarify what version of the Fire TV was used.
+X-Ray live indication of core saturation.
+chrome == webview
