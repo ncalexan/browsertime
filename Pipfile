@@ -14,6 +14,7 @@ structlog = "*"
 colorama = "*"
 mozterm = "*"
 jupyter = "*"
+seaborn = "*"
 
 [requires]
 python_version = "2.7"
