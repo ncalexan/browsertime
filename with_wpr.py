@@ -7,6 +7,10 @@ another process.
 Collect the outputs from the `wpr ...` runs, the HTTP archive, and the
 outputs from the processes.
 
+Install with:
+
+`pipenv install`
+
 Invoke like:
 
 `pipenv run python with_wpr.py -v --wpr /path/to/wpr --record 'curl --proxy localhost:4040 http://example.com' --replay 'curl --proxy localhost https://example.com'` # noqa
