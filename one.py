@@ -246,6 +246,8 @@ def main(args):
     parser = argparse.ArgumentParser()
     parser.add_argument('--verbose', '-v', action='count',
                         help='Be verbose (can be repeated)')
+    parser.add_argument('--video', action='store_true', default=False,
+                        help='Record and store video of each pageload.')
     parser.add_argument('--wpr',
                         default=None,
                         help='Web Page Replay Go binary. ' +
@@ -332,6 +334,8 @@ def main(args):
 
     shared_browsertime_args.extend(['-v'] * args.verbose)
 
+    if args.video:
+        shared_browsertime_args.extend(['--video'])
 
     # From `docker/scripts/start.sh`.  We must use this wait script for both
     # record and replay, because the default script uses `Date.now()`, which WPR
@@ -454,53 +458,68 @@ def main(args):
 
         wanted_configurations.append(VehicleConfiguration(browser, turbo, record, replay, live))
 
-    for url_index, url in enumerate(urls):
-        log.info("greeted", whom="world", more_than_a_string=[1, 2, 3])
-        url_log = log.new(url_index=url_index, url=url)
-        url_log.info('testing URL')
-        print("x")
+    mitmdump_logfile = os.path.join(args.result_dir, 'mitmdump.log')
+    ensureParentDir(mitmdump_logfile)
 
-        if args.wpr or args.wpr_root:
-            wpr_configuration = WprConfiguration(args.wpr, args.wpr_root, shlex.split(args.wpr_args) + ['--host', host]) # '0.0.0.0'
+    mitmproxy_args = ['--listen-host',
+                      host,
+                      '--listen-port',
+                      str(4444),
+                      '-s',
+                      'vendor/mitmproxy_portforward.py',
+                      '--ssl-insecure']
+    with with_wpr.process(
+        ['mitmdump'] + mitmproxy_args,
+        logfile=mitmdump_logfile) as mitmdump_proc:
 
-            url_result_dir = os.path.join(args.result_dir,
-                                          "url-{:02d}".format(url_index + 1),
-                                          urllib.quote_plus(url))
+        if mitmdump_proc.poll():
+            raise RuntimeError("Port forwarding proxy failed: ", mitmdump_proc.poll())
 
-            for vehicle_index, vehicle_configuration in enumerate(wanted_configurations):
-                vehicle_log = url_log.bind(vehicle_index=vehicle_index, vehicle_configuration=vehicle_configuration)
-                vehicle_log.info('Testing vehicle', browser=vehicle_configuration.browser, turbo=vehicle_configuration.turbo)
+        for url_index, url in enumerate(urls):
+            url_log = log.new(url_index=url_index, url=url)
+            url_log.info('testing URL')
 
-                vehicle_result_dir = vehicle_configuration.result_dir(os.path.join(url_result_dir, "vehicle-{:02d}".format(vehicle_index + 1)))
-                try:
-                    if FOOTER:
-                        FOOTER.clear()
+            if args.wpr or args.wpr_root:
+                wpr_configuration = WprConfiguration(args.wpr, args.wpr_root, shlex.split(args.wpr_args) + ['--host', host]) # '0.0.0.0'
 
-                    if FOOTER:
-                        FOOTER.write([('green', 'url {:02d}/{:02d}'.format(url_index, len(urls))),
-                                      ('green', 'vehicle {:02d}/{:02d}'.format(vehicle_index, len(wanted_configurations)))])
+                url_result_dir = os.path.join(args.result_dir,
+                                              "url-{:02d}".format(url_index + 1),
+                                              urllib.quote_plus(url))
 
-                    test_one_url(vehicle_configuration, wpr_configuration, vehicle_result_dir, url)
-                except RuntimeError as e:
-                    error_file = os.path.join(vehicle_result_dir, "error")
-                    ensureParentDir(error_file)
-                    print(e, file=open(error_file, 'wt'))
+                for vehicle_index, vehicle_configuration in enumerate(wanted_configurations):
+                    vehicle_log = url_log.bind(vehicle_index=vehicle_index, vehicle_configuration=vehicle_configuration)
+                    vehicle_log.info('Testing vehicle', browser=vehicle_configuration.browser, turbo=vehicle_configuration.turbo)
 
-                    if args.no_continue:
-                        raise
-        else:
-            raise NotImplementedError
-            # import pprint
-            # pprint.pprint(live)
+                    vehicle_result_dir = vehicle_configuration.result_dir(os.path.join(url_result_dir, "vehicle-{:02d}".format(vehicle_index + 1)))
+                    try:
+                        # if FOOTER:
+                        #     FOOTER.clear()
 
-            # # XXX: logging.
-            # logfile = os.path.join(result_dir, 'browsertime') # 'browsertime-{}-{}.log'.format(browser, turbo))
-            # ensureParentDir(logfile)
+                        # if FOOTER:
+                        #     FOOTER.write([('green', 'url {:02d}/{:02d}'.format(url_index, len(urls))),
+                        #                   ('green', 'vehicle {:02d}/{:02d}'.format(vehicle_index, len(wanted_configurations)))])
 
-            # with with_wpr.process(live, logfile=logfile) as browsertime_proc:
-            #     browsertime_proc.wait()
+                        test_one_url(vehicle_configuration, wpr_configuration, vehicle_result_dir, url)
+                    except RuntimeError as e:
+                        error_file = os.path.join(vehicle_result_dir, "error")
+                        ensureParentDir(error_file)
+                        print(e, file=open(error_file, 'wt'))
 
-        # url_log.info('Testing URL {} ... DONE', url)
+                        if args.no_continue:
+                            raise
+            else:
+                raise NotImplementedError
+                # import pprint
+                # pprint.pprint(live)
+
+                # # XXX: logging.
+                # logfile = os.path.join(result_dir, 'browsertime') # 'browsertime-{}-{}.log'.format(browser, turbo))
+                # ensureParentDir(logfile)
+
+                # with with_wpr.process(live, logfile=logfile) as browsertime_proc:
+                #     browsertime_proc.wait()
+
+            # url_log.info('Testing URL {} ... DONE', url)
 
 
 if __name__ == '__main__':
