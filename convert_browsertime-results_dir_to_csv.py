@@ -16,6 +16,13 @@ def walk(root, verbose=0):
     """Collect pageLoadTime entries from files like
     `{root}/firefox/turbo-true/google.com/browsertime.json`"""
 
+    def map_browser(browser):
+        if browser == 'chrome':
+            return 'WebView'
+        if browser == 'firefox':
+            return 'GeckoView'
+        raise ValueError('Unrecognized browser: {}'.format(browser))
+
     for root, _, fs in os.walk(root):
         for f in fs:
             if f == 'browsertime.json':
@@ -33,7 +40,7 @@ def walk(root, verbose=0):
                         for i, run in enumerate(entry['browserScripts']):
                             pageLoadTime = run['timings']['pageTimings']['pageLoadTime']
                             timestamp = entry['timestamps'][i]
-                            yield {'site': site, 'browser': browser, 'turbo': turbo,
+                            yield {'site': site, 'browser': map_browser(browser), 'turbo': turbo,
                                    'proxy': proxy, 'timestamp': timestamp,
                                    'pageLoadTime': pageLoadTime}
                 except Exception as e:
