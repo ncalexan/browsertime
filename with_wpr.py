@@ -103,8 +103,7 @@ def record_and_replay(
         raise ValueError('wpr_root is not a directory: {}'.format(wpr_root))
 
     # Paths are relative to `wpr_root`.
-    wpr_args = ['--http_connect_proxy_port', str(4040),
-                '--http_port', str(8080),
+    wpr_args = ['--http_port', str(8080),
                 '--https_port', str(8081),
                 '--inject_scripts', 'deterministic.js']
     if '--https_cert_file' not in wpr_extra_args:
