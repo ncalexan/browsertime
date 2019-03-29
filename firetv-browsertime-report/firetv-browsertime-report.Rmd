@@ -88,14 +88,14 @@ gv_over_wv$noise_pct <- xx$pageLoadTime_rsd/yy$pageLoadTime_rsd
 gv_over_wv <- gv_over_wv %>% ungroup() %>% select(-starts_with('pageLoadTime'))
 ```
 
-When running with **Turbo Mode disabled, GeckoView is perhaps 10% slower than WebView on the more powerful FireTV Pendant and perhaps 50% slower than WebView on the underpowered FireTV Cube.**  It seems that GeckoView is also much more variable than WebView -- perhaps as much as 200% more.
+When running with **Turbo Mode disabled, GeckoView is perhaps 10% slower than WebView on the more powerful FireTV Stick 4k and Fire TV Pendant and perhaps 50% slower than WebView on the underpowered FireTV Cube.**  It seems that GeckoView is also much more variable than WebView -- perhaps as much as 200% more.
 
 ```{r, echo=FALSE}
 turbo_off <- gv_over_wv %>% filter(turbo == 'false') %>% group_by(run, device) %>% summarise(`speed penalty`=mean(speed_pct), `noise penalty`=mean(noise_pct))
 datatable(turbo_off, options=list(dom='t'), caption=('GeckoView pageload penalties with Turbo Mode disabled (lower is better)' %>% glue())) %>% formatPercentage(c(3, 4))
 ```
 
-The performance gap does decrease with **Turbo Mode enabled: GeckoView is perhaps level with WebView on the FireTV Pendant and perhaps 40% slower than WebView on the FireTV Cube**.  However, GeckoView becomes significantly more variable than WebView.  This is very surprising because the set of processed resources should be smaller than with Turbo Mode disabled, which one expects to translate to less variability.
+The performance gap does decrease with **Turbo Mode enabled: GeckoView is perhaps level with WebView on the FireTV Stick 4k and Fire TV Pendant and perhaps 40% slower than WebView on the FireTV Cube**.  However, GeckoView becomes significantly more variable than WebView.  This is very surprising because the set of processed resources should be smaller than with Turbo Mode disabled, which one expects to translate to less variability.
 
 ```{r, echo=FALSE}
 turbo_on <- gv_over_wv %>% filter(turbo == 'true') %>% group_by(run, device) %>% summarise(`speed penalty`=mean(speed_pct), `noise penalty`=mean(noise_pct))
