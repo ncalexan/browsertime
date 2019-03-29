@@ -40,7 +40,7 @@ def walk(root, verbose=0):
                         for i, run in enumerate(entry['browserScripts']):
                             pageLoadTime = run['timings']['pageTimings']['pageLoadTime']
                             timestamp = entry['timestamps'][i]
-                            yield {'site': site, 'browser': map_browser(browser), 'turbo': turbo,
+                            yield {'site': site, 'engine': map_browser(browser), 'turbo': turbo,
                                    'proxy': proxy, 'timestamp': timestamp,
                                    'pageLoadTime': pageLoadTime}
                 except Exception as e:
@@ -66,7 +66,7 @@ def main(args):
                 measurement['run'] = i + 1
                 yield measurement
 
-    writer = csv.DictWriter(sys.stdout, ('device', 'run', 'site', 'browser', 'turbo', 'proxy', 'timestamp', 'pageLoadTime'))
+    writer = csv.DictWriter(sys.stdout, ('device', 'run', 'site', 'engine', 'turbo', 'proxy', 'timestamp', 'pageLoadTime'))
     writer.writeheader()
     writer.writerows(walk_dirs(args.dir))
 

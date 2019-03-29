@@ -1,7 +1,7 @@
 ---
-title: "browsertime: GeckoView vs system WebView on the Fire TV Cube and Pendant"
+title: "browsertime: GeckoView vs system WebView on the Fire TV Stick 4k, Pendant, and Cube"
 author: Nick Alexander
-date: March 13, 2019
+date: March 29, 2019
 output:
   html_document:
     toc: true
@@ -25,18 +25,42 @@ library(dplyr)
 library(DT)
 library(ggplot2)
 library(stringr)
+library(tidyr)
 
 btr <- read.csv('data/firetv.csv')
 by_site <- btr %>%
   filter(proxy == 'replay') %>%
   select(-proxy, -timestamp)
-complete <- by_site %>%
+
+runs <- data.frame(run = c(1, 2, 3, 4, 5),
+                   device = factor(c("FireTV Cube", "FireTV Cube", "FireTV Pendant", "FireTV Pendant", "FireTV Stick 4k")),
+                   iterations = c(5, 5, 5, 5, 9),
+                   min_iterations = c(4, 4, 4, 4, 8))
+
+with_min_iterations <- by_site %>%
+  group_by(run, device, site, engine, turbo) %>%
+  summarise(num_iterations=n()) %>%
+  ungroup() %>%
+  mutate(vehicle = paste(engine, turbo)) %>%
+  select(-engine, -turbo) %>%
+  # This ensures that every "vehicle" has 0 if there were no runs recorded for that vehicle configuration.
+  spread(vehicle, num_iterations, fill = 0) %>%
+  gather("vehicle", num_iterations, 4:7) %>%
+  # arrange(run, device, site) %>%
   group_by(run, device, site) %>%
-  filter(n() == 20) %>%
+  summarise(min_iterations=min(num_iterations)) %>%
   ungroup()
+
+# Each (run, device, site) that has sufficient data to draw conclusions.
+sufficient <- left_join(with_min_iterations, runs %>% select(-iterations), by = c("run", "device")) %>%
+  filter(min_iterations.x >= min_iterations.y) %>%
+  select(run, device, site)
+
+# The measurements corresponding to (run, device, site) tuples with sufficient data.
+complete <- semi_join(by_site, sufficient, by = c("run", "device", "site"))
 ```
 
-This report analyses performance measurements from the [browsertime](https://github.com/sitespeedio/browsertime) test harness across the Fire TV vehicle powered by different rendering engines.
+This report analyses performance measurements from the [browsertime](https://github.com/sitespeedio/browsertime) test harness across the Firefox TV vehicle powered by different rendering engines.
 
 This report was commissioned to try to replicate similar measurements performed using a different test harness and methodology, the [nimbledroid test suite](https://github.com/npark-mozilla/focus-nimbledroid/blob/master/fftv-tests/app/src/androidTest/java/com/nimbledroid/blackboxtest/EspressoTests.java).  As data was collected, the focus of the project shifted away from validating the nimbledroid test suite, and in fact the tested site corpus is almost entirely disjoint from the site corpus tested by the nimbledroid test suite.  Prior to shifting the corpus, however, the browsertime measurements were consonant with the nimbledroid measurements.
 
@@ -46,14 +70,14 @@ This report was commissioned to try to replicate similar measurements performed 
 
 ```{r gv_over_wv, include=FALSE}
 xx <- complete %>%
-  group_by(browser, run, device, site, turbo) %>%
-  filter(browser == 'firefox') %>%
+  group_by(engine, run, device, site, turbo) %>%
+  filter(engine == 'GeckoView') %>%
   group_by(run, device, site, turbo) %>%
   summarise(pageLoadTime_mean=mean(pageLoadTime), pageLoadTime_rsd=sd(pageLoadTime)/mean(pageLoadTime)*100)
 
 yy <- complete %>%
-  group_by(browser, run, device, site, turbo) %>%
-  filter(browser == 'chrome') %>%
+  group_by(engine, run, device, site, turbo) %>%
+  filter(engine == 'WebView') %>%
   group_by(run, device, site, turbo) %>%
   summarise(pageLoadTime_mean=mean(pageLoadTime), pageLoadTime_rsd=sd(pageLoadTime)/mean(pageLoadTime)*100)
 
@@ -82,18 +106,18 @@ datatable(turbo_on, options=list(dom='t'), caption=('GeckoView pageload penaltie
 
 ```{r turbo, include=FALSE}
 xx <- complete %>%
-  group_by(turbo, run, device, site, browser) %>%
+  group_by(turbo, run, device, site, engine) %>%
   filter(turbo == 'true') %>%
-  group_by(run, device, site, browser) %>%
+  group_by(run, device, site, engine) %>%
   summarise(pageLoadTime_mean=mean(pageLoadTime), pageLoadTime_rsd=sd(pageLoadTime)/mean(pageLoadTime)*100)
 
 yy <- complete %>%
-  group_by(turbo, run, device, site, browser) %>%
+  group_by(turbo, run, device, site, engine) %>%
   filter(turbo == 'false') %>%
-  group_by(run, device, site, browser) %>%
+  group_by(run, device, site, engine) %>%
   summarise(pageLoadTime_mean=mean(pageLoadTime), pageLoadTime_rsd=sd(pageLoadTime)/mean(pageLoadTime)*100)
 
-turbo_improvement <- inner_join(xx, yy, by=c("run", "device", "site", "browser"))
+turbo_improvement <- inner_join(xx, yy, by=c("run", "device", "site", "engine"))
 turbo_improvement$speed_pct <- xx$pageLoadTime_mean/yy$pageLoadTime_mean
 turbo_improvement$noise_pct <- xx$pageLoadTime_rsd/yy$pageLoadTime_rsd
 
@@ -103,24 +127,24 @@ turbo_improvement <- turbo_improvement %>% ungroup() %>% select(-starts_with('pa
 With GeckoView: enabling turbo mode produces a performance increase, more significant on the underpowered FireTV Cube, and a significant noise increase.
 
 ```{r, echo=FALSE}
-gv.noise_improvement <- turbo_improvement %>% filter(browser == 'firefox') %>% group_by(run, device) %>% summarise(`speed improvement`=mean(speed_pct), `noise penalty`=mean(noise_pct))
+gv.noise_improvement <- turbo_improvement %>% filter(engine == 'GeckoView') %>% group_by(run, device) %>% summarise(`speed improvement`=mean(speed_pct), `noise penalty`=mean(noise_pct))
 datatable(gv.noise_improvement, options=list(dom='t'), caption=('GeckoView speed improvements and noise penalities with turbo mode enabled (lower is better)' %>% glue())) %>% formatPercentage(c(3, 4))
 ```
 
 We see the same general behaviour with WebView: a performance increase on the underpowered FireTV Cube and a noise increase.
 
 ```{r, echo=FALSE}
-webview_noise_improvement <- turbo_improvement %>% filter(browser == 'chrome') %>% group_by(run, device) %>% summarise(`speed change`=mean(speed_pct), `noise penalty`=mean(noise_pct))
+webview_noise_improvement <- turbo_improvement %>% filter(engine == 'WebView') %>% group_by(run, device) %>% summarise(`speed change`=mean(speed_pct), `noise penalty`=mean(noise_pct))
 datatable(webview_noise_improvement, options=list(dom='t'), caption=('WebView speed improvements and noise penalities with turbo mode enabled (lower is better)' %>% glue())) %>% formatPercentage(c(3, 4))
 ```
 
 ## Recommendations for Future Work
 
-1.  The value of the `load` event, as measured by the `loadEventStart` timestamp captured by `pageLoadTime`, is questionable.  The next step is to capture similar numbers
+1.  The value of the `load` event, as measured by the `loadEventStart` timestamp captured by `pageLoadTime`, is questionable.  The next step is to capture similar numbers for various visual metrics that the Performance Team will provide more valuable measurements.
 
-2.  GeckoView fires the `load` eventgenerally after the system WebView does.  This effect is larger on the FireTV Cube, which we consider to be less powerful than the FireTV Pendant, which suggests that Gecko has significant room to improve on low-end devices.
+2.  GeckoView fires the `load` event generally after the system WebView does.  This effect is larger on the FireTV Cube, which we consider to be less powerful than the FireTV Pendant and the Fire TV Stick 4k, which suggests that Gecko has significant room to improve on low-end devices.
 
-3.  The impact of Turbo Mode is surprising: it is counter-intuitive that reducing the total set of resources to process increases variability.  More investigation into how the Content Blocking system is working in Firefox TV and in GeckoView itself is needed.  It may also be the case that more valuable visual metrics improve while the Web Performance API metrics are stable.
+3.  The impact of Turbo Mode is surprising: it is counter-intuitive that reducing the total set of resources to process increases variability.  More investigation into how the Content Blocking system is working in Firefox TV and in GeckoView itself is needed.  It may also be the case that more valuable visual metrics improve while the Web Navigation Performance API metrics are stable.
 
 4.  Quantifying the differences in the content served to GeckoView and WebView for the corpus under test could let us be more confident that measured differences are truly delivered by the underlying engines.
 
@@ -137,7 +161,7 @@ xx$site <- sub('http://', '', xx$site)
 xx$site <- xx$site %>% str_trunc(30) %>% str_pad(30, 'right')
 
 p <- ggplot(xx, aes(x=reorder(site, m), y=pageLoadTime))
-p <- p + geom_boxplot(aes(fill=browser))
+p <- p + geom_boxplot(aes(fill=engine))
 p <- p + facet_wrap(vars(device, run), ncol=1, scales='free', labeller=labeller(.multi_line=FALSE)) + theme(axis.text.x=element_text(angle=-67.5, hjust=0, vjust=0)) + xlab('site')
 p <- p + theme(legend.justification = c(0, 1), legend.position = c(0.04, 0.995))
 p
@@ -152,7 +176,7 @@ xx$site <- sub('http://', '', xx$site)
 xx$site <- xx$site %>% str_trunc(30) %>% str_pad(30, 'right')
 
 p <- ggplot(xx, aes(x=reorder(site, m), y=pageLoadTime))
-p <- p + geom_boxplot(aes(fill=browser))
+p <- p + geom_boxplot(aes(fill=engine))
 p <- p + facet_wrap(vars(device, run), ncol=1, scales='free', labeller=labeller(.multi_line=FALSE)) + theme(axis.text.x=element_text(angle=-67.5, hjust=0, vjust=0)) + xlab('site')
 p <- p + theme(legend.justification = c(0, 1), legend.position = c(0.04, 0.995))
 p
@@ -186,10 +210,12 @@ were tested.  The sites not tested were:
 | https://www.allrecipes.com | fails to render in WebView due to invalid protocol error |
 
 Some sites witnessed transient network errors: in these cases the
-number of recorded measurements is fewer than expected.  No site was
-measured fewer than 5 times.
+number of recorded measurements is fewer than expected.  In any
+individual run, no site was measured fewer than 4 times on the Fire TV
+Pendant and Cube, or fewer than 8 times on the Fire TV Stick 4k.
 
-The entire corpus was tested end-to-end twice in succession.
+The entire corpus was tested end-to-end twice in succession on the
+Fire TV Pendant and Cube, and end-to-end once on the Fire TV Stick.
 
 ### Single site test
 
@@ -203,12 +229,14 @@ captured.
 
 2. The record and replay proxy was started in replay mode, backed by
 the archive of captured network activity.  browsertime, with
-`--iterations 5` launched the vehicle and cold-loaded the site under
-test the specified number of times.  Between each cold-load the
-vehicle was force-stopped and its on-device package-data cleared.
+`--iterations 5` (respectively, `--iterations 9`) on the Fire TV
+Pendant and Cube (respectively, Fire TV Stick 4k) launched the vehicle
+and cold-loaded the site under test the specified number of times.
+Between each cold-load the vehicle was force-stopped and its on-device
+package-data cleared.
 
 3. For each cold-load, browsertime reports a wide range of timings,
-mostly from the [Performance Timing API](XXX).
+mostly from the [Performance Navigation Timing API](https://developer.mozilla.org/en-US/docs/Web/API/PerformanceNavigationTiming).
 
 ## Results
 
@@ -216,23 +244,25 @@ mostly from the [Performance Timing API](XXX).
 
 The data collected for the following tests is available:
 
-| target device | folder |
-| --- | --- |
-| Fire TV Cube | https://drive.google.com/open?id=1-1jfdNQU-CR4h7BBQRHKpW3T0DAO6vqW |
-| Fire TV Pendant | https://drive.google.com/open?id=1xW_bwcK6TnvRqot3h9XZdsc10Uyf6fKe |
-| Fire TV Cube (repeat) | https://drive.google.com/open?id=14xtHSG5Z6FoXiwjjworPxD3zsqAWLcJp |
+| run | device | folder |
+| --- | --- | --- |
+| 1 | Fire TV Cube | https://drive.google.com/open?id=1Fmrh7WYFTqK9Pg2cq0np8H84imcnI0Ag |
+| 2 | Fire TV Cube | https://drive.google.com/open?id=1g3zSrIOmBrnIH4qgEdFBPwDOwgHZGK97 |
+| 3 | Fire TV Pendant | https://drive.google.com/open?id=1eSibHYYPNUXjnQFgtvc2rUoEeWktQ1iB |
+| 4 | Fire TV Pendant | https://drive.google.com/open?id=1-xNB3HWsp8tjgZvWiXXrsE5i5aBtkyQh |
+| 5 | Fire TV Stick | https://drive.google.com/open?id=1dwh5eStdVNNFO5KofgYGyHx1K4CY0H7u |
 
 ### Processed data
 
 The data from the three test runs above can be found in the following
-[CSV file](XXX).  The columns of the CSV are as follows:
+[CSV file](data/firetv.csv).  The columns of the CSV are as follows:
 
 | column | description |
 | --- | --- |
-`device` | the target device, either "Fire TV Cube (WebView 59)" or "Fire TV Pendant (WebView 59)" |
+`device` | the target device, one of "Fire TV Stick 4k", "Fire TV Cube", or "Fire TV Pendant" |
 | `run` | the test run number |
 | `site` | the URL of the page being loaded |
-| `browser` | the tested engine, either "firefox" (meaning GeckoView) or "chrome" (meaning system WebView) |
+| `engine` | the tested engine, either "GeckoView" or "WebView" |
 | `turbo` | whether Turbo Mode was enabled, either "true" (meaning Turbo View was enabled) or "false" (meaning Turbo View was disabled) |
 | `proxy` | the proxy state, either "record" (meaning the pageload was from the live network and the proxy was recording) or "replay" (meaning the pageload was from the replaying proxy and not from the live network) |
 | `timestamp` | the local timestamp when the pageload was initiated |
@@ -277,7 +307,7 @@ Using a proxy and a custom CA certificate for both WebView and
 GeckoView sacrifices real-world characteristics for cross-engine
 consistency.  GeckoView requires a true HTTP proxy for this type of
 record and replay, and such a proxy requires either a custom CA
-certificate or for the browser to allow insecure connections.
+certificate or for the engine to allow insecure connections.
 Allowing insecure connections is decidely _not_ real-world, hence we
 took the lesser of two evils.
 
@@ -309,8 +339,8 @@ with `cert9.db` and `key4.db` containing the custom CA certificate
 used by the record and replay proxy was produced.  Second, this
 template was copied to the target device, and the vehicle was started
 from a cleared state with this profile.  The single page
-`http://example.com` was visited and then browser was idle for 2
-minutes.  The vehicle was then force-stopped and the conditioned
+`http://example.com` was visited and then the vehicle was left idle
+for 2 minutes.  The vehicle was then force-stopped and the conditioned
 profile retrieved from the device.
 
 This conditioned profile was then copied to the device at the
@@ -318,6 +348,18 @@ beginning of every test run: that is, every cold pageload started with
 exactly the same Gecko profile.
 
 ## Versions
+
+### Fire TV versions
+
+The output of `adb shell getprops` for each device is available:
+
+| device |
+| --- |
+| [Fire TV Cube](Fire TV Cube.getprops) |
+| [Fire TV Pendant](Fire TV Pendant.getprops) |
+| [Fire TV Stick](Fire TV Stick 4k.getprops) |
+
+### Software versions
 
 | package | version | link |
 | ------- | --- | --- |
@@ -329,7 +371,3 @@ exactly the same Gecko profile.
 | firefox-tv | | xxx |
 | GeckoView | XXX | |
 | system WebView | 59.XXX |
-
-Clarify what version of the Fire TV was used.
-X-Ray live indication of core saturation.
-chrome == webview
