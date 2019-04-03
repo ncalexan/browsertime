@@ -19,6 +19,11 @@ git clone https://github.com/ncalexan/browsertime ncalexan-browsertime
 cd ncalexan-browsertime
 git checkout master
 # Or at least c0813a288dda892c0125ee53855d00eae4fa469a.
+```
+
+Install the base `selenium-webdriver` and then the packages from this repository:
+```
+npm install selenium-webdriver
 npm install
 ```
 
