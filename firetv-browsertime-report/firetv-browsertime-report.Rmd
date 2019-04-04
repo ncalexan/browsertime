@@ -351,13 +351,13 @@ exactly the same Gecko profile.
 
 ### Fire TV versions
 
-The output of `adb shell getprops` for each device is available:
+The output of `adb shell getprop` for each device is available:
 
 | device |
 | --- |
-| [Fire TV Cube](Fire TV Cube.getprops) |
-| [Fire TV Pendant](Fire TV Pendant.getprops) |
-| [Fire TV Stick](Fire TV Stick 4k.getprops) |
+| [Fire TV Cube](Fire TV Cube.getprop) |
+| [Fire TV Pendant](Fire TV Pendant.getprop) |
+| [Fire TV Stick](Fire TV Stick 4k.getprop) |
 
 ### Software versions
 
