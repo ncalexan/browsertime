@@ -15,7 +15,7 @@ You will also need to install `mitmproxy`, perhaps using `brew install mitmproxy
 
 Invoke like:
 
-`pipenv run python with_wpr.py -v --wpr ~/Downloads/wpr-go/wpr-macosx64 --record 'curl --proxy 127.0.0.1:4040 https://example.com/ --proxy-cacert /Users/nalexander/.mitmproxy/mitmproxy-ca-cert.pem --cacert /Users/nalexander/.mitmproxy/mitmproxy-ca-cert.pem -vvv' --replay 'curl --proxy 127.0.0.1:4040 https://example.com/ --proxy-cacert /Users/nalexander/.mitmproxy/mitmproxy-ca-cert.pem --cacert /Users/nalexander/.mitmproxy/mitmproxy-ca-cert.pem' --args '--host 127.0.0.1 --https_cert_file /Users/nalexander/.mitmproxy/mitmproxy-ca-cert.pem --https_key_file /Users/nalexander/.mitmproxy/mitmproxy-ca-key.pem'` # noqa
+`pipenv run python with_wpr.py -v --wpr ~/Downloads/wpr-go/wpr-macosx64 --record 'curl --proxy 127.0.0.1:4040 https://example.com/ --proxy-cacert /Users/nalexander/.mitmproxy/mitmproxy-ca-cert.pem --cacert /Users/nalexander/.mitmproxy/mitmproxy-ca-cert.pem -vvv' --replay 'curl --proxy 127.0.0.1:4040 https://example.com/ --proxy-cacert /Users/nalexander/.mitmproxy/mitmproxy-ca-cert.pem --cacert /Users/nalexander/.mitmproxy/mitmproxy-ca-cert.pem' --wpr-args '--host 127.0.0.1 --https_cert_file /Users/nalexander/.mitmproxy/mitmproxy-ca-cert.pem --https_key_file /Users/nalexander/.mitmproxy/mitmproxy-ca-key.pem'` # noqa
 """
 
 from __future__ import absolute_import, print_function, unicode_literals
@@ -53,27 +53,35 @@ def ensureParentDir(path):
                 raise
 
 
-
 class FormatStreamOutput(object):
     """Pass formatted output to a stream and flush"""
 
     def __init__(self, stream, template):
         self.stream = stream
-        self.template = template
+        self.template = template + '\n'
 
     def __call__(self, line):
-        try:
-            self.stream.write(self.template.format(line) + '\n'.encode('utf8'))
-        except UnicodeDecodeError:
-            # TODO: Workaround for bug #991866 to make sure we can display when
-            # when normal UTF-8 display is failing
-            self.stream.write(self.template.format(line).decode('iso8859-1') + '\n')
+        if type(line) == bytes:
+            line = line.decode('utf-8')
+        self.stream.write(self.template.format(line))
         self.stream.flush()
+
+
+class FormatLogOutput(FormatStreamOutput):
+    """Pass formatted output to a file."""
+
+    def __init__(self, filename, template):
+        self.file_obj = open(filename, 'a')
+        FormatStreamOutput.__init__(self, self.file_obj, template)
+
+    def __del__(self):
+        if self.file_obj is not None:
+            self.file_obj.close()
 
 
 @contextmanager
 def process(*args, **kwargs):
-    logoutput = mozprocess.LogOutput(kwargs['logfile'])
+    logoutput = FormatLogOutput(kwargs.pop('logfile'), template='{}')
     processOutputLine = [FormatStreamOutput(sys.stdout, "[{}] {{}}".format(kwargs.pop('prefix'))), logoutput]
     kwargs['processOutputLine'] = processOutputLine
 
@@ -83,7 +91,7 @@ def process(*args, **kwargs):
         cmd = [proc.cmd] + proc.args
         printable_cmd = ' '.join(pipes.quote(arg) for arg in cmd)
         for pol in processOutputLine:
-            pol('Executing "{}"{}'.format(printable_cmd, '' if not proc.cwd else ' in "{}"'.format(proc.cwd))) # , file=sys.stderr)
+            pol('Executing "{}"{}'.format(printable_cmd, '' if not proc.cwd else ' in "{}"'.format(proc.cwd)))
 
     try:
         proc.run()
