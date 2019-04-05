@@ -7,9 +7,15 @@ another process.
 Collect the outputs from the `wpr ...` runs, the HTTP archive, and the
 outputs from the processes.
 
+Install like:
+
+`pipenv install`
+
+You will also need to install `mitmproxy`, perhaps using `brew install mitmproxy`.  TODO: figure out how to invoke `mitmdump` from a Python module installed using `pipenv install`; this will require we use Python 3 (which is fine, but not yet done).
+
 Invoke like:
 
-`pipenv run python with_wpr.py -v --wpr /path/to/wpr --record 'curl --proxy localhost:4040 http://example.com' --replay 'curl --proxy localhost https://example.com'` # noqa
+`pipenv run python with_wpr.py -v --wpr ~/Downloads/wpr-go/wpr-macosx64 --record 'curl --proxy 127.0.0.1:4040 https://example.com/ --proxy-cacert /Users/nalexander/.mitmproxy/mitmproxy-ca-cert.pem --cacert /Users/nalexander/.mitmproxy/mitmproxy-ca-cert.pem -vvv' --replay 'curl --proxy 127.0.0.1:4040 https://example.com/ --proxy-cacert /Users/nalexander/.mitmproxy/mitmproxy-ca-cert.pem --cacert /Users/nalexander/.mitmproxy/mitmproxy-ca-cert.pem' --args '--host 127.0.0.1 --https_cert_file /Users/nalexander/.mitmproxy/mitmproxy-ca-cert.pem --https_key_file /Users/nalexander/.mitmproxy/mitmproxy-ca-key.pem'` # noqa
 """
 
 from __future__ import absolute_import, print_function, unicode_literals
@@ -21,10 +27,16 @@ import errno
 import mozprocess
 import os
 import pipes
+import requests
 import signal
 import shlex
+import subprocess
 import sys
 import tempfile
+import warnings
+
+import backoff
+import requests
 
 
 VERBOSE = 0
@@ -41,15 +53,37 @@ def ensureParentDir(path):
                 raise
 
 
+
+class FormatStreamOutput(object):
+    """Pass formatted output to a stream and flush"""
+
+    def __init__(self, stream, template):
+        self.stream = stream
+        self.template = template
+
+    def __call__(self, line):
+        try:
+            self.stream.write(self.template.format(line) + '\n'.encode('utf8'))
+        except UnicodeDecodeError:
+            # TODO: Workaround for bug #991866 to make sure we can display when
+            # when normal UTF-8 display is failing
+            self.stream.write(self.template.format(line).decode('iso8859-1') + '\n')
+        self.stream.flush()
+
+
 @contextmanager
 def process(*args, **kwargs):
+    logoutput = mozprocess.LogOutput(kwargs['logfile'])
+    processOutputLine = [FormatStreamOutput(sys.stdout, "[{}] {{}}".format(kwargs.pop('prefix'))), logoutput]
+    kwargs['processOutputLine'] = processOutputLine
+
     proc = mozprocess.ProcessHandler(*args, **kwargs)
 
     if VERBOSE:
         cmd = [proc.cmd] + proc.args
         printable_cmd = ' '.join(pipes.quote(arg) for arg in cmd)
-        print('Executing "{}"{}'.format(printable_cmd, '' if not proc.cwd else ' in "{}"'.format(proc.cwd)), file=sys.stderr)
-        sys.stderr.flush()
+        for pol in processOutputLine:
+            pol('Executing "{}"{}'.format(printable_cmd, '' if not proc.cwd else ' in "{}"'.format(proc.cwd))) # , file=sys.stderr)
 
     try:
         proc.run()
@@ -78,6 +112,16 @@ def wpr_process_name(platform=sys.platform):
     raise ValueError("Don't recognize platform: {}".format(platform))
 
 
+@backoff.on_exception(backoff.expo,
+                      requests.exceptions.RequestException,
+                      max_time=5)
+def _ensure_http_response(url):
+    with warnings.catch_warnings():
+        # Eat warnings about SSL insecurity.  These fetches establish status only.
+        warnings.simplefilter("ignore")
+        return requests.get(url, verify=False)
+
+
 def record_and_replay(
         wpr, wpr_root, wpr_extra_args=[],
         output_prefix='wpr',
@@ -99,8 +143,7 @@ def record_and_replay(
         raise ValueError('wpr_root is not a directory: {}'.format(wpr_root))
 
     # Paths are relative to `wpr_root`.
-    wpr_args = ['--http_connect_proxy_port', str(4040),
-                '--http_port', str(8080),
+    wpr_args = ['--http_port', str(8080),
                 '--https_port', str(8081),
                 '--inject_scripts', 'deterministic.js']
     if '--https_cert_file' not in wpr_extra_args:
@@ -114,10 +157,11 @@ def record_and_replay(
     ensureParentDir(archive_path)
     wpr_args.append(archive_path)
 
+    portforward_logfile = os.path.abspath('{}portforward-mitmproxy.log'.format(output_prefix))
     record_logfile = os.path.abspath('{}record-wpr.log'.format(output_prefix))
     replay_logfile = os.path.abspath('{}replay-wpr.log'.format(output_prefix))
 
-    for path in (record_logfile, replay_logfile):
+    for path in (portforward_logfile, record_logfile, replay_logfile):
         ensureParentDir(path)
         try:
             os.remove(path)
@@ -127,49 +171,88 @@ def record_and_replay(
 
     status = 0
 
-    with process([wpr, 'record'] + wpr_args,
-                 cwd=wpr_root,
-                 logfile=record_logfile) as record_proc:
+    host = '127.0.0.1'
+    print(wpr_extra_args)
+    if '--host' in wpr_extra_args:
+        host = wpr_extra_args[wpr_extra_args.index('--host') + 1]
+
+    mitmproxy_args = ['--listen-host',
+                      host,
+                      '--listen-port',
+                      str(4040), # Configurable?
+                      '-s',
+                      'vendor/mitmproxy_portforward.py', # XXX
+                      '--set', 'portmap=80,8080,443,8081', # Configurable.
+                      '--ssl-insecure',  # REALLY?
+                      # '--certs', '*=/Users/nalexander/.mitmproxy/mitmproxy-ca.pem',
+                      # '--certs', '*=/Users/nalexander/Downloads/wpr-go/wpr_both.pem',
+                      ]
+
+    with process(['mitmdump'] + mitmproxy_args,
+                 prefix='portfwd',
+                 logfile=portforward_logfile) as portforward_proc:
         try:
-            if record_proc.poll():
-                raise RuntimeError("Record proxy failed: ", record_proc.poll())
+            if portforward_proc.poll():
+                raise RuntimeError("Port forwarding proxy failed: ", portforward_proc.poll())
 
-            status = record(*record_args, **record_kwargs)
-            if status:
-                raise RuntimeError("Recording failed: ", status)
-            print("record_verify", bool(record_verify))
-            if record_verify:
-                status = record_verify(*record_args, **record_kwargs)
-                print("record_verify status", status)
+            with process([wpr, 'record'] + wpr_args,
+                         cwd=wpr_root,
+                         prefix='rec-wpr',
+                         logfile=record_logfile) as record_proc:
+                try:
+                    if record_proc.poll():
+                        raise RuntimeError("Record proxy failed: ", record_proc.poll())
 
-                if status:
-                    raise RuntimeError("Record verifying failed: ", status)
+                    # It takes some time for mitmproxy and wpr to be ready to serve.  mitmproxy is
+                    # actually slower (Python startup time, yo!) so we check for it last.
+                    r = _ensure_http_response("http://{}:{}/web-page-replay-generate-200".format(host, 8080))
+                    r = _ensure_http_response("https://{}:{}/web-page-replay-generate-200".format(host, 8081))
+                    r = _ensure_http_response("http://{}:{}/mitmdump-generate-200".format(host, 4040))
+                    print(r)
+
+                    status = record(*record_args, **record_kwargs)
+                    if status:
+                        raise RuntimeError("Recording failed: ", status)
+                    if record_verify:
+                        status = record_verify(*record_args, **record_kwargs)
+
+                        if status:
+                            raise RuntimeError("Record verifying failed: ", status)
+                finally:
+                    if record_proc.poll():
+                        raise RuntimeError("Record proxy failed: ", record_proc.poll())
+                    else:
+                        record_proc.kill(signal.SIGINT)
+
+            with process([wpr, 'replay'] + wpr_args,
+                         cwd=wpr_root,
+                         prefix='rep-wpr',
+                         logfile=replay_logfile) as replay_proc:
+                try:
+                    if replay_proc.poll():
+                        raise RuntimeError("Replay proxy failed: ", replay_proc.poll())
+
+                    # It takes some time for wpr to be ready to serve.  Don't race!
+                    r = _ensure_http_response("http://{}:{}/web-page-replay-generate-200".format(host, 8080))
+                    r = _ensure_http_response("https://{}:{}/web-page-replay-generate-200".format(host, 8081))
+
+                    status = replay(*replay_args, **replay_kwargs)
+                    if status:
+                        raise RuntimeError("Replaying failed: ", status)
+                    if replay_verify:
+                        status = replay_verify(*replay_args, **replay_kwargs)
+                        if status:
+                            raise RuntimeError("Replay verifying failed: ", status)
+                finally:
+                    if replay_proc.poll():
+                        raise RuntimeError("Replay proxy failed: ", replay_proc.poll())
+                    else:
+                        replay_proc.kill(signal.SIGINT)
         finally:
-            if record_proc.poll():
-                raise RuntimeError("Record proxy failed: ", record_proc.poll())
+            if portforward_proc.poll():
+                raise RuntimeError("Port forwarding proxy failed: ", portforward_proc.poll())
             else:
-                record_proc.kill(signal.SIGINT)
-
-    with process([wpr, 'replay'] + wpr_args,
-                 cwd=wpr_root,
-                 logfile=replay_logfile) as replay_proc:
-        try:
-            if replay_proc.poll():
-                raise RuntimeError("Replay proxy failed: ", replay_proc.poll())
-
-            status = replay(*replay_args, **replay_kwargs)
-            if status:
-                raise RuntimeError("Replaying failed: ", status)
-            if replay_verify:
-                status = replay_verify(*replay_args, **replay_kwargs)
-                if status:
-                    raise RuntimeError("Replay verifying failed: ", status)
-        finally:
-            if replay_proc.poll():
-                raise RuntimeError("Replay proxy failed: ", replay_proc.poll())
-            else:
-                replay_proc.kill(signal.SIGINT)
-        # return replay(*replay_args, **replay_kwargs)
+                portforward_proc.kill(signal.SIGINT)
 
 
 def record_and_replay_processes(
@@ -206,11 +289,11 @@ def record_and_replay_processes(
         output_prefix=output_prefix,
         record=execute,
         record_args=record,
-        record_kwargs={'logfile': record_logfile},
+        record_kwargs={'prefix': 'rec-cmd', 'logfile': record_logfile},
         record_verify=record_verify,
         replay=execute,
         replay_args=replay,
-        replay_kwargs={'logfile': replay_logfile},
+        replay_kwargs={'prefix': 'rep-cmd', 'logfile': replay_logfile},
         replay_verify=replay_verify)
 
 
@@ -235,15 +318,15 @@ def main(args):
                         default=None,
                         help='Web Page Replay Go binary. ' +
                         'Parent directory should contain wpr_{cert,key}.pem '
-                        'and deterministic.js (or set --root).')
-    parser.add_argument('--root', dest='wpr_root',
+                        'and deterministic.js (or set --wpr-root).')
+    parser.add_argument('--wpr-root', dest='wpr_root',
                         default=None,
                         help='Web Page Replay Go root directory ' +
                         '(contains wpr_{cert,key}.pem, deterministic.js, ' +
                         'wpr-* binaries)')
-    parser.add_argument('--args', dest='wpr_args', default='', help='wpr args')
-    parser.add_argument('--record', required=True, help='record')
-    parser.add_argument('--replay', required=True, help='replay')
+    parser.add_argument('--wpr-args', dest='wpr_args', default='', help='string of wpr args')
+    parser.add_argument('--record', required=True, help='string record command')
+    parser.add_argument('--replay', required=True, help='string replay command')
     parser.add_argument('--output-prefix',
                         default='{}/rnr-'.format(tempfile.gettempdir()),
                         help='Output prefix (end with / to create directory)')

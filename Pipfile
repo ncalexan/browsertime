@@ -17,6 +17,8 @@ jupyter = "*"
 seaborn = "*"
 pyyaml = "*"
 json-e = "*"
+requests = "*"
+backoff = "*"
 
 [requires]
 python_version = "2.7"
