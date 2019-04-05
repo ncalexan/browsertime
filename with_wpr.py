@@ -196,7 +196,8 @@ def record_and_replay(
                       # '--certs', '*=/Users/nalexander/Downloads/wpr-go/wpr_both.pem',
                       ]
 
-    with process(['mitmdump'] + mitmproxy_args,
+    # `mitmdump` is sibling to `python` in the virtualenv `bin/` directory.
+    with process([os.path.join(os.path.dirname(sys.executable), 'mitmdump')] + mitmproxy_args,
                  prefix='portfwd',
                  logfile=portforward_logfile) as portforward_proc:
         try:
