@@ -18,7 +18,6 @@ import signal
 import shlex
 import sys
 import urllib
-import urlparse
 
 import with_wpr
 
@@ -315,7 +314,7 @@ def main(args):
             urls.append(url)
 
     for url in urls:
-        if urlparse.urlparse(url).scheme not in ('http', 'https'):
+        if urllib.parse.urlparse(url).scheme not in ('http', 'https'):
             raise ValueError('URL scheme is not http(s): {}'.format(url))
 
     print(urls)
@@ -390,7 +389,7 @@ def main(args):
                 # N.B.: chromedriver doesn't have an official way to pass intent
                 # arguments, but it does have an unsanitized injection at
                 # https://github.com/bayandin/chromedriver/blob/5a2b8f793391c80c9d1a1b0004f28be0a2be9ab2/chrome/adb_impl.cc#L212.
-                '--chrome.android.activity', 'org.mozilla.tv.firefox.MainActivity --ez TURBO_MODE {} --es HTTP_PROXY_HOST {} --ei HTTP_PROXY_PORT {} -a android.intent.action.VIEW'.format(turbo, host, 4444),
+                '--chrome.android.activity', 'org.mozilla.tv.firefox.MainActivity --ez TURBO_MODE {} --es HTTP_PROXY_HOST {} --ei HTTP_PROXY_PORT {} -a android.intent.action.VIEW'.format(turbo, host, 4040),
             ],
         }
 
@@ -446,8 +445,8 @@ def main(args):
         live = list(replay)
 
         for variant in (record, replay):
-            variant.extend(['--proxy.http', '{}:4444'.format(host)]) # XXX
-            variant.extend(['--proxy.https', '{}:4444'.format(host)])
+            variant.extend(['--proxy.http', '{}:4040'.format(host)]) # XXX
+            variant.extend(['--proxy.https', '{}:4040'.format(host)])
 
         for variant, name in ((record, 'record'), (replay, 'replay'), (live, 'live')):
             variant.extend(['--info.extra', json.dumps({'browser': browser, 'turbo': turbo, 'proxy': name})])
@@ -458,68 +457,40 @@ def main(args):
 
         wanted_configurations.append(VehicleConfiguration(browser, turbo, record, replay, live))
 
-    mitmdump_logfile = os.path.join(args.result_dir, 'mitmdump.log')
-    ensureParentDir(mitmdump_logfile)
+    for url_index, url in enumerate(urls):
+        url_log = log.new(url_index=url_index, url=url)
+        url_log.info('testing URL')
 
-    mitmproxy_args = ['--listen-host',
-                      host,
-                      '--listen-port',
-                      str(4444),
-                      '-s',
-                      'vendor/mitmproxy_portforward.py',
-                      '--ssl-insecure']
-    with with_wpr.process(
-        ['mitmdump'] + mitmproxy_args,
-        logfile=mitmdump_logfile) as mitmdump_proc:
+        if args.wpr or args.wpr_root:
+            wpr_configuration = WprConfiguration(args.wpr, args.wpr_root, shlex.split(args.wpr_args) + ['--host', host]) # '0.0.0.0'
 
-        if mitmdump_proc.poll():
-            raise RuntimeError("Port forwarding proxy failed: ", mitmdump_proc.poll())
+            url_result_dir = os.path.join(args.result_dir,
+                                          "url-{:02d}".format(url_index + 1),
+                                          urllib.parse.quote_plus(url))
 
-        for url_index, url in enumerate(urls):
-            url_log = log.new(url_index=url_index, url=url)
-            url_log.info('testing URL')
+            for vehicle_index, vehicle_configuration in enumerate(wanted_configurations):
+                vehicle_log = url_log.bind(vehicle_index=vehicle_index, vehicle_configuration=vehicle_configuration)
+                vehicle_log.info('Testing vehicle', browser=vehicle_configuration.browser, turbo=vehicle_configuration.turbo)
 
-            if args.wpr or args.wpr_root:
-                wpr_configuration = WprConfiguration(args.wpr, args.wpr_root, shlex.split(args.wpr_args) + ['--host', host]) # '0.0.0.0'
+                vehicle_result_dir = vehicle_configuration.result_dir(os.path.join(url_result_dir, "vehicle-{:02d}".format(vehicle_index + 1)))
+                try:
+                    # if FOOTER:
+                    #     FOOTER.clear()
 
-                url_result_dir = os.path.join(args.result_dir,
-                                              "url-{:02d}".format(url_index + 1),
-                                              urllib.quote_plus(url))
+                    # if FOOTER:
+                    #     FOOTER.write([('green', 'url {:02d}/{:02d}'.format(url_index, len(urls))),
+                    #                   ('green', 'vehicle {:02d}/{:02d}'.format(vehicle_index, len(wanted_configurations)))])
 
-                for vehicle_index, vehicle_configuration in enumerate(wanted_configurations):
-                    vehicle_log = url_log.bind(vehicle_index=vehicle_index, vehicle_configuration=vehicle_configuration)
-                    vehicle_log.info('Testing vehicle', browser=vehicle_configuration.browser, turbo=vehicle_configuration.turbo)
+                    test_one_url(vehicle_configuration, wpr_configuration, vehicle_result_dir, url)
+                except RuntimeError as e:
+                    error_file = os.path.join(vehicle_result_dir, "error")
+                    ensureParentDir(error_file)
+                    print(e, file=open(error_file, 'wt'))
 
-                    vehicle_result_dir = vehicle_configuration.result_dir(os.path.join(url_result_dir, "vehicle-{:02d}".format(vehicle_index + 1)))
-                    try:
-                        # if FOOTER:
-                        #     FOOTER.clear()
-
-                        # if FOOTER:
-                        #     FOOTER.write([('green', 'url {:02d}/{:02d}'.format(url_index, len(urls))),
-                        #                   ('green', 'vehicle {:02d}/{:02d}'.format(vehicle_index, len(wanted_configurations)))])
-
-                        test_one_url(vehicle_configuration, wpr_configuration, vehicle_result_dir, url)
-                    except RuntimeError as e:
-                        error_file = os.path.join(vehicle_result_dir, "error")
-                        ensureParentDir(error_file)
-                        print(e, file=open(error_file, 'wt'))
-
-                        if args.no_continue:
-                            raise
-            else:
-                raise NotImplementedError
-                # import pprint
-                # pprint.pprint(live)
-
-                # # XXX: logging.
-                # logfile = os.path.join(result_dir, 'browsertime') # 'browsertime-{}-{}.log'.format(browser, turbo))
-                # ensureParentDir(logfile)
-
-                # with with_wpr.process(live, logfile=logfile) as browsertime_proc:
-                #     browsertime_proc.wait()
-
-            # url_log.info('Testing URL {} ... DONE', url)
+                    if args.no_continue:
+                        raise
+        else:
+            raise NotImplementedError
 
 
 if __name__ == '__main__':

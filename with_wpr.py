@@ -40,6 +40,7 @@ import requests
 
 
 VERBOSE = 0
+DRY_RUN = False
 
 
 def ensureParentDir(path):
@@ -81,8 +82,17 @@ class FormatLogOutput(FormatStreamOutput):
 
 @contextmanager
 def process(*args, **kwargs):
-    logoutput = FormatLogOutput(kwargs.pop('logfile'), template='{}')
-    processOutputLine = [FormatStreamOutput(sys.stdout, "[{}] {{}}".format(kwargs.pop('prefix'))), logoutput]
+    prefix = kwargs.pop('prefix', None)
+    if prefix:
+        streamoutput = FormatStreamOutput(sys.stdout, '[{}] {{}}'.format(prefix))
+    else:
+        streamoutput = FormatStreamOutput(sys.stdout, '{}')
+
+    logfile = kwargs.pop('logfile')
+    ensureParentDir(logfile)
+    logoutput = FormatLogOutput(logfile, '{}')
+
+    processOutputLine = [streamoutput, logoutput]
     kwargs['processOutputLine'] = processOutputLine
 
     proc = mozprocess.ProcessHandler(*args, **kwargs)
@@ -93,7 +103,7 @@ def process(*args, **kwargs):
         for pol in processOutputLine:
             pol('Executing "{}"{}\n'.format(printable_cmd, '' if not proc.cwd else ' in "{}"'.format(proc.cwd)))
 
-    if dry_run:
+    if DRY_RUN:
         proc = mozprocess.ProcessHandler(['true'], **kwargs) # XXX Windows?
 
     try:
@@ -136,10 +146,13 @@ def wpr_process_name(platform=sys.platform):
                       requests.exceptions.RequestException,
                       max_time=5)
 def _ensure_http_response(url):
+    if DRY_RUN:
+        return
+
     with warnings.catch_warnings():
         # Eat warnings about SSL insecurity.  These fetches establish status only.
         warnings.simplefilter("ignore")
-        return requests.get(url, verify=False)
+        requests.get(url, verify=False)
 
 
 def record_and_replay(
@@ -192,7 +205,6 @@ def record_and_replay(
     status = 0
 
     host = '127.0.0.1'
-    print(wpr_extra_args)
     if '--host' in wpr_extra_args:
         host = wpr_extra_args[wpr_extra_args.index('--host') + 1]
 
@@ -226,10 +238,9 @@ def record_and_replay(
 
                     # It takes some time for mitmproxy and wpr to be ready to serve.  mitmproxy is
                     # actually slower (Python startup time, yo!) so we check for it last.
-                    r = _ensure_http_response("http://{}:{}/web-page-replay-generate-200".format(host, 8080))
-                    r = _ensure_http_response("https://{}:{}/web-page-replay-generate-200".format(host, 8081))
-                    r = _ensure_http_response("http://{}:{}/mitmdump-generate-200".format(host, 4040))
-                    print(r)
+                    _ensure_http_response("http://{}:{}/web-page-replay-generate-200".format(host, 8080))
+                    _ensure_http_response("https://{}:{}/web-page-replay-generate-200".format(host, 8081))
+                    _ensure_http_response("http://{}:{}/mitmdump-generate-200".format(host, 4040))
 
                     status = record(*record_args, **record_kwargs)
                     if status:
@@ -254,8 +265,8 @@ def record_and_replay(
                         raise RuntimeError("Replay proxy failed: ", replay_proc.poll())
 
                     # It takes some time for wpr to be ready to serve.  Don't race!
-                    r = _ensure_http_response("http://{}:{}/web-page-replay-generate-200".format(host, 8080))
-                    r = _ensure_http_response("https://{}:{}/web-page-replay-generate-200".format(host, 8081))
+                    _ensure_http_response("http://{}:{}/web-page-replay-generate-200".format(host, 8080))
+                    _ensure_http_response("https://{}:{}/web-page-replay-generate-200".format(host, 8081))
 
                     status = replay(*replay_args, **replay_kwargs)
                     if status:
@@ -333,10 +344,10 @@ def normalize_wpr_args(wpr, wpr_root):
 
 def main(args):
     parser = argparse.ArgumentParser()
-    parser.add_argument('--dry-run', action='store_true',
-                        help='Echo commands but do not execute')
     parser.add_argument('--verbose', '-v', action='count',
                         help='Be verbose (can be repeated)')
+    parser.add_argument('--dry-run', action='store_true',
+                        help='Echo commands but do not execute')
     parser.add_argument('--wpr',
                         default=None,
                         help='Web Page Replay Go binary. ' +
@@ -358,9 +369,12 @@ def main(args):
     global VERBOSE
     VERBOSE = args.verbose
 
+    global DRY_RUN
+    DRY_RUN = args.dry_run
+
     wpr, wpr_root = normalize_wpr_args(args.wpr, args.wpr_root)
 
-    if VERBOSE:
+    if VERBOSE > 1:
         print("Running wpr: {}".format(wpr))
         print("Running in wpr root: {}".format(wpr_root))
 
