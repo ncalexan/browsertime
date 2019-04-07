@@ -1,0 +1,305 @@
+# -*- Mode: yaml; yaml-indent-offset: 4 -*-
+
+# rm -rf browsertime-results-android ; pipenv run python one.py
+# --geckodriver /Users/nalexander/Mozilla/gecko/target/debug/geckodriver
+# --chromedriver /Users/nalexander/Downloads/chromedriver-2.32
+# --firefox-false-profile-template
+# /tmp/firefox-profile-mitmproxy-turbo-false
+# --firefox-true-profile-template
+# /tmp/firefox-profile-mitmproxy-turbo-true --wpr-host '192.168.1.141'
+# --wpr-root /Users/nalexander/Downloads/wpr-go --wpr-args
+# '--https_cert_file /Users/nalexander/.mitmproxy/mitmproxy-ca-cert.pem
+# --https_key_file /Users/nalexander/.mitmproxy/mitmproxy-ca-key.pem'
+# @corpus.product -vv -n 1 --browser firefox
+
+racetrack:
+    proxy:
+        record: true
+        replay: true
+
+        type: wpr
+        args:
+        - --wpr-root
+        - /Users/nalexander/Downloads/wpr-go
+        - --wpr-args
+        - "--https_cert_file /Users/nalexander/.mitmproxy/mitmproxy-ca-cert.pem --https_key_file /Users/nalexander/.mitmproxy/mitmproxy-ca-key.pem"
+
+    vehicles:
+    - &browsertime
+        args:
+            - bin/browsertime.js
+            - ${verbosity_flag}
+            # From `docker/scripts/start.sh`.  We must use this wait script for both record and
+            # replay, because the default script uses `Date.now()`, which WPR makes deterministic!
+            - --pageCompleteCheck
+            - "return (function() {try { var end = window.performance.timing.loadEventEnd; var start= window.performance.timing.navigationStart; return (end > 0) && (performance.now() > end - start + 10000);} catch(e) {return true;}})()"
+            # XXX
+            - --proxy.http=${http_proxy_host}:${http_proxy_port}
+            - --proxy.https=${http_proxy_host}:${http_proxy_port}
+            # XXX
+            - --firefox.profileTemplate
+            - /tmp/firefox-profile-mitmproxy
+
+    - &browsertime-android
+        from: *browsertime
+        args:
+            - --android
+            - --skipHar
+
+    - &geckoview
+        from: *browsertime-android
+        args:
+            - --browser=firefox
+            - --firefox.geckodriverPath=${geckodriver}
+            - --preURL=data:text/html,
+            - --preURLDelay=5000
+
+    - &fennec
+        from: *geckoview
+        args:
+            - --firefox.android.intentArgument=--ez
+            - --firefox.android.intentArgument=skipstartpane
+            - --firefox.android.intentArgument=true
+            - --firefox.android.intentArgument=-a
+            - --firefox.android.intentArgument=android.intent.action.VIEW
+            - --firefox.android.intentArgument=-d
+            - --firefox.android.intentArgument=data:text/html,
+            - --firefox.android.activity=org.mozilla.gecko.BrowserApp
+
+    -
+        name: org.mozilla.firefox
+        from: *fennec
+        args:
+            - --firefox.android.package=org.mozilla.firefox
+
+    -
+        name: org.mozilla.firefox_beta
+        from: *fennec
+        args:
+            - --firefox.android.package=org.mozilla.firefox_beta
+
+    -
+        name: org.mozilla.fennec_aurora
+        from: *fennec
+        args:
+            - --firefox.android.package=org.mozilla.fennec_aurora
+
+    -
+        name: org.mozilla.fennec_${user}
+        from: *fennec
+        args:
+            - --firefox.android.package=org.mozilla.fennec_${user}
+
+    - &chrome
+        from: *browsertime
+        args:
+            - --browser=chrome
+            - --chrome.chromedriverPath=${chromedriver}
+
+    - &webview
+        from: *browsertime-android
+        args:
+            - --browser=chrome
+            - --chrome.chromedriverPath=${chromedriver}
+
+    # Install `mitmproxy-ca-cert.cer` manually following
+    # https://support.google.com/nexus/answer/2844832?hl=en.  Worked on Moto G5.  Disable
+    # `--ignore-certificate-errors` in `lib/chrome/webdriver/chromeAndroidOptions.js`.
+    -
+        name: com.android.chrome
+        from: *webview
+        args:
+            - --chrome.android.package=com.android.chrome
+
+race:
+    # description: Fennec 64 vs. Fenix
+    # vehicle_names:
+    #     - org.mozilla.firefox
+    description: Fenix vs. Chrome 73
+    vehicle_names:
+        - com.android.chrome
+    urls:
+        - https://www.amazon.com
+        - https://www.google.com
+        - https://blogger.com/about
+        - https://m.facebook.com
+        - https://booking.com/searchresults.en-gb.html?city=20088325
+        - https://buzzfeed.com/daves4/the-new-york-times-makes-the-nerdiest-correction-e?utm_term=.tlL2KE08L6#.hwrBglaV2A
+        - https://www.youtube.com
+        - https://www.instagram.com
+        - https://m.ebay-kleinanzeigen.de
+        - https://eurosport.de
+        - https://eurosport.de/fussball/fifa-wm/2018/wm-2018-spielplan-russland-alle-dfb-spiele-wm-2018-gruppen-wm-2018-termine_sto6691356/story.shtml
+        - https://fashionbeans.com
+        - https://fashionbeans.com/article/coolest-menswear-stores-in-the-world
+        - https://www.bing.com/search?q=restaurants
+        - https://booking.com
+        - https://m.ebay-kleinanzeigen.de/s-anzeigen/auf-zeit-wg-berlin/zimmer/c199-l3331
+        - https://www.amazon.com/s/ref=nb_sb_noss_2/139-6317191-5622045?url=search-alias%3Daps&field-keywords=mobile+phone
+        - https://en.m.wikipedia.org/wiki/Main_Page
+        - https://www.youtube.com/watch?v=COU5T-Wafa4
+        - https://www.bing.com
+        - https://www.reddit.com
+        - https://www.reddit.com/r/firefox/comments/7dkq03/its_been_a_while/
+        - https://stackoverflow.com/
+        - https://stackoverflow.com/questions/927358/how-do-i-undo-the-most-recent-commits-in-git
+        - https://discordapp.com/
+        - https://www.jianshu.com/
+        - https://m.imdb.com/
+        - https://m.imdb.com/find?q=Firefox
+        - https://www.allrecipes.com/
+        - https://www.allrecipes.com/recipe/16485/barbs-broccoli-cauliflower-salad/?internalSource=hub%20recipe&referringContentType=Search
+        - https://www.espn.com
+        - http://www.espn.com/nba/story/_/page/allstarweekend25788027/the-comparison-lebron-james-michael-jordan-their-own-words
+        - https://web.de/
+        - https://web.de/magazine/politik/politologe-glaubt-grossen-koalition-herbst-knallen-33563566
+        - https://bbc.co.uk
+        - https://aframe.io/examples/showcase/animation/
+        - https://m.facebook.com/Cristiano
+
+        # - *browsertime-android
+
+#     # - --iterations=${iterations}
+
+#     - --binary=/.../...
+#     # --firefox.binaryPath
+
+#     firefox:
+#         inherit: browsertime
+#         args:
+#             - --browser=firefox
+#             - --firefox.geckodriverPath=${geckodriver}
+
+
+
+#     org.mozilla.tv.firefox.gecko:
+#         inherit: geckoview
+#         args:
+#             - --firefox.android.package=org.mozilla.tv.firefox.gecko.debug
+#             - --firefox.android.activity=org.mozilla.tv.firefox.MainActivity
+#             - --firefox.android.intentArgument=-a
+#             - --firefox.android.intentArgument=android.intent.action.VIEW
+#             - --firefox.android.intentArgument=-d
+#             - --firefox.android.intentArgument=data:text/html,
+#             # XXX profile template?
+#             # How to filter proxy if you want a live comparison?
+#             --proxy.http=${http_proxy_host}:${http_proxy_port}
+#             --proxy.https=${http_proxy_host}:${http_proxy_port}
+
+
+#             # How to not specify turbo? - $if ${turbo}
+#             - --firefox.android.intentArgument=--ez
+#             - --firefox.android.intentArgument=TURBO_MODE
+#             - --firefox.android.intentArgument=true
+
+#     org.mozilla.tv.firefox:
+#         inherit: webview
+#         args:
+#             - --chrome.android.package=org.mozilla.tv.firefox.debug
+#             - --chrome.android.activity
+#             # N.B.: chromedriver doesn"t have an official way to pass intent
+#             # arguments, but it does have an unsanitized injection at
+#             # https://github.com/bayandin/chromedriver/blob/5a2b8f793391c80c9d1a1b0004f28be0a2be9ab2/chrome/adb_impl.cc#L212.
+#             - org.mozilla.tv.firefox.MainActivity --ez TURBO_MODE ${turbo} --es HTTP_PROXY_HOST ${http_proxy_host} --ei HTTP_PROXY_PORT ${http_proxy_port} -a android.intent.action.VIEW
+
+#     firefox-rcwn.short:
+#         inherit: $eval ($merge ["base": "firefox"] ["base": $base])["base"]
+
+#         prefs:
+#             network.http.rcwn.enabled: true
+#             network.http.rcwn.max_wait_before_racing_ms: 500
+
+#     firefox-rcwn.long:
+#         inherit: firefox
+
+#         prefs:
+#             network.http.rcwn.enabled: true
+#             network.http.rcwn.max_wait_before_racing_ms: 1000
+
+#     firefox-rcwn.off:
+#         inherit: firefox
+
+#         prefs:
+#             network.http.rcwn.enabled: false
+
+#     something:
+#         inherit: firefox
+
+#         env:
+#             - FOO_BAR=1
+
+# prefs:
+#     network.http.rcwn.enabled:
+#         - true
+#         - false
+
+# app-settings:
+#     turbo:
+#         - true
+#         - false
+
+# prefs:
+#     network.http.rcwn.enabled:
+#         - true
+#         - false
+
+# #+END_SRC
+
+# Measure URLs across three Desktop vehicles:
+
+# #+BEGIN_SRC yaml
+# configurations:
+#     vehicles:
+#         - firefox-rcwn.short
+#         - firefox-rcwn.long
+#         - firefox-rcwn.off
+# #+END_SRC
+
+# And across three Desktop vehicles and three Fennec vehicles:
+
+# #+BEGIN_SRC yaml
+# configurations:
+#     vehicles:
+#         - firefox-rcwn.short
+#         - firefox-rcwn.long
+#         - firefox-rcwn.off
+
+#     vars:
+#         base: [firefox, fennec]
+
+#   - configurations:
+#       - vehicles:
+#           - org.mozilla.fenix
+#       - prefs:
+#           - network.http.rcwn.enabled
+#               - true
+#               - false
+#       - app-settings:
+#           - turbo:
+#               - true
+#               - false
+
+#   - configurations:
+#       - vehicles:
+#           - org.mozilla.tv.firefox.gecko
+#           - org.mozilla.tv.firefox
+#       - app-settings:
+#           - turbo
+
+
+
+
+#       # gv_turbo_true:
+#       #     vehicle: gv
+#       #     turbo: true
+#       # gv_turbo_false:
+#       #     vehicle: gv
+#       #     turbo: false
+#       # wv_turbo_true:
+#       #     vehicle: wv
+#       #     turbo: true
+#       # wv_turbo_false:
+#       #     vehicle: wv
+#       #     turbo: false
+
+# bin/browsertime.js --firefox.geckodriverPath "/Users/nalexander/Mozilla/gecko/target/debug/geckodriver" --android https://google.com -vv --browser firefox --firefox.android.package "org.mozilla.firefox" --firefox.android.activity "org.mozilla.gecko.BrowserApp" -n 1 --skipHar --firefox.android.intentArgument=-a --firefox.android.intentArgument=android.intent.action.VIEW --firefox.android.intentArgument=-d --firefox.android.intentArgument=data:text/html, --firefox.android.intentArgument=--ez --firefox.android.intentArgument=skipstartpane --firefox.android.intentArgument=true -vvv
