@@ -91,13 +91,25 @@ def process(*args, **kwargs):
         cmd = [proc.cmd] + proc.args
         printable_cmd = ' '.join(pipes.quote(arg) for arg in cmd)
         for pol in processOutputLine:
-            pol('Executing "{}"{}'.format(printable_cmd, '' if not proc.cwd else ' in "{}"'.format(proc.cwd)))
+            pol('Executing "{}"{}\n'.format(printable_cmd, '' if not proc.cwd else ' in "{}"'.format(proc.cwd)))
+
+    if dry_run:
+        proc = mozprocess.ProcessHandler(['true'], **kwargs) # XXX Windows?
 
     try:
         proc.run()
         yield proc
     finally:
+        if proc.poll() is not None:
+            return
+
         try:
+            proc.kill(signal.SIGINT)
+
+            if proc.poll() is not None:
+                return
+
+            time.sleep(0.5)
             proc.kill()
         except RuntimeError as e:
             print(e)
@@ -190,7 +202,7 @@ def record_and_replay(
                       str(4040), # Configurable?
                       '-s',
                       'vendor/mitmproxy_portforward.py', # XXX
-                      '--set', 'portmap=80,8080,443,8081', # Configurable.
+                      '--set', 'portmap=80:8080,443:8081', # Configurable.
                       '--ssl-insecure',  # REALLY?
                       # '--certs', '*=/Users/nalexander/.mitmproxy/mitmproxy-ca.pem',
                       # '--certs', '*=/Users/nalexander/Downloads/wpr-go/wpr_both.pem',
@@ -321,6 +333,8 @@ def normalize_wpr_args(wpr, wpr_root):
 
 def main(args):
     parser = argparse.ArgumentParser()
+    parser.add_argument('--dry-run', action='store_true',
+                        help='Echo commands but do not execute')
     parser.add_argument('--verbose', '-v', action='count',
                         help='Be verbose (can be repeated)')
     parser.add_argument('--wpr',
