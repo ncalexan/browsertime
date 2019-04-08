@@ -187,6 +187,10 @@ def main(args):
         url_result_dir = os.path.join(args.result_dir,
                                       "{:02d}-{}".format(url_index + 1, urllib.parse.quote_plus(url)))
 
+        prefix = 'with_wpr'
+        if len(urls) > 1:
+            prefix += ' {:02d}/{:02d}'.format(url_index + 1, len(urls))
+
         for vehicle_index, vehicle in enumerate(race_vehicles):
             vehicle_result_dir = os.path.join(url_result_dir, "{:02d}-{}".format(vehicle_index + 1, vehicle['name']))
             # print(vehicle_result_dir)
@@ -207,7 +211,10 @@ def main(args):
              '--replay', ' '.join(pipes.quote(arg) for arg in replay),
              '--wpr-args', '--host {} --https_cert_file /Users/nalexander/.mitmproxy/mitmproxy-ca-cert.pem --https_key_file /Users/nalexander/.mitmproxy/mitmproxy-ca-key.pem'.format(http_proxy_host)] # XXX
 
-            with with_wpr.process(cmd, prefix='with_wpr', logfile=os.path.join(vehicle_result_dir, 'with_wpr.log')) as with_wpr_proc:
+            if len(race_vehicles) > 1:
+                prefix += ' ({:02d}/{:02d})'.format(vehicle_index + 1, len(race_vehicles))
+
+            with with_wpr.process(cmd, prefix=prefix, logfile=os.path.join(vehicle_result_dir, 'with_wpr.log')) as with_wpr_proc:
                 try:
                     if with_wpr_proc.poll():
                         raise RuntimeError("with_wpr failed: ", with_wpr_proc.poll())
