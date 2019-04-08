@@ -54,6 +54,19 @@ racetrack:
             - --preURL=data:text/html,
             - --preURLDelay=5000
 
+    # https://index.taskcluster.net/v1/task/gecko.v2.mozilla-central.latest.mobile.android-api-16-pgo/artifacts/public/build/geckoview_example.apk
+    # -> https://taskcluster-artifacts.net/aIAShNXnQ66ZRyTwNkA_JA/0/public/build/geckoview_example.apk
+    -
+        name: org.mozilla.geckoview_example
+        from: *geckoview
+        args:
+            - --firefox.android.package=org.mozilla.geckoview_example
+            - --firefox.android.activity=org.mozilla.geckoview_example.GeckoViewActivity
+            - --firefox.android.intentArgument=-a
+            - --firefox.android.intentArgument=android.intent.action.VIEW
+            - --firefox.android.intentArgument=-d
+            - --firefox.android.intentArgument=data:text/html,
+
     - &fennec
         from: *geckoview
         args:
@@ -115,9 +128,15 @@ race:
     # description: Fennec 64 vs. Fenix
     # vehicle_names:
     #     - org.mozilla.firefox
-    description: Fenix vs. Chrome 73
+
+    # description: Fenix vs. Chrome 73
+    # vehicle_names:
+    #     - com.android.chrome
+
+    description: Fenix vs. GVE
     vehicle_names:
-        - com.android.chrome
+        - org.mozilla.geckoview_example
+
     urls:
         - https://www.amazon.com
         - https://www.google.com
