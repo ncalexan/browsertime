@@ -1,0 +1,109 @@
+---
+title: "browsertime: Fenix vs Fennec 64 vs Chrome on the Moto G5"
+author: Nick Alexander
+date: April 08, 2019
+output:
+  html_document:
+    toc: true
+    toc_float: true
+    theme: cosmo
+    includes:
+      in_header: "html/header.html"
+---
+
+<style>
+select {
+    width: 30%;
+    right: 10px;
+    height: 30px;
+}
+</style>
+
+```{r setup, include=FALSE}
+library(glue)
+library(dplyr)
+library(DT)
+library(ggplot2)
+library(stringr)
+library(tidyr)
+
+btr <- read.csv('data/data.csv')
+by_site <- btr %>%
+  filter(proxy == 'replay') %>%
+  select(-proxy, -timestamp) %>%
+  mutate(run=1)
+
+runs <- data.frame(run = c(1, 2, 3),
+                   device = factor(c("Moto G5", "Moto G5", "Moto G5")),
+                   iterations = c(9, 9, 9),
+                   min_iterations = c(8, 8, 8))
+
+with_min_iterations <- by_site %>%
+  group_by(run, device, site, engine) %>%
+  summarise(num_iterations=n()) %>%
+  ungroup() %>%
+  group_by(run, device, site) %>%
+  # This ensures that every "engine" has 0 if there were no runs recorded for that vehicle configuration.
+  spread(engine, num_iterations, fill = 0) %>%
+  gather("engine", num_iterations, 4:6) %>%
+  ungroup() %>%
+  group_by(run, device, site) %>%
+  summarise(min_iterations=min(num_iterations)) %>%
+  ungroup()
+
+# Each (run, device, site) that has sufficient data to draw conclusions.
+sufficient <- left_join(with_min_iterations, runs %>% select(-iterations), by = c("run", "device")) %>%
+  filter(min_iterations.x >= min_iterations.y) %>%
+  select(run, device, site)
+
+# The measurements corresponding to (run, device, site) tuples with sufficient data.
+complete <- semi_join(by_site, sufficient, by = c("run", "device", "site"))
+```
+
+## GVE over Fennec 64
+
+```{r gve_over_f64, include=FALSE}
+xx <- complete %>%
+  group_by(engine, run, device, site) %>%
+  filter(grepl("Gecko/68.0", engine, fixed = TRUE)) %>%
+  group_by(run, device, site) %>%
+  summarise(pageLoadTime_mean=mean(pageLoadTime), pageLoadTime_rsd=sd(pageLoadTime)/mean(pageLoadTime)*100)
+
+yy <- complete %>%
+  group_by(engine, run, device, site) %>%
+  filter(grepl("Gecko/64.0", engine, fixed = TRUE)) %>%
+  group_by(run, device, site) %>%
+  summarise(pageLoadTime_mean=mean(pageLoadTime), pageLoadTime_rsd=sd(pageLoadTime)/mean(pageLoadTime)*100)
+
+gve_over_f64 <- inner_join(xx, yy, by=c("run", "device", "site"), suffix=c(".gve", ".f64"))
+gve_over_f64$speed_pct <- xx$pageLoadTime_mean/yy$pageLoadTime_mean
+gve_over_f64$noise_pct <- xx$pageLoadTime_rsd/yy$pageLoadTime_rsd
+
+gve_over_f64 <- gve_over_f64 %>% ungroup() %>% select(-contains('pageLoadTime_rsd')) %>% arrange(speed_pct)
+```
+
+```{r}
+datatable(gve_over_f64 %>% select(-run), options=list(dom='t', pageLength = nrow(gve_over_f64)),
+          fillContainer = FALSE,
+          caption=('GeckoView pageload over Fennec 64 pageload (lower is better)' %>% glue())) %>%
+  formatRound(c(3, 4), 2) %>%
+  formatPercentage(c(5, 6))
+```
+
+## Per-device, per-site engine comparisons
+
+The following graphs give some insight into how GeckoView and WebView compare on the sites in the test corpus.
+
+```{r, echo=FALSE, fig.width = 12, fig.height=12}
+# , fig.height=10
+xx <- complete %>% group_by(device, run, site) %>% summarize(m=mean(pageLoadTime)) %>% ungroup() %>% arrange(m) %>% inner_join(complete, by=c('device', 'run', 'site'))
+xx$site <- sub('https://', '', xx$site)
+xx$site <- sub('http://', '', xx$site)
+xx$site <- xx$site %>% str_trunc(30) %>% str_pad(30, 'right')
+
+p <- ggplot(xx, aes(x=reorder(site, m), y=pageLoadTime))
+p <- p + geom_point(aes(color=engine))
+p <- p + facet_wrap(vars(device, run), ncol=1, scales='free', labeller=labeller(.multi_line=FALSE)) + theme(axis.text.x=element_text(angle=-67.5, hjust=0, vjust=0)) + xlab('site')
+p <- p + theme(legend.justification = c(0, 1), legend.position = c(0.04, 0.995))
+p
+```
