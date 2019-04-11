@@ -17,6 +17,7 @@ import pipes
 import signal
 import shlex
 import sys
+import time
 import urllib
 
 import with_wpr
@@ -178,9 +179,26 @@ def main(args):
     if os.path.exists(args.result_dir) and not args.force:
         raise ValueError('Results directory exists with no --force flag: {}', args.result_dir)
 
-    race_vehicles = [named_vehicles[name] for name in sorted(race['vehicle_names'])]
 
-    for url_index, url in enumerate(urls):
+    def onTimeout(proc):
+        proc.reader.stdout_callback('onTimeout proc: {}, timedOut: {}, outputTimedOut: {}'.format(proc, proc.timedOut, proc.outputTimedOut))
+
+        try:
+            proc.kill(signal.SIGINT)
+            if proc.poll() is not None:
+                return
+            time.sleep(1.0)
+            proc.kill()
+        except RuntimeError as e:
+            print(e)
+            pass
+
+    race_vehicles = [named_vehicles[name] for name in race['vehicle_names']]
+
+    for v, u in itertools.product(enumerate(race_vehicles), enumerate(urls)):
+        url_index, url = u
+        vehicle_index, vehicle = v
+
         # url_log = log.new(url_index=url_index, url=url)
         # url_log.info('testing URL')
 
@@ -191,41 +209,46 @@ def main(args):
         if len(urls) > 1:
             prefix += ' {:02d}/{:02d}'.format(url_index + 1, len(urls))
 
-        for vehicle_index, vehicle in enumerate(race_vehicles):
-            vehicle_result_dir = os.path.join(url_result_dir, "{:02d}-{}".format(vehicle_index + 1, vehicle['name']))
-            # print(vehicle_result_dir)
+        vehicle_result_dir = os.path.join(url_result_dir, "{:02d}-{}".format(vehicle_index + 1, vehicle['name']))
+        # print(vehicle_result_dir)
 
-            record = vehicle['args'] + ['--resultDir', os.path.join(vehicle_result_dir, 'record'), '-n', '1', url]
-            # print(record)
+        record = vehicle['args'] + ['--resultDir', os.path.join(vehicle_result_dir, 'record'), '-n', '1', url]
+        # print(record)
 
-            for arg in record:
-                print(arg, shlex.quote(arg))
+        for arg in record:
+            print(arg, shlex.quote(arg))
 
-            replay = vehicle['args'] + ['--resultDir', os.path.join(vehicle_result_dir, 'replay'), '-n', str(args.iterations), url]
+        replay = vehicle['args'] + ['--resultDir', os.path.join(vehicle_result_dir, 'replay'), '-n', str(args.iterations), url]
 
-            cmd = [sys.executable, 'with_wpr.py', '-v'] + \
-            (['--dry-run'] if args.dry_run else []) + \
-            ['--output-prefix', vehicle_result_dir if vehicle_result_dir.endswith(os.sep) else vehicle_result_dir + os.sep,
-             '--wpr', '/Users/nalexander/Downloads/wpr-go/wpr-macosx64',
-             '--record', ' '.join(shlex.quote(arg) for arg in record),
-             '--replay', ' '.join(pipes.quote(arg) for arg in replay),
-             '--wpr-args', '--host {} --https_cert_file /Users/nalexander/.mitmproxy/mitmproxy-ca-cert.pem --https_key_file /Users/nalexander/.mitmproxy/mitmproxy-ca-key.pem'.format(http_proxy_host)] # XXX
+        cmd = [sys.executable, 'with_wpr.py', '-v'] + \
+        (['--dry-run'] if args.dry_run else []) + \
+        ['--output-prefix', vehicle_result_dir if vehicle_result_dir.endswith(os.sep) else vehicle_result_dir + os.sep,
+         '--wpr', '/Users/nalexander/Downloads/wpr-go/wpr-macosx64',
+         '--record', ' '.join(shlex.quote(arg) for arg in record),
+         '--replay', ' '.join(pipes.quote(arg) for arg in replay),
+         '--wpr-args', '--host {} --https_cert_file /Users/nalexander/.mitmproxy/mitmproxy-ca-cert.pem --https_key_file /Users/nalexander/.mitmproxy/mitmproxy-ca-key.pem'.format(http_proxy_host)] # XXX
 
-            if len(race_vehicles) > 1:
-                prefix += ' ({:02d}/{:02d})'.format(vehicle_index + 1, len(race_vehicles))
+        if len(race_vehicles) > 1:
+            prefix += ' ({:02d}/{:02d})'.format(vehicle_index + 1, len(race_vehicles))
 
-            with with_wpr.process(cmd, prefix=prefix, logfile=os.path.join(vehicle_result_dir, 'with_wpr.log')) as with_wpr_proc:
-                try:
-                    if with_wpr_proc.poll():
-                        raise RuntimeError("with_wpr failed: ", with_wpr_proc.poll())
+        with with_wpr.process(cmd, prefix=prefix, logfile=os.path.join(vehicle_result_dir, 'with_wpr.log'),
+                              kill_on_timeout=False,
+                              onTimeout=onTimeout,
+                              timeout=2*60*(args.iterations+2),
+                              outputTimeout=2*60) as with_wpr_proc:
+            try:
+                if with_wpr_proc.poll():
+                    raise RuntimeError("with_wpr failed: ", with_wpr_proc.poll())
 
-                    status = with_wpr_proc.wait()
-                    print("XXX", status)
-                finally:
-                    if with_wpr_proc.poll():
-                        raise RuntimeError("with_wpr failed: ", with_wpr_proc.poll())
-                    else:
-                        with_wpr_proc.kill(signal.SIGINT)
+                status = with_wpr_proc.wait()
+            finally:
+                if with_wpr_proc.poll():
+                    raise RuntimeError("with_wpr failed: ", with_wpr_proc.poll())
+
+        # XXX
+        adb = ['/Users/nalexander/.mozbuild/android-sdk-macosx/platform-tools/adb', 'shell', 'am', 'force-stop', vehicle['name']]
+        with with_wpr.process(adb, prefix='adb', logfile=os.path.join(vehicle_result_dir, 'adb.log')) as p:
+            p.wait()
 
     return 0
 

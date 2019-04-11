@@ -82,6 +82,14 @@ class FormatLogOutput(FormatStreamOutput):
 
 @contextmanager
 def process(*args, **kwargs):
+    timeout = kwargs.pop('timeout', None)
+    outputTimeout = kwargs.pop('outputTimeout', None)
+    onTimeout = kwargs.pop('onTimeout', None)
+
+    proc_holder = [None]
+    if onTimeout:
+        kwargs['onTimeout'] = lambda: onTimeout(proc_holder[0])
+
     prefix = kwargs.pop('prefix', None)
     if prefix:
         streamoutput = FormatStreamOutput(sys.stdout, '[{}] {{}}'.format(prefix))
@@ -106,8 +114,10 @@ def process(*args, **kwargs):
     if DRY_RUN:
         proc = mozprocess.ProcessHandler(['true'], **kwargs) # XXX Windows?
 
+    proc_holder[0] = proc
+
     try:
-        proc.run()
+        proc.run(timeout=timeout, outputTimeout=outputTimeout)
         yield proc
     finally:
         if proc.poll() is not None:
@@ -119,7 +129,7 @@ def process(*args, **kwargs):
             if proc.poll() is not None:
                 return
 
-            time.sleep(0.5)
+            time.sleep(1.0)
             proc.kill()
         except RuntimeError as e:
             print(e)
@@ -253,8 +263,6 @@ def record_and_replay(
                 finally:
                     if record_proc.poll():
                         raise RuntimeError("Record proxy failed: ", record_proc.poll())
-                    else:
-                        record_proc.kill(signal.SIGINT)
 
             with process([wpr, 'replay'] + wpr_args,
                          cwd=wpr_root,
@@ -278,13 +286,9 @@ def record_and_replay(
                 finally:
                     if replay_proc.poll():
                         raise RuntimeError("Replay proxy failed: ", replay_proc.poll())
-                    else:
-                        replay_proc.kill(signal.SIGINT)
         finally:
             if portforward_proc.poll():
                 raise RuntimeError("Port forwarding proxy failed: ", portforward_proc.poll())
-            else:
-                portforward_proc.kill(signal.SIGINT)
 
 
 def record_and_replay_processes(
