@@ -67,6 +67,19 @@ racetrack:
             - --firefox.android.intentArgument=-d
             - --firefox.android.intentArgument=data:text/html,
 
+    # Eventually, https://index.taskcluster.net/v1/task/project.mobile.fenix.signed-nightly.nightly.latest/artifacts/public/target.arm.apk
+    # For now, raptorGreenfieldRelease from https://queue.taskcluster.net/v1/task/G-yJwOBQTCmMA_n4yBQE7Q/runs/0/artifacts/public/target.apk
+    -
+        name: org.mozilla.fenix
+        from: *geckoview
+        args:
+            - --firefox.android.package=org.mozilla.fenix
+            - --firefox.android.activity=org.mozilla.fenix.browser.BrowserPerformanceTestActivity
+            - --firefox.android.intentArgument=-a
+            - --firefox.android.intentArgument=android.intent.action.VIEW
+            - --firefox.android.intentArgument=-d
+            - --firefox.android.intentArgument=data:text/html,
+
     - &fennec
         from: *geckoview
         args:
@@ -125,18 +138,12 @@ racetrack:
             - --chrome.android.package=com.android.chrome
 
 race:
-    # description: Fennec 64 vs. Fenix
-    # vehicle_names:
-    #     - org.mozilla.firefox
-
-    # description: Fenix vs. Chrome 73
-    # vehicle_names:
-    #     - com.android.chrome
-
-    description: Fenix vs. GVE
+    description: Chrome 73 vs GVE 68 ARM vs Fenix 68 ARM vs. Fennec 64
     vehicle_names:
+        - com.android.chrome
+        - org.mozilla.fenix
+        - org.mozilla.firefox
         - org.mozilla.geckoview_example
-
     urls:
         - https://www.amazon.com
         - https://www.google.com
@@ -166,8 +173,8 @@ race:
         - https://www.jianshu.com/
         - https://m.imdb.com/
         - https://m.imdb.com/find?q=Firefox
-        - https://www.allrecipes.com/
-        - https://www.allrecipes.com/recipe/16485/barbs-broccoli-cauliflower-salad/?internalSource=hub%20recipe&referringContentType=Search
+        # - https://www.allrecipes.com/
+        # - https://www.allrecipes.com/recipe/16485/barbs-broccoli-cauliflower-salad/?internalSource=hub%20recipe&referringContentType=Search
         - https://www.espn.com
         - http://www.espn.com/nba/story/_/page/allstarweekend25788027/the-comparison-lebron-james-michael-jordan-their-own-words
         - https://web.de/

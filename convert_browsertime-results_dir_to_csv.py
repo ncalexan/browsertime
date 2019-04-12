@@ -27,6 +27,8 @@ def walk(root, verbose=0):
         for f in fs:
             if f == 'browsertime.json':
                 path = os.path.join(root, f)
+                if 'replay/' not in path:
+                    continue
                 if verbose > 0:
                     print('Processing {}...'.format(path), file=sys.stderr)
 
@@ -34,14 +36,15 @@ def walk(root, verbose=0):
                     j = json.load(open(path, 'rt'))
                     for entry in j:
                         site = entry['info']['url'].lower()
-                        proxy = entry['info']['extra']['proxy']
-                        browser = entry['info']['extra']['browser']
-                        turbo = entry['info']['extra']['turbo']
+                        # proxy = entry['info']['extra']['proxy']
+                        # browser = entry['info']['extra']['browser']
+                        # turbo = entry['info']['extra']['turbo']
                         for i, run in enumerate(entry['browserScripts']):
                             pageLoadTime = run['timings']['pageTimings']['pageLoadTime']
                             timestamp = entry['timestamps'][i]
-                            yield {'site': site, 'engine': map_browser(browser), 'turbo': turbo,
-                                   'proxy': proxy, 'timestamp': timestamp,
+                            yield {'site': site,
+                                   'engine': run['browser']['userAgent'],
+                                   'timestamp': timestamp,
                                    'pageLoadTime': pageLoadTime}
                 except Exception as e:
                     print('Processing {}... ERROR: {}'.format(path, e), file=sys.stderr)
@@ -61,12 +64,15 @@ def main(args):
     def walk_dirs(dirs):
         for i, d in enumerate(dirs):
             run_extras = json.load(open(os.path.join(d, 'run.json'), 'rt'))
+            run_extras.pop('ro', None)
+
             for measurement in walk(d, args.verbose):
                 measurement.update(run_extras)
                 measurement['run'] = i + 1
+                measurement['proxy'] = 'replay'
                 yield measurement
 
-    writer = csv.DictWriter(sys.stdout, ('device', 'run', 'site', 'engine', 'turbo', 'proxy', 'timestamp', 'pageLoadTime'))
+    writer = csv.DictWriter(sys.stdout, ('device', 'run', 'site', 'engine', 'proxy', 'timestamp', 'pageLoadTime'))
     writer.writeheader()
     writer.writerows(walk_dirs(args.dir))
 
