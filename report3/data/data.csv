@@ -1,0 +1,519 @@
+device,run,site,engine,proxy,timestamp,pageLoadTime
+Pixel 2,1,https://booking.com/searchresults.en-gb.html?city=20088325,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T21:08:54-07:00,3115
+Pixel 2,1,https://booking.com/searchresults.en-gb.html?city=20088325,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T21:09:24-07:00,3450
+Pixel 2,1,https://booking.com/searchresults.en-gb.html?city=20088325,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T21:09:55-07:00,2803
+Pixel 2,1,https://booking.com/searchresults.en-gb.html?city=20088325,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T21:10:25-07:00,2072
+Pixel 2,1,https://booking.com/searchresults.en-gb.html?city=20088325,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T21:10:54-07:00,2805
+Pixel 2,1,https://booking.com/searchresults.en-gb.html?city=20088325,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T21:11:24-07:00,2048
+Pixel 2,1,https://booking.com/searchresults.en-gb.html?city=20088325,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T21:11:53-07:00,2566
+Pixel 2,1,https://booking.com/searchresults.en-gb.html?city=20088325,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T21:12:23-07:00,1677
+Pixel 2,1,https://booking.com/searchresults.en-gb.html?city=20088325,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T21:12:52-07:00,1998
+Pixel 2,1,https://booking.com/searchresults.en-gb.html?city=20088325,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T19:16:58-07:00,2133
+Pixel 2,1,https://booking.com/searchresults.en-gb.html?city=20088325,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T19:17:15-07:00,3488
+Pixel 2,1,https://booking.com/searchresults.en-gb.html?city=20088325,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T19:17:33-07:00,1908
+Pixel 2,1,https://booking.com/searchresults.en-gb.html?city=20088325,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T19:17:50-07:00,3308
+Pixel 2,1,https://booking.com/searchresults.en-gb.html?city=20088325,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T19:18:08-07:00,1703
+Pixel 2,1,https://booking.com/searchresults.en-gb.html?city=20088325,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T19:18:24-07:00,2484
+Pixel 2,1,https://booking.com/searchresults.en-gb.html?city=20088325,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T19:18:41-07:00,1612
+Pixel 2,1,https://booking.com/searchresults.en-gb.html?city=20088325,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T19:18:57-07:00,2571
+Pixel 2,1,https://booking.com/searchresults.en-gb.html?city=20088325,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T19:19:14-07:00,3145
+Pixel 2,1,https://www.bing.com/search?q=restaurants,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T22:01:41-07:00,546
+Pixel 2,1,https://www.bing.com/search?q=restaurants,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T22:02:09-07:00,588
+Pixel 2,1,https://www.bing.com/search?q=restaurants,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T22:02:37-07:00,770
+Pixel 2,1,https://www.bing.com/search?q=restaurants,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T22:03:05-07:00,880
+Pixel 2,1,https://www.bing.com/search?q=restaurants,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T22:03:32-07:00,810
+Pixel 2,1,https://www.bing.com/search?q=restaurants,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T22:04:00-07:00,847
+Pixel 2,1,https://www.bing.com/search?q=restaurants,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T22:04:28-07:00,788
+Pixel 2,1,https://www.bing.com/search?q=restaurants,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T22:04:56-07:00,536
+Pixel 2,1,https://www.bing.com/search?q=restaurants,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T22:05:23-07:00,608
+Pixel 2,1,https://www.bing.com/search?q=restaurants,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T19:42:04-07:00,1349
+Pixel 2,1,https://www.bing.com/search?q=restaurants,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T19:42:20-07:00,727
+Pixel 2,1,https://www.bing.com/search?q=restaurants,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T19:42:35-07:00,826
+Pixel 2,1,https://www.bing.com/search?q=restaurants,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T19:42:51-07:00,511
+Pixel 2,1,https://www.bing.com/search?q=restaurants,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T19:43:06-07:00,1456
+Pixel 2,1,https://www.bing.com/search?q=restaurants,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T19:43:22-07:00,719
+Pixel 2,1,https://www.bing.com/search?q=restaurants,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T19:43:38-07:00,1351
+Pixel 2,1,https://www.bing.com/search?q=restaurants,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T19:43:54-07:00,469
+Pixel 2,1,https://www.bing.com/search?q=restaurants,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T19:44:09-07:00,1465
+Pixel 2,1,https://www.bing.com,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T22:36:00-07:00,1000
+Pixel 2,1,https://www.bing.com,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T22:36:28-07:00,900
+Pixel 2,1,https://www.bing.com,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T22:36:56-07:00,767
+Pixel 2,1,https://www.bing.com,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T22:37:23-07:00,564
+Pixel 2,1,https://www.bing.com,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T22:37:51-07:00,921
+Pixel 2,1,https://www.bing.com,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T22:38:19-07:00,896
+Pixel 2,1,https://www.bing.com,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T22:38:47-07:00,845
+Pixel 2,1,https://www.bing.com,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T22:39:15-07:00,612
+Pixel 2,1,https://www.bing.com,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T22:39:43-07:00,884
+Pixel 2,1,https://www.bing.com,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T19:59:28-07:00,795
+Pixel 2,1,https://www.bing.com,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T19:59:44-07:00,618
+Pixel 2,1,https://www.bing.com,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T19:59:59-07:00,789
+Pixel 2,1,https://www.bing.com,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T20:00:15-07:00,749
+Pixel 2,1,https://www.bing.com,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T20:00:30-07:00,842
+Pixel 2,1,https://www.bing.com,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T20:00:46-07:00,729
+Pixel 2,1,https://www.bing.com,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T20:01:01-07:00,546
+Pixel 2,1,https://www.bing.com,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T20:01:16-07:00,630
+Pixel 2,1,https://www.bing.com,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T20:01:32-07:00,1062
+Pixel 2,1,https://fashionbeans.com/article/coolest-menswear-stores-in-the-world,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T19:38:00-07:00,12857
+Pixel 2,1,https://fashionbeans.com/article/coolest-menswear-stores-in-the-world,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T19:38:28-07:00,9997
+Pixel 2,1,https://fashionbeans.com/article/coolest-menswear-stores-in-the-world,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T19:38:52-07:00,8689
+Pixel 2,1,https://fashionbeans.com/article/coolest-menswear-stores-in-the-world,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T19:39:15-07:00,9799
+Pixel 2,1,https://fashionbeans.com/article/coolest-menswear-stores-in-the-world,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T19:39:40-07:00,9738
+Pixel 2,1,https://fashionbeans.com/article/coolest-menswear-stores-in-the-world,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T19:40:04-07:00,10854
+Pixel 2,1,https://fashionbeans.com/article/coolest-menswear-stores-in-the-world,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T19:40:29-07:00,8325
+Pixel 2,1,https://fashionbeans.com/article/coolest-menswear-stores-in-the-world,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T19:40:52-07:00,13889
+Pixel 2,1,https://fashionbeans.com/article/coolest-menswear-stores-in-the-world,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T19:41:21-07:00,9721
+Pixel 2,1,https://aframe.io/examples/showcase/animation/,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-12T08:01:12-07:00,3721
+Pixel 2,1,https://aframe.io/examples/showcase/animation/,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-12T08:01:43-07:00,2975
+Pixel 2,1,https://aframe.io/examples/showcase/animation/,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-12T08:02:14-07:00,3401
+Pixel 2,1,https://aframe.io/examples/showcase/animation/,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-12T08:02:45-07:00,3414
+Pixel 2,1,https://aframe.io/examples/showcase/animation/,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-12T08:03:16-07:00,3623
+Pixel 2,1,https://aframe.io/examples/showcase/animation/,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-12T08:03:46-07:00,3243
+Pixel 2,1,https://aframe.io/examples/showcase/animation/,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-12T08:04:17-07:00,3071
+Pixel 2,1,https://aframe.io/examples/showcase/animation/,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-12T08:04:47-07:00,3601
+Pixel 2,1,https://aframe.io/examples/showcase/animation/,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T20:42:39-07:00,3087
+Pixel 2,1,https://aframe.io/examples/showcase/animation/,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T20:42:57-07:00,3366
+Pixel 2,1,https://aframe.io/examples/showcase/animation/,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T20:43:15-07:00,3222
+Pixel 2,1,https://aframe.io/examples/showcase/animation/,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T20:43:33-07:00,2280
+Pixel 2,1,https://aframe.io/examples/showcase/animation/,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T20:43:50-07:00,2128
+Pixel 2,1,https://aframe.io/examples/showcase/animation/,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T20:44:07-07:00,1809
+Pixel 2,1,https://aframe.io/examples/showcase/animation/,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T20:44:24-07:00,2191
+Pixel 2,1,https://aframe.io/examples/showcase/animation/,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T20:44:41-07:00,3531
+Pixel 2,1,https://aframe.io/examples/showcase/animation/,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T20:44:59-07:00,2938
+Pixel 2,1,https://www.reddit.com,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T20:02:11-07:00,2227
+Pixel 2,1,https://www.reddit.com,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T20:02:28-07:00,2684
+Pixel 2,1,https://www.reddit.com,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T20:02:45-07:00,1552
+Pixel 2,1,https://www.reddit.com,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T20:03:01-07:00,1613
+Pixel 2,1,https://www.reddit.com,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T20:03:18-07:00,1929
+Pixel 2,1,https://www.reddit.com,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T20:03:34-07:00,1749
+Pixel 2,1,https://www.reddit.com,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T20:03:51-07:00,1704
+Pixel 2,1,https://www.reddit.com,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T20:04:07-07:00,3042
+Pixel 2,1,https://www.reddit.com,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T20:04:25-07:00,2057
+Pixel 2,1,https://m.facebook.com/cristiano,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-12T08:05:53-07:00,2533
+Pixel 2,1,https://m.facebook.com/cristiano,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-12T08:06:23-07:00,2351
+Pixel 2,1,https://m.facebook.com/cristiano,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-12T08:06:53-07:00,2186
+Pixel 2,1,https://m.facebook.com/cristiano,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-12T08:07:22-07:00,2076
+Pixel 2,1,https://m.facebook.com/cristiano,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-12T08:07:51-07:00,2566
+Pixel 2,1,https://m.facebook.com/cristiano,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-12T08:08:21-07:00,2445
+Pixel 2,1,https://m.facebook.com/cristiano,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-12T08:08:51-07:00,2144
+Pixel 2,1,https://m.facebook.com/cristiano,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-12T08:09:20-07:00,2167
+Pixel 2,1,https://m.facebook.com/cristiano,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T20:45:37-07:00,3200
+Pixel 2,1,https://m.facebook.com/cristiano,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T20:45:55-07:00,3394
+Pixel 2,1,https://m.facebook.com/cristiano,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T20:46:13-07:00,2541
+Pixel 2,1,https://m.facebook.com/cristiano,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T20:46:30-07:00,2015
+Pixel 2,1,https://m.facebook.com/cristiano,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T20:46:46-07:00,2248
+Pixel 2,1,https://m.facebook.com/cristiano,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T20:47:03-07:00,2642
+Pixel 2,1,https://m.facebook.com/cristiano,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T20:47:20-07:00,2802
+Pixel 2,1,https://m.facebook.com/cristiano,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T20:47:37-07:00,3147
+Pixel 2,1,https://m.facebook.com/cristiano,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T20:47:55-07:00,2241
+Pixel 2,1,https://www.youtube.com,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T21:20:58-07:00,1711
+Pixel 2,1,https://www.youtube.com,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T21:21:27-07:00,3610
+Pixel 2,1,https://www.youtube.com,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T21:21:58-07:00,2639
+Pixel 2,1,https://www.youtube.com,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T21:22:27-07:00,3384
+Pixel 2,1,https://www.youtube.com,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T21:22:57-07:00,3217
+Pixel 2,1,https://www.youtube.com,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T21:23:28-07:00,2292
+Pixel 2,1,https://www.youtube.com,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T21:23:57-07:00,2086
+Pixel 2,1,https://www.youtube.com,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T21:24:26-07:00,2961
+Pixel 2,1,https://www.youtube.com,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T19:22:54-07:00,1709
+Pixel 2,1,https://www.youtube.com,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T19:23:09-07:00,1687
+Pixel 2,1,https://www.youtube.com,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T19:23:25-07:00,1927
+Pixel 2,1,https://www.youtube.com,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T19:23:42-07:00,2153
+Pixel 2,1,https://www.youtube.com,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T19:23:58-07:00,1713
+Pixel 2,1,https://www.youtube.com,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T19:24:14-07:00,1798
+Pixel 2,1,https://www.youtube.com,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T19:24:30-07:00,1877
+Pixel 2,1,https://www.youtube.com,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T19:24:46-07:00,1826
+Pixel 2,1,https://www.youtube.com,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T19:25:02-07:00,1831
+Pixel 2,1,https://blogger.com/about,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T20:58:44-07:00,2427
+Pixel 2,1,https://blogger.com/about,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T20:59:14-07:00,1724
+Pixel 2,1,https://blogger.com/about,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T20:59:45-07:00,1899
+Pixel 2,1,https://blogger.com/about,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T21:00:16-07:00,2118
+Pixel 2,1,https://blogger.com/about,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T21:00:46-07:00,1852
+Pixel 2,1,https://blogger.com/about,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T21:01:15-07:00,1965
+Pixel 2,1,https://blogger.com/about,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T21:01:46-07:00,1916
+Pixel 2,1,https://blogger.com/about,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T21:02:17-07:00,2322
+Pixel 2,1,https://blogger.com/about,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T21:02:48-07:00,1840
+Pixel 2,1,https://blogger.com/about,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T19:13:42-07:00,2239
+Pixel 2,1,https://blogger.com/about,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T19:13:58-07:00,1875
+Pixel 2,1,https://blogger.com/about,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T19:14:15-07:00,1529
+Pixel 2,1,https://blogger.com/about,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T19:14:31-07:00,2347
+Pixel 2,1,https://blogger.com/about,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T19:14:47-07:00,2682
+Pixel 2,1,https://blogger.com/about,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T19:15:05-07:00,1809
+Pixel 2,1,https://blogger.com/about,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T19:15:21-07:00,1949
+Pixel 2,1,https://blogger.com/about,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T19:15:37-07:00,2696
+Pixel 2,1,https://blogger.com/about,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T19:15:54-07:00,1965
+Pixel 2,1,https://buzzfeed.com/daves4/the-new-york-times-makes-the-nerdiest-correction-e?utm_term=.tll2ke08l6#.hwrbglav2a,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T21:13:59-07:00,8547
+Pixel 2,1,https://buzzfeed.com/daves4/the-new-york-times-makes-the-nerdiest-correction-e?utm_term=.tll2ke08l6#.hwrbglav2a,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T21:14:35-07:00,8645
+Pixel 2,1,https://buzzfeed.com/daves4/the-new-york-times-makes-the-nerdiest-correction-e?utm_term=.tll2ke08l6#.hwrbglav2a,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T21:15:10-07:00,7594
+Pixel 2,1,https://buzzfeed.com/daves4/the-new-york-times-makes-the-nerdiest-correction-e?utm_term=.tll2ke08l6#.hwrbglav2a,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T21:15:45-07:00,10039
+Pixel 2,1,https://buzzfeed.com/daves4/the-new-york-times-makes-the-nerdiest-correction-e?utm_term=.tll2ke08l6#.hwrbglav2a,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T21:16:22-07:00,8413
+Pixel 2,1,https://buzzfeed.com/daves4/the-new-york-times-makes-the-nerdiest-correction-e?utm_term=.tll2ke08l6#.hwrbglav2a,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T21:16:57-07:00,8509
+Pixel 2,1,https://buzzfeed.com/daves4/the-new-york-times-makes-the-nerdiest-correction-e?utm_term=.tll2ke08l6#.hwrbglav2a,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T21:17:32-07:00,72439
+Pixel 2,1,https://buzzfeed.com/daves4/the-new-york-times-makes-the-nerdiest-correction-e?utm_term=.tll2ke08l6#.hwrbglav2a,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T21:19:12-07:00,9740
+Pixel 2,1,https://buzzfeed.com/daves4/the-new-york-times-makes-the-nerdiest-correction-e?utm_term=.tll2ke08l6#.hwrbglav2a,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T21:19:49-07:00,8323
+Pixel 2,1,https://m.facebook.com,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T21:03:51-07:00,1709
+Pixel 2,1,https://m.facebook.com,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T21:04:20-07:00,2401
+Pixel 2,1,https://m.facebook.com,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T21:04:49-07:00,2040
+Pixel 2,1,https://m.facebook.com,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T21:05:18-07:00,2806
+Pixel 2,1,https://m.facebook.com,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T21:05:48-07:00,1697
+Pixel 2,1,https://m.facebook.com,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T21:06:17-07:00,1917
+Pixel 2,1,https://m.facebook.com,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T21:06:46-07:00,1764
+Pixel 2,1,https://m.facebook.com,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T21:07:15-07:00,2066
+Pixel 2,1,https://m.facebook.com,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T21:07:44-07:00,3547
+Pixel 2,1,https://fashionbeans.com,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T19:33:53-07:00,8013
+Pixel 2,1,https://fashionbeans.com,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T19:34:16-07:00,10082
+Pixel 2,1,https://fashionbeans.com,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T19:34:40-07:00,5642
+Pixel 2,1,https://fashionbeans.com,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T19:35:01-07:00,8055
+Pixel 2,1,https://fashionbeans.com,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T19:35:23-07:00,7745
+Pixel 2,1,https://fashionbeans.com,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T19:35:45-07:00,8423
+Pixel 2,1,https://fashionbeans.com,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T19:36:09-07:00,8264
+Pixel 2,1,https://fashionbeans.com,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T19:36:31-07:00,8156
+Pixel 2,1,https://fashionbeans.com,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T19:36:54-07:00,7975
+Pixel 2,1,https://m.imdb.com/find?q=firefox,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T23:23:58-07:00,3534
+Pixel 2,1,https://m.imdb.com/find?q=firefox,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T23:24:29-07:00,3862
+Pixel 2,1,https://m.imdb.com/find?q=firefox,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T23:25:00-07:00,3916
+Pixel 2,1,https://m.imdb.com/find?q=firefox,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T23:25:31-07:00,3519
+Pixel 2,1,https://m.imdb.com/find?q=firefox,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T23:26:02-07:00,4219
+Pixel 2,1,https://m.imdb.com/find?q=firefox,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T23:26:33-07:00,3672
+Pixel 2,1,https://m.imdb.com/find?q=firefox,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T23:27:04-07:00,4342
+Pixel 2,1,https://m.imdb.com/find?q=firefox,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T23:27:36-07:00,3496
+Pixel 2,1,https://m.imdb.com/find?q=firefox,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T23:28:06-07:00,3443
+Pixel 2,1,https://m.imdb.com/find?q=firefox,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T20:23:25-07:00,3176
+Pixel 2,1,https://m.imdb.com/find?q=firefox,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T20:23:43-07:00,2823
+Pixel 2,1,https://m.imdb.com/find?q=firefox,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T20:24:01-07:00,3529
+Pixel 2,1,https://m.imdb.com/find?q=firefox,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T20:24:19-07:00,3781
+Pixel 2,1,https://m.imdb.com/find?q=firefox,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T20:24:37-07:00,3859
+Pixel 2,1,https://m.imdb.com/find?q=firefox,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T20:24:56-07:00,3272
+Pixel 2,1,https://m.imdb.com/find?q=firefox,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T20:25:14-07:00,3189
+Pixel 2,1,https://m.imdb.com/find?q=firefox,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T20:25:31-07:00,3576
+Pixel 2,1,https://m.imdb.com/find?q=firefox,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T20:25:49-07:00,3396
+Pixel 2,1,http://www.espn.com/nba/story/_/page/allstarweekend25788027/the-comparison-lebron-james-michael-jordan-their-own-words,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T20:29:27-07:00,2889
+Pixel 2,1,http://www.espn.com/nba/story/_/page/allstarweekend25788027/the-comparison-lebron-james-michael-jordan-their-own-words,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T20:29:45-07:00,3323
+Pixel 2,1,http://www.espn.com/nba/story/_/page/allstarweekend25788027/the-comparison-lebron-james-michael-jordan-their-own-words,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T20:30:02-07:00,3654
+Pixel 2,1,http://www.espn.com/nba/story/_/page/allstarweekend25788027/the-comparison-lebron-james-michael-jordan-their-own-words,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T20:30:20-07:00,3283
+Pixel 2,1,http://www.espn.com/nba/story/_/page/allstarweekend25788027/the-comparison-lebron-james-michael-jordan-their-own-words,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T20:30:37-07:00,2697
+Pixel 2,1,http://www.espn.com/nba/story/_/page/allstarweekend25788027/the-comparison-lebron-james-michael-jordan-their-own-words,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T20:30:54-07:00,3896
+Pixel 2,1,http://www.espn.com/nba/story/_/page/allstarweekend25788027/the-comparison-lebron-james-michael-jordan-their-own-words,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T20:31:12-07:00,3186
+Pixel 2,1,http://www.espn.com/nba/story/_/page/allstarweekend25788027/the-comparison-lebron-james-michael-jordan-their-own-words,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T20:31:29-07:00,4105
+Pixel 2,1,http://www.espn.com/nba/story/_/page/allstarweekend25788027/the-comparison-lebron-james-michael-jordan-their-own-words,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T20:31:48-07:00,2837
+Pixel 2,1,https://web.de/,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-12T07:42:44-07:00,266
+Pixel 2,1,https://web.de/,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-12T07:43:12-07:00,559
+Pixel 2,1,https://web.de/,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-12T07:43:39-07:00,461
+Pixel 2,1,https://web.de/,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-12T07:44:07-07:00,476
+Pixel 2,1,https://web.de/,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-12T07:44:35-07:00,383
+Pixel 2,1,https://web.de/,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-12T07:45:04-07:00,230
+Pixel 2,1,https://web.de/,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-12T07:45:31-07:00,380
+Pixel 2,1,https://web.de/,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-12T07:46:01-07:00,442
+Pixel 2,1,https://web.de/,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-12T07:46:31-07:00,445
+Pixel 2,1,https://web.de/,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T20:32:28-07:00,6053
+Pixel 2,1,https://web.de/,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T20:32:49-07:00,4477
+Pixel 2,1,https://web.de/,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T20:33:08-07:00,5137
+Pixel 2,1,https://web.de/,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T20:33:28-07:00,5891
+Pixel 2,1,https://web.de/,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T20:33:48-07:00,5895
+Pixel 2,1,https://web.de/,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T20:34:09-07:00,5381
+Pixel 2,1,https://web.de/,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T20:34:29-07:00,5062
+Pixel 2,1,https://web.de/,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T20:34:48-07:00,6162
+Pixel 2,1,https://web.de/,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T20:35:09-07:00,5992
+Pixel 2,1,https://www.youtube.com/watch?v=cou5t-wafa4,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T22:30:56-07:00,2788
+Pixel 2,1,https://www.youtube.com/watch?v=cou5t-wafa4,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T22:31:26-07:00,3855
+Pixel 2,1,https://www.youtube.com/watch?v=cou5t-wafa4,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T22:31:57-07:00,2812
+Pixel 2,1,https://www.youtube.com/watch?v=cou5t-wafa4,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T22:32:27-07:00,3119
+Pixel 2,1,https://www.youtube.com/watch?v=cou5t-wafa4,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T22:32:57-07:00,3520
+Pixel 2,1,https://www.youtube.com/watch?v=cou5t-wafa4,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T22:33:28-07:00,3057
+Pixel 2,1,https://www.youtube.com/watch?v=cou5t-wafa4,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T22:33:58-07:00,2984
+Pixel 2,1,https://www.youtube.com/watch?v=cou5t-wafa4,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T22:34:28-07:00,3047
+Pixel 2,1,https://www.youtube.com/watch?v=cou5t-wafa4,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T22:34:58-07:00,2686
+Pixel 2,1,https://www.youtube.com/watch?v=cou5t-wafa4,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T19:56:43-07:00,2568
+Pixel 2,1,https://www.youtube.com/watch?v=cou5t-wafa4,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T19:57:00-07:00,2516
+Pixel 2,1,https://www.youtube.com/watch?v=cou5t-wafa4,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T19:57:16-07:00,2673
+Pixel 2,1,https://www.youtube.com/watch?v=cou5t-wafa4,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T19:57:32-07:00,2499
+Pixel 2,1,https://www.youtube.com/watch?v=cou5t-wafa4,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T19:57:49-07:00,2625
+Pixel 2,1,https://www.youtube.com/watch?v=cou5t-wafa4,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T19:58:05-07:00,2467
+Pixel 2,1,https://www.youtube.com/watch?v=cou5t-wafa4,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T19:58:21-07:00,2944
+Pixel 2,1,https://www.youtube.com/watch?v=cou5t-wafa4,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T19:58:38-07:00,2245
+Pixel 2,1,https://www.youtube.com/watch?v=cou5t-wafa4,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T19:58:54-07:00,2130
+Pixel 2,1,https://bbc.co.uk,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T20:39:16-07:00,2981
+Pixel 2,1,https://bbc.co.uk,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T20:39:36-07:00,3365
+Pixel 2,1,https://bbc.co.uk,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T20:39:55-07:00,3022
+Pixel 2,1,https://bbc.co.uk,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T20:40:15-07:00,3417
+Pixel 2,1,https://bbc.co.uk,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T20:40:35-07:00,2757
+Pixel 2,1,https://bbc.co.uk,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T20:40:55-07:00,3591
+Pixel 2,1,https://bbc.co.uk,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T20:41:15-07:00,2719
+Pixel 2,1,https://bbc.co.uk,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T20:41:36-07:00,3135
+Pixel 2,1,https://bbc.co.uk,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T20:41:56-07:00,3176
+Pixel 2,1,https://m.imdb.com/,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T20:20:15-07:00,4685
+Pixel 2,1,https://m.imdb.com/,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T20:20:34-07:00,3187
+Pixel 2,1,https://m.imdb.com/,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T20:20:51-07:00,3762
+Pixel 2,1,https://m.imdb.com/,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T20:21:10-07:00,2954
+Pixel 2,1,https://m.imdb.com/,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T20:21:27-07:00,3958
+Pixel 2,1,https://m.imdb.com/,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T20:21:46-07:00,4066
+Pixel 2,1,https://m.imdb.com/,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T20:22:04-07:00,3889
+Pixel 2,1,https://m.imdb.com/,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T20:22:22-07:00,4864
+Pixel 2,1,https://m.imdb.com/,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T20:22:42-07:00,3279
+Pixel 2,1,https://www.reddit.com/r/firefox/comments/7dkq03/its_been_a_while/,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T22:48:58-07:00,3695
+Pixel 2,1,https://www.reddit.com/r/firefox/comments/7dkq03/its_been_a_while/,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T22:49:29-07:00,2730
+Pixel 2,1,https://www.reddit.com/r/firefox/comments/7dkq03/its_been_a_while/,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T22:49:59-07:00,2042
+Pixel 2,1,https://www.reddit.com/r/firefox/comments/7dkq03/its_been_a_while/,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T22:50:28-07:00,2122
+Pixel 2,1,https://www.reddit.com/r/firefox/comments/7dkq03/its_been_a_while/,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T22:50:58-07:00,1969
+Pixel 2,1,https://www.reddit.com/r/firefox/comments/7dkq03/its_been_a_while/,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T22:51:26-07:00,3461
+Pixel 2,1,https://www.reddit.com/r/firefox/comments/7dkq03/its_been_a_while/,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T22:51:57-07:00,3321
+Pixel 2,1,https://www.reddit.com/r/firefox/comments/7dkq03/its_been_a_while/,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T22:52:27-07:00,2391
+Pixel 2,1,https://www.reddit.com/r/firefox/comments/7dkq03/its_been_a_while/,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T20:05:04-07:00,2147
+Pixel 2,1,https://www.reddit.com/r/firefox/comments/7dkq03/its_been_a_while/,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T20:05:21-07:00,2247
+Pixel 2,1,https://www.reddit.com/r/firefox/comments/7dkq03/its_been_a_while/,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T20:05:38-07:00,1968
+Pixel 2,1,https://www.reddit.com/r/firefox/comments/7dkq03/its_been_a_while/,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T20:05:54-07:00,2578
+Pixel 2,1,https://www.reddit.com/r/firefox/comments/7dkq03/its_been_a_while/,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T20:06:12-07:00,2566
+Pixel 2,1,https://www.reddit.com/r/firefox/comments/7dkq03/its_been_a_while/,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T20:06:29-07:00,2689
+Pixel 2,1,https://www.reddit.com/r/firefox/comments/7dkq03/its_been_a_while/,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T20:06:46-07:00,2440
+Pixel 2,1,https://www.reddit.com/r/firefox/comments/7dkq03/its_been_a_while/,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T20:07:03-07:00,1940
+Pixel 2,1,https://www.reddit.com/r/firefox/comments/7dkq03/its_been_a_while/,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T20:07:20-07:00,2336
+Pixel 2,1,https://eurosport.de,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T21:36:21-07:00,368
+Pixel 2,1,https://eurosport.de,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T21:36:49-07:00,554
+Pixel 2,1,https://eurosport.de,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T21:37:16-07:00,346
+Pixel 2,1,https://eurosport.de,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T21:37:43-07:00,336
+Pixel 2,1,https://eurosport.de,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T21:38:11-07:00,916
+Pixel 2,1,https://eurosport.de,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T21:38:39-07:00,1507
+Pixel 2,1,https://eurosport.de,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T21:39:07-07:00,629
+Pixel 2,1,https://eurosport.de,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T21:39:35-07:00,236
+Pixel 2,1,https://eurosport.de,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T21:40:02-07:00,253
+Pixel 2,1,https://stackoverflow.com/,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T22:53:31-07:00,1949
+Pixel 2,1,https://stackoverflow.com/,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T22:54:00-07:00,2328
+Pixel 2,1,https://stackoverflow.com/,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T22:54:30-07:00,2030
+Pixel 2,1,https://stackoverflow.com/,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T22:54:59-07:00,2040
+Pixel 2,1,https://stackoverflow.com/,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T22:55:28-07:00,2124
+Pixel 2,1,https://stackoverflow.com/,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T22:55:57-07:00,1851
+Pixel 2,1,https://stackoverflow.com/,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T22:56:26-07:00,1975
+Pixel 2,1,https://stackoverflow.com/,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T22:56:55-07:00,2177
+Pixel 2,1,https://stackoverflow.com/,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T22:57:24-07:00,2135
+Pixel 2,1,https://stackoverflow.com/,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T20:08:00-07:00,2652
+Pixel 2,1,https://stackoverflow.com/,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T20:08:17-07:00,2664
+Pixel 2,1,https://stackoverflow.com/,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T20:08:34-07:00,2468
+Pixel 2,1,https://stackoverflow.com/,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T20:08:52-07:00,1582
+Pixel 2,1,https://stackoverflow.com/,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T20:09:08-07:00,2402
+Pixel 2,1,https://stackoverflow.com/,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T20:09:25-07:00,2455
+Pixel 2,1,https://stackoverflow.com/,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T20:09:42-07:00,2342
+Pixel 2,1,https://stackoverflow.com/,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T20:09:59-07:00,2503
+Pixel 2,1,https://stackoverflow.com/,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T20:10:16-07:00,2224
+Pixel 2,1,https://www.amazon.com/s/ref=nb_sb_noss_2/139-6317191-5622045?url=search-alias%3daps&field-keywords=mobile+phone,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T19:51:15-07:00,2071
+Pixel 2,1,https://www.amazon.com/s/ref=nb_sb_noss_2/139-6317191-5622045?url=search-alias%3daps&field-keywords=mobile+phone,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T19:51:31-07:00,2246
+Pixel 2,1,https://www.amazon.com/s/ref=nb_sb_noss_2/139-6317191-5622045?url=search-alias%3daps&field-keywords=mobile+phone,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T19:51:48-07:00,1836
+Pixel 2,1,https://www.amazon.com/s/ref=nb_sb_noss_2/139-6317191-5622045?url=search-alias%3daps&field-keywords=mobile+phone,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T19:52:04-07:00,1394
+Pixel 2,1,https://www.amazon.com/s/ref=nb_sb_noss_2/139-6317191-5622045?url=search-alias%3daps&field-keywords=mobile+phone,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T19:52:20-07:00,1632
+Pixel 2,1,https://www.amazon.com/s/ref=nb_sb_noss_2/139-6317191-5622045?url=search-alias%3daps&field-keywords=mobile+phone,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T19:52:36-07:00,1608
+Pixel 2,1,https://www.amazon.com/s/ref=nb_sb_noss_2/139-6317191-5622045?url=search-alias%3daps&field-keywords=mobile+phone,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T19:52:52-07:00,1861
+Pixel 2,1,https://www.amazon.com/s/ref=nb_sb_noss_2/139-6317191-5622045?url=search-alias%3daps&field-keywords=mobile+phone,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T19:53:08-07:00,2267
+Pixel 2,1,https://www.amazon.com/s/ref=nb_sb_noss_2/139-6317191-5622045?url=search-alias%3daps&field-keywords=mobile+phone,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T19:53:25-07:00,1620
+Pixel 2,1,https://www.instagram.com,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T21:25:29-07:00,1949
+Pixel 2,1,https://www.instagram.com,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T21:25:58-07:00,2510
+Pixel 2,1,https://www.instagram.com,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T21:26:28-07:00,1766
+Pixel 2,1,https://www.instagram.com,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T21:26:57-07:00,2640
+Pixel 2,1,https://www.instagram.com,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T21:27:27-07:00,3201
+Pixel 2,1,https://www.instagram.com,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T21:27:57-07:00,4083
+Pixel 2,1,https://www.instagram.com,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T21:28:28-07:00,1842
+Pixel 2,1,https://www.instagram.com,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T21:28:57-07:00,1898
+Pixel 2,1,https://www.instagram.com,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T21:29:26-07:00,1574
+Pixel 2,1,https://www.instagram.com,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T19:25:40-07:00,2302
+Pixel 2,1,https://www.instagram.com,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T19:25:57-07:00,1652
+Pixel 2,1,https://www.instagram.com,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T19:26:13-07:00,1718
+Pixel 2,1,https://www.instagram.com,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T19:26:29-07:00,2434
+Pixel 2,1,https://www.instagram.com,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T19:26:46-07:00,1701
+Pixel 2,1,https://www.instagram.com,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T19:27:02-07:00,2573
+Pixel 2,1,https://www.instagram.com,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T19:27:20-07:00,1892
+Pixel 2,1,https://www.instagram.com,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T19:27:36-07:00,1933
+Pixel 2,1,https://www.instagram.com,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T19:27:53-07:00,1796
+Pixel 2,1,https://stackoverflow.com/questions/927358/how-do-i-undo-the-most-recent-commits-in-git,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T22:58:33-07:00,3250
+Pixel 2,1,https://stackoverflow.com/questions/927358/how-do-i-undo-the-most-recent-commits-in-git,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T22:59:04-07:00,2732
+Pixel 2,1,https://stackoverflow.com/questions/927358/how-do-i-undo-the-most-recent-commits-in-git,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T22:59:34-07:00,3390
+Pixel 2,1,https://stackoverflow.com/questions/927358/how-do-i-undo-the-most-recent-commits-in-git,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T23:00:04-07:00,3952
+Pixel 2,1,https://stackoverflow.com/questions/927358/how-do-i-undo-the-most-recent-commits-in-git,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T23:00:35-07:00,3766
+Pixel 2,1,https://stackoverflow.com/questions/927358/how-do-i-undo-the-most-recent-commits-in-git,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T23:01:06-07:00,3044
+Pixel 2,1,https://stackoverflow.com/questions/927358/how-do-i-undo-the-most-recent-commits-in-git,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T23:01:37-07:00,2482
+Pixel 2,1,https://stackoverflow.com/questions/927358/how-do-i-undo-the-most-recent-commits-in-git,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T23:02:06-07:00,3225
+Pixel 2,1,https://stackoverflow.com/questions/927358/how-do-i-undo-the-most-recent-commits-in-git,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T23:02:37-07:00,2882
+Pixel 2,1,https://stackoverflow.com/questions/927358/how-do-i-undo-the-most-recent-commits-in-git,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T20:10:57-07:00,3291
+Pixel 2,1,https://stackoverflow.com/questions/927358/how-do-i-undo-the-most-recent-commits-in-git,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T20:11:15-07:00,3722
+Pixel 2,1,https://stackoverflow.com/questions/927358/how-do-i-undo-the-most-recent-commits-in-git,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T20:11:33-07:00,3470
+Pixel 2,1,https://stackoverflow.com/questions/927358/how-do-i-undo-the-most-recent-commits-in-git,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T20:11:51-07:00,3222
+Pixel 2,1,https://stackoverflow.com/questions/927358/how-do-i-undo-the-most-recent-commits-in-git,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T20:12:09-07:00,3452
+Pixel 2,1,https://stackoverflow.com/questions/927358/how-do-i-undo-the-most-recent-commits-in-git,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T20:12:27-07:00,3401
+Pixel 2,1,https://stackoverflow.com/questions/927358/how-do-i-undo-the-most-recent-commits-in-git,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T20:12:45-07:00,3222
+Pixel 2,1,https://stackoverflow.com/questions/927358/how-do-i-undo-the-most-recent-commits-in-git,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T20:13:03-07:00,3668
+Pixel 2,1,https://stackoverflow.com/questions/927358/how-do-i-undo-the-most-recent-commits-in-git,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T20:13:22-07:00,3407
+Pixel 2,1,https://booking.com,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T22:06:30-07:00,3358
+Pixel 2,1,https://booking.com,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T22:07:01-07:00,3790
+Pixel 2,1,https://booking.com,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T22:07:32-07:00,2829
+Pixel 2,1,https://booking.com,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T22:08:02-07:00,4425
+Pixel 2,1,https://booking.com,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T22:08:34-07:00,3200
+Pixel 2,1,https://booking.com,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T22:09:04-07:00,3679
+Pixel 2,1,https://booking.com,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T22:09:35-07:00,2720
+Pixel 2,1,https://booking.com,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T22:10:04-07:00,3219
+Pixel 2,1,https://booking.com,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T22:10:35-07:00,3581
+Pixel 2,1,https://booking.com,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T19:44:53-07:00,3854
+Pixel 2,1,https://booking.com,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T19:45:12-07:00,2015
+Pixel 2,1,https://booking.com,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T19:45:28-07:00,3703
+Pixel 2,1,https://booking.com,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T19:45:47-07:00,2490
+Pixel 2,1,https://booking.com,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T19:46:04-07:00,2694
+Pixel 2,1,https://booking.com,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T19:46:21-07:00,2406
+Pixel 2,1,https://booking.com,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T19:46:38-07:00,2880
+Pixel 2,1,https://booking.com,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T19:46:56-07:00,2954
+Pixel 2,1,https://booking.com,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T19:47:13-07:00,3220
+Pixel 2,1,https://www.espn.com,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T20:26:31-07:00,2264
+Pixel 2,1,https://www.espn.com,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T20:26:48-07:00,2094
+Pixel 2,1,https://www.espn.com,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T20:27:05-07:00,2151
+Pixel 2,1,https://www.espn.com,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T20:27:21-07:00,2360
+Pixel 2,1,https://www.espn.com,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T20:27:38-07:00,3245
+Pixel 2,1,https://www.espn.com,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T20:27:56-07:00,2253
+Pixel 2,1,https://www.espn.com,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T20:28:13-07:00,3252
+Pixel 2,1,https://www.espn.com,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T20:28:31-07:00,2501
+Pixel 2,1,https://www.espn.com,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T20:28:48-07:00,1988
+Pixel 2,1,https://m.ebay-kleinanzeigen.de,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T21:30:35-07:00,5077
+Pixel 2,1,https://m.ebay-kleinanzeigen.de,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T21:31:08-07:00,4000
+Pixel 2,1,https://m.ebay-kleinanzeigen.de,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T21:31:39-07:00,5059
+Pixel 2,1,https://m.ebay-kleinanzeigen.de,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T21:32:11-07:00,3976
+Pixel 2,1,https://m.ebay-kleinanzeigen.de,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T21:32:42-07:00,4416
+Pixel 2,1,https://m.ebay-kleinanzeigen.de,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T21:33:13-07:00,4863
+Pixel 2,1,https://m.ebay-kleinanzeigen.de,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T21:33:46-07:00,4562
+Pixel 2,1,https://m.ebay-kleinanzeigen.de,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T21:34:17-07:00,4402
+Pixel 2,1,https://m.ebay-kleinanzeigen.de,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T21:34:49-07:00,5365
+Pixel 2,1,https://m.ebay-kleinanzeigen.de,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T19:28:36-07:00,3109
+Pixel 2,1,https://m.ebay-kleinanzeigen.de,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T19:28:53-07:00,4245
+Pixel 2,1,https://m.ebay-kleinanzeigen.de,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T19:29:12-07:00,3747
+Pixel 2,1,https://m.ebay-kleinanzeigen.de,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T19:29:29-07:00,4208
+Pixel 2,1,https://m.ebay-kleinanzeigen.de,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T19:29:48-07:00,3153
+Pixel 2,1,https://m.ebay-kleinanzeigen.de,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T19:30:05-07:00,3061
+Pixel 2,1,https://m.ebay-kleinanzeigen.de,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T19:30:22-07:00,3367
+Pixel 2,1,https://m.ebay-kleinanzeigen.de,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T19:30:39-07:00,3589
+Pixel 2,1,https://m.ebay-kleinanzeigen.de,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T19:30:57-07:00,3791
+Pixel 2,1,https://eurosport.de/fussball/fifa-wm/2018/wm-2018-spielplan-russland-alle-dfb-spiele-wm-2018-gruppen-wm-2018-termine_sto6691356/story.shtml,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T21:41:30-07:00,229
+Pixel 2,1,https://eurosport.de/fussball/fifa-wm/2018/wm-2018-spielplan-russland-alle-dfb-spiele-wm-2018-gruppen-wm-2018-termine_sto6691356/story.shtml,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T21:41:57-07:00,510
+Pixel 2,1,https://eurosport.de/fussball/fifa-wm/2018/wm-2018-spielplan-russland-alle-dfb-spiele-wm-2018-gruppen-wm-2018-termine_sto6691356/story.shtml,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T21:42:25-07:00,401
+Pixel 2,1,https://eurosport.de/fussball/fifa-wm/2018/wm-2018-spielplan-russland-alle-dfb-spiele-wm-2018-gruppen-wm-2018-termine_sto6691356/story.shtml,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T21:42:52-07:00,247
+Pixel 2,1,https://eurosport.de/fussball/fifa-wm/2018/wm-2018-spielplan-russland-alle-dfb-spiele-wm-2018-gruppen-wm-2018-termine_sto6691356/story.shtml,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T21:43:19-07:00,493
+Pixel 2,1,https://eurosport.de/fussball/fifa-wm/2018/wm-2018-spielplan-russland-alle-dfb-spiele-wm-2018-gruppen-wm-2018-termine_sto6691356/story.shtml,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T21:43:47-07:00,325
+Pixel 2,1,https://eurosport.de/fussball/fifa-wm/2018/wm-2018-spielplan-russland-alle-dfb-spiele-wm-2018-gruppen-wm-2018-termine_sto6691356/story.shtml,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T21:44:14-07:00,556
+Pixel 2,1,https://eurosport.de/fussball/fifa-wm/2018/wm-2018-spielplan-russland-alle-dfb-spiele-wm-2018-gruppen-wm-2018-termine_sto6691356/story.shtml,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T21:44:42-07:00,221
+Pixel 2,1,https://eurosport.de/fussball/fifa-wm/2018/wm-2018-spielplan-russland-alle-dfb-spiele-wm-2018-gruppen-wm-2018-termine_sto6691356/story.shtml,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T21:45:09-07:00,348
+Pixel 2,1,https://www.google.com,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T20:53:51-07:00,1776
+Pixel 2,1,https://www.google.com,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T20:54:20-07:00,1242
+Pixel 2,1,https://www.google.com,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T20:54:49-07:00,2519
+Pixel 2,1,https://www.google.com,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T20:55:18-07:00,1527
+Pixel 2,1,https://www.google.com,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T20:55:46-07:00,1338
+Pixel 2,1,https://www.google.com,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T20:56:15-07:00,1182
+Pixel 2,1,https://www.google.com,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T20:56:43-07:00,1315
+Pixel 2,1,https://www.google.com,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T20:57:11-07:00,1599
+Pixel 2,1,https://www.google.com,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T20:57:40-07:00,1639
+Pixel 2,1,https://www.google.com,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T19:10:50-07:00,1755
+Pixel 2,1,https://www.google.com,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T19:11:06-07:00,1220
+Pixel 2,1,https://www.google.com,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T19:11:22-07:00,2408
+Pixel 2,1,https://www.google.com,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T19:11:39-07:00,1901
+Pixel 2,1,https://www.google.com,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T19:11:55-07:00,1858
+Pixel 2,1,https://www.google.com,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T19:12:11-07:00,1599
+Pixel 2,1,https://www.google.com,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T19:12:27-07:00,1399
+Pixel 2,1,https://www.google.com,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T19:12:43-07:00,1834
+Pixel 2,1,https://www.google.com,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T19:12:59-07:00,1593
+Pixel 2,1,https://web.de/magazine/politik/politologe-glaubt-grossen-koalition-herbst-knallen-33563566,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-12T07:47:37-07:00,5049
+Pixel 2,1,https://web.de/magazine/politik/politologe-glaubt-grossen-koalition-herbst-knallen-33563566,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-12T07:48:10-07:00,4700
+Pixel 2,1,https://web.de/magazine/politik/politologe-glaubt-grossen-koalition-herbst-knallen-33563566,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-12T07:48:43-07:00,5470
+Pixel 2,1,https://web.de/magazine/politik/politologe-glaubt-grossen-koalition-herbst-knallen-33563566,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-12T07:49:16-07:00,4262
+Pixel 2,1,https://web.de/magazine/politik/politologe-glaubt-grossen-koalition-herbst-knallen-33563566,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-12T07:49:47-07:00,4235
+Pixel 2,1,https://web.de/magazine/politik/politologe-glaubt-grossen-koalition-herbst-knallen-33563566,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-12T07:50:19-07:00,4487
+Pixel 2,1,https://web.de/magazine/politik/politologe-glaubt-grossen-koalition-herbst-knallen-33563566,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-12T07:50:51-07:00,2155
+Pixel 2,1,https://web.de/magazine/politik/politologe-glaubt-grossen-koalition-herbst-knallen-33563566,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-12T07:51:20-07:00,4043
+Pixel 2,1,https://web.de/magazine/politik/politologe-glaubt-grossen-koalition-herbst-knallen-33563566,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-12T07:51:52-07:00,5585
+Pixel 2,1,https://web.de/magazine/politik/politologe-glaubt-grossen-koalition-herbst-knallen-33563566,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T20:35:53-07:00,4281
+Pixel 2,1,https://web.de/magazine/politik/politologe-glaubt-grossen-koalition-herbst-knallen-33563566,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T20:36:12-07:00,5614
+Pixel 2,1,https://web.de/magazine/politik/politologe-glaubt-grossen-koalition-herbst-knallen-33563566,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T20:36:33-07:00,3940
+Pixel 2,1,https://web.de/magazine/politik/politologe-glaubt-grossen-koalition-herbst-knallen-33563566,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T20:36:51-07:00,4600
+Pixel 2,1,https://web.de/magazine/politik/politologe-glaubt-grossen-koalition-herbst-knallen-33563566,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T20:37:11-07:00,4324
+Pixel 2,1,https://web.de/magazine/politik/politologe-glaubt-grossen-koalition-herbst-knallen-33563566,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T20:37:30-07:00,3490
+Pixel 2,1,https://web.de/magazine/politik/politologe-glaubt-grossen-koalition-herbst-knallen-33563566,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T20:37:48-07:00,5694
+Pixel 2,1,https://web.de/magazine/politik/politologe-glaubt-grossen-koalition-herbst-knallen-33563566,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T20:38:09-07:00,3964
+Pixel 2,1,https://web.de/magazine/politik/politologe-glaubt-grossen-koalition-herbst-knallen-33563566,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T20:38:27-07:00,4612
+Pixel 2,1,https://www.amazon.com,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T20:49:00-07:00,1376
+Pixel 2,1,https://www.amazon.com,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T20:49:28-07:00,1843
+Pixel 2,1,https://www.amazon.com,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T20:49:57-07:00,1905
+Pixel 2,1,https://www.amazon.com,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T20:50:26-07:00,2074
+Pixel 2,1,https://www.amazon.com,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T20:50:54-07:00,1582
+Pixel 2,1,https://www.amazon.com,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T20:51:23-07:00,1508
+Pixel 2,1,https://www.amazon.com,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T20:51:51-07:00,2513
+Pixel 2,1,https://www.amazon.com,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T20:52:21-07:00,3146
+Pixel 2,1,https://www.amazon.com,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T20:52:51-07:00,1381
+Pixel 2,1,https://www.amazon.com,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T19:07:58-07:00,1957
+Pixel 2,1,https://www.amazon.com,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T19:08:14-07:00,1623
+Pixel 2,1,https://www.amazon.com,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T19:08:30-07:00,5951
+Pixel 2,1,https://www.amazon.com,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T19:08:50-07:00,2327
+Pixel 2,1,https://www.amazon.com,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T19:09:07-07:00,1241
+Pixel 2,1,https://www.amazon.com,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T19:09:22-07:00,1922
+Pixel 2,1,https://www.amazon.com,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T19:09:38-07:00,2224
+Pixel 2,1,https://www.amazon.com,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T19:09:55-07:00,3668
+Pixel 2,1,https://www.amazon.com,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T19:10:13-07:00,2383
+Pixel 2,1,https://discordapp.com/,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T23:03:42-07:00,3174
+Pixel 2,1,https://discordapp.com/,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T23:04:13-07:00,2786
+Pixel 2,1,https://discordapp.com/,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T23:04:43-07:00,3918
+Pixel 2,1,https://discordapp.com/,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T23:05:15-07:00,3023
+Pixel 2,1,https://discordapp.com/,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T23:05:46-07:00,2570
+Pixel 2,1,https://discordapp.com/,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T23:06:16-07:00,3024
+Pixel 2,1,https://discordapp.com/,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T23:06:46-07:00,3327
+Pixel 2,1,https://discordapp.com/,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T23:07:17-07:00,2722
+Pixel 2,1,https://discordapp.com/,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T23:07:47-07:00,4286
+Pixel 2,1,https://discordapp.com/,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T20:14:01-07:00,3956
+Pixel 2,1,https://discordapp.com/,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T20:14:20-07:00,3091
+Pixel 2,1,https://discordapp.com/,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T20:14:38-07:00,3012
+Pixel 2,1,https://discordapp.com/,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T20:14:56-07:00,4448
+Pixel 2,1,https://discordapp.com/,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T20:15:15-07:00,2835
+Pixel 2,1,https://discordapp.com/,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T20:15:33-07:00,2429
+Pixel 2,1,https://discordapp.com/,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T20:15:50-07:00,2176
+Pixel 2,1,https://discordapp.com/,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T20:16:07-07:00,2252
+Pixel 2,1,https://discordapp.com/,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T20:16:24-07:00,2784
+Pixel 2,1,https://www.jianshu.com/,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T23:08:58-07:00,3486
+Pixel 2,1,https://www.jianshu.com/,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T23:09:28-07:00,3493
+Pixel 2,1,https://www.jianshu.com/,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T23:09:59-07:00,4112
+Pixel 2,1,https://www.jianshu.com/,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T23:10:30-07:00,4250
+Pixel 2,1,https://www.jianshu.com/,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T23:11:01-07:00,3656
+Pixel 2,1,https://www.jianshu.com/,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T23:11:32-07:00,5592
+Pixel 2,1,https://www.jianshu.com/,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T23:12:04-07:00,4478
+Pixel 2,1,https://www.jianshu.com/,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T23:12:36-07:00,6481
+Pixel 2,1,https://www.jianshu.com/,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T23:13:09-07:00,3661
+Pixel 2,1,https://www.jianshu.com/,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T20:17:06-07:00,3335
+Pixel 2,1,https://www.jianshu.com/,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T20:17:24-07:00,3145
+Pixel 2,1,https://www.jianshu.com/,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T20:17:42-07:00,3469
+Pixel 2,1,https://www.jianshu.com/,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T20:18:00-07:00,2827
+Pixel 2,1,https://www.jianshu.com/,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T20:18:17-07:00,4141
+Pixel 2,1,https://www.jianshu.com/,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T20:18:36-07:00,3267
+Pixel 2,1,https://www.jianshu.com/,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T20:18:54-07:00,2539
+Pixel 2,1,https://www.jianshu.com/,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T20:19:11-07:00,2830
+Pixel 2,1,https://www.jianshu.com/,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T20:19:29-07:00,4757
+Pixel 2,1,https://m.ebay-kleinanzeigen.de/s-anzeigen/auf-zeit-wg-berlin/zimmer/c199-l3331,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T22:11:49-07:00,4351
+Pixel 2,1,https://m.ebay-kleinanzeigen.de/s-anzeigen/auf-zeit-wg-berlin/zimmer/c199-l3331,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T22:12:20-07:00,4251
+Pixel 2,1,https://m.ebay-kleinanzeigen.de/s-anzeigen/auf-zeit-wg-berlin/zimmer/c199-l3331,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T22:12:51-07:00,2786
+Pixel 2,1,https://m.ebay-kleinanzeigen.de/s-anzeigen/auf-zeit-wg-berlin/zimmer/c199-l3331,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T22:13:21-07:00,3838
+Pixel 2,1,https://m.ebay-kleinanzeigen.de/s-anzeigen/auf-zeit-wg-berlin/zimmer/c199-l3331,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T22:13:52-07:00,3483
+Pixel 2,1,https://m.ebay-kleinanzeigen.de/s-anzeigen/auf-zeit-wg-berlin/zimmer/c199-l3331,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T22:14:22-07:00,4228
+Pixel 2,1,https://m.ebay-kleinanzeigen.de/s-anzeigen/auf-zeit-wg-berlin/zimmer/c199-l3331,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T22:14:53-07:00,4882
+Pixel 2,1,https://m.ebay-kleinanzeigen.de/s-anzeigen/auf-zeit-wg-berlin/zimmer/c199-l3331,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T22:15:25-07:00,2521
+Pixel 2,1,https://m.ebay-kleinanzeigen.de/s-anzeigen/auf-zeit-wg-berlin/zimmer/c199-l3331,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T22:15:55-07:00,3936
+Pixel 2,1,https://m.ebay-kleinanzeigen.de/s-anzeigen/auf-zeit-wg-berlin/zimmer/c199-l3331,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T19:48:08-07:00,2454
+Pixel 2,1,https://m.ebay-kleinanzeigen.de/s-anzeigen/auf-zeit-wg-berlin/zimmer/c199-l3331,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T19:48:25-07:00,4316
+Pixel 2,1,https://m.ebay-kleinanzeigen.de/s-anzeigen/auf-zeit-wg-berlin/zimmer/c199-l3331,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T19:48:44-07:00,5287
+Pixel 2,1,https://m.ebay-kleinanzeigen.de/s-anzeigen/auf-zeit-wg-berlin/zimmer/c199-l3331,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T19:49:04-07:00,3291
+Pixel 2,1,https://m.ebay-kleinanzeigen.de/s-anzeigen/auf-zeit-wg-berlin/zimmer/c199-l3331,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T19:49:21-07:00,2566
+Pixel 2,1,https://m.ebay-kleinanzeigen.de/s-anzeigen/auf-zeit-wg-berlin/zimmer/c199-l3331,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T19:49:39-07:00,4620
+Pixel 2,1,https://m.ebay-kleinanzeigen.de/s-anzeigen/auf-zeit-wg-berlin/zimmer/c199-l3331,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T19:49:58-07:00,3365
+Pixel 2,1,https://m.ebay-kleinanzeigen.de/s-anzeigen/auf-zeit-wg-berlin/zimmer/c199-l3331,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T19:50:16-07:00,3848
+Pixel 2,1,https://m.ebay-kleinanzeigen.de/s-anzeigen/auf-zeit-wg-berlin/zimmer/c199-l3331,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T19:50:35-07:00,2543
+Pixel 2,1,https://en.m.wikipedia.org/wiki/main_page,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T22:26:00-07:00,1572
+Pixel 2,1,https://en.m.wikipedia.org/wiki/main_page,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T22:26:29-07:00,1997
+Pixel 2,1,https://en.m.wikipedia.org/wiki/main_page,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T22:26:58-07:00,2025
+Pixel 2,1,https://en.m.wikipedia.org/wiki/main_page,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T22:27:27-07:00,1663
+Pixel 2,1,https://en.m.wikipedia.org/wiki/main_page,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T22:27:56-07:00,3158
+Pixel 2,1,https://en.m.wikipedia.org/wiki/main_page,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T22:28:26-07:00,1441
+Pixel 2,1,https://en.m.wikipedia.org/wiki/main_page,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T22:28:55-07:00,1560
+Pixel 2,1,https://en.m.wikipedia.org/wiki/main_page,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T22:29:23-07:00,1205
+Pixel 2,1,https://en.m.wikipedia.org/wiki/main_page,Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0,replay,2019-04-11T22:29:52-07:00,1518
+Pixel 2,1,https://en.m.wikipedia.org/wiki/main_page,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T19:54:01-07:00,1083
+Pixel 2,1,https://en.m.wikipedia.org/wiki/main_page,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T19:54:16-07:00,1289
+Pixel 2,1,https://en.m.wikipedia.org/wiki/main_page,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T19:54:32-07:00,937
+Pixel 2,1,https://en.m.wikipedia.org/wiki/main_page,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T19:54:47-07:00,972
+Pixel 2,1,https://en.m.wikipedia.org/wiki/main_page,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T19:55:03-07:00,1117
+Pixel 2,1,https://en.m.wikipedia.org/wiki/main_page,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T19:55:19-07:00,938
+Pixel 2,1,https://en.m.wikipedia.org/wiki/main_page,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T19:55:35-07:00,1470
+Pixel 2,1,https://en.m.wikipedia.org/wiki/main_page,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T19:55:51-07:00,1094
+Pixel 2,1,https://en.m.wikipedia.org/wiki/main_page,"Mozilla/5.0 (Linux; Android 9; Pixel 2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36",replay,2019-04-11T19:56:06-07:00,1653

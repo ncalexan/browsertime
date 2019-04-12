@@ -1,0 +1,301 @@
+.mg-active-datapoint {
+    fill: black
+    font-size: 1.3rem;
+    font-weight: 500;
+    opacity: 0.8;
+}
+
+body {
+    padding: 1em 0 0 1em;
+}
+
+h1 {
+    font-weight: 100;
+    font-size: 3vw;
+    margin: auto;
+}
+
+.release .mg-area1-color {
+    fill: #FE9033;/*orange*/
+}
+
+
+
+.nightly .mg-area1-color {
+    fill: #773CFF /*purple*/
+}
+
+.beta .mg-area1-color {
+    fill: #4F7DFF; /*blue*/
+}
+
+
+.esr .mg-area1-color {
+    fill: #69d1ae; /*green*/
+}
+
+.esr .mg-hover-line1-color {
+    fill:  #69d1ae; /*green*/
+}
+
+.esr .mg-line1-color {
+    stroke: #69d1ae; /*green*/
+}
+
+
+
+
+
+.mg-header {
+    font-weight: 100;
+    font-size: 1.2em;
+}
+
+.mg-header .mg-chart-description .mg-warning {
+    fill: #ccc;
+    /*    font-weight: 100;
+*/    font-size: 8em;
+}
+
+
+
+.mg-points circle {
+    opacity: 0.65;
+}
+
+.mg-popover {
+    font-size: 1.1rem;
+    }
+
+.mg-popover-content {
+    cursor: auto;
+    line-height: 17px;
+}
+
+.mg-data-table {
+    margin-top: 30px;
+}
+
+.mg-data-table thead tr th {
+    border-bottom: 1px solid darkgray;
+    cursor: default;
+    font-size: 1.1rem;
+    font-weight: normal;
+    padding: 5px 5px 8px 5px;
+    text-align: right;
+}
+
+/*div.chart {
+    display: flex;
+
+}*/
+
+
+
+
+
+.release .mg-line1-color {
+    stroke: #FE9033; /*organe*/
+}
+
+.nightly .mg-line1-color {
+    stroke: #773CFF /*purple*/
+}
+
+.beta .mg-line1-color {
+    stroke: #4F7DFF /*blue*/
+}
+
+
+.release .mg-hover-line1-color {
+    fill: #FE9033;/*orange*/
+}
+
+.beta .mg-hover-line1-color {
+    fill:  #4F7DFF /*blue*/
+}
+
+.nightly .mg-hover-line1-color {
+    fill:  #773CFF /*purple*/
+}
+
+
+
+
+.mg-line-legend text {
+    font-size: 1.2rem;
+    font-weight: 100;
+    stroke: none;
+    align-content: center;
+}
+
+
+.release .mg-line1-legend-color {
+    color: #FE9033;/*orange*/
+    fill: #FE9033;/*orange*/
+}
+
+
+
+.mg-main-area-solid svg .mg-main-area {
+/*    fill: #ccccff;
+*/    opacity: 1;
+      fill: orange;
+}
+
+.mg-markers line {
+    opacity: 1;
+    shape-rendering: auto;
+    stroke: #b3b2b2;
+    stroke-width: 1px;
+}
+
+
+
+
+.mg-markers text {
+    fill: black;
+    font-size: 0.8rem;
+    opacity: 0.6;
+    text-anchor: end;
+}
+
+.mg-missing-text {
+    opacity: 0.9;
+}
+
+.mg-missing-background {
+    stroke: blue;
+    fill: none;
+    stroke-dasharray: 10,5;
+    stroke-opacity: 0.05;
+    stroke-width: 2;
+}
+
+.mg-missing .mg-main-line {
+    opacity: 0.1;
+}
+
+
+.mg-missing .mg-main-area {
+    opacity: 0.03;
+}
+
+.mg-main-line:hover {
+    stroke-width: 2;
+}
+
+path.mg-main-area {
+    opacity: 0.2;
+    stroke: none;
+}
+
+path.mg-confidence-band {
+    fill: #ccc;
+    opacity: 0.4;
+    stroke: none;
+}
+
+path.mg-main-line {
+    fill: none;
+    opacity: 0.6;
+    stroke-width: 3px;
+}
+
+
+
+.mg-points circle {
+    fill-opacity: 0.4;
+    stroke-opacity: 1;
+}
+
+circle.mg-points-mono {
+/*    fill: #0000ff;
+    stroke: #0000ff;*/
+}
+
+tspan.mg-points-mono {
+   /* fill: #0000ff;
+    stroke: #0000ff;*/
+    fill: orange;
+}
+
+/* a selected point in a scatterplot */
+.mg-points circle.selected {
+    fill-opacity: 1;
+    stroke-opacity: 1;
+}
+
+.mg-voronoi path {
+    fill: none;
+    pointer-events: all;
+    stroke: none;
+    stroke-opacity: 0.1;
+}
+
+.mg-x-rug-mono,
+.mg-y-rug-mono {
+    stroke: black;
+}
+
+.mg-x-axis line,
+.mg-y-axis line {
+    opacity: 1;
+    shape-rendering: auto;
+    stroke: #b3b2b2;
+    stroke-width: 1px;
+}
+
+.mg-x-axis text,
+.mg-y-axis text,
+.mg-histogram .axis text {
+    font-size: 1.2rem;
+    font-weight: 500;
+    opacity: .55;
+    
+}
+
+.mg-x-axis .label,
+.mg-y-axis .label,
+.mg-axis .label {
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    font-weight: 400;
+}
+
+.mg-x-axis-small text,
+.mg-y-axis-small text,
+.mg-active-datapoint-small {
+    font-size: 0.6rem;
+}
+
+.mg-x-axis-small .label,
+.mg-y-axis-small .label {
+    font-size: 0.65rem;
+}
+
+.mg-european-hours {
+}
+
+.mg-year-marker text {
+    fill: black;
+    font-size: 1.2rem;
+    opacity: 0.55;
+}
+
+.mg-year-marker line {
+    opacity: 1;
+    shape-rendering: auto;
+    stroke: #b3b2b2;
+    stroke-width: 1px;
+}
+
+.mg-year-marker-small text {
+    font-size: 0.6rem;
+}
+
+.mg-line3 .mg-line4 {
+    stroke-dasharray: 3, 3;
+}
+
+
