@@ -195,7 +195,20 @@ def main(args):
 
     race_vehicles = [named_vehicles[name] for name in race['vehicle_names']]
 
-    for v, u in itertools.product(enumerate(race_vehicles), enumerate(urls)):
+    # # Install vehicles if we're asked to do so.
+    # install = data.get('install', {})
+    # if install:
+    #     import request
+    #     for name in race['vehicle_names']:
+    #         if name in install:
+    #             url = install['name']['url'] # XXX support files, etc.
+
+    # Condition profiles as directed.
+    # env NAME=firefox-profile-mitmproxy PACKAGE=org.mozilla.fenix ACTIVITY=org.mozilla.fenix.browser.BrowserPerformanceTestActivity bash condition_profile.sh
+    # env NAME=firefox-profile-mitmproxy PACKAGE=org.mozilla.geckoview_example ACTIVITY=org.mozilla.geckoview_example.GeckoViewActivity bash condition_profile.sh
+
+    for u, v in itertools.product(enumerate(urls), enumerate(race_vehicles)):
+    # for v, u in itertools.product(enumerate(race_vehicles), enumerate(urls)):
         url_index, url = u
         vehicle_index, vehicle = v
 

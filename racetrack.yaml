@@ -36,9 +36,6 @@ racetrack:
             # XXX
             - --proxy.http=${http_proxy_host}:${http_proxy_port}
             - --proxy.https=${http_proxy_host}:${http_proxy_port}
-            # XXX
-            - --firefox.profileTemplate
-            - /tmp/firefox-profile-mitmproxy
 
     - &browsertime-android
         from: *browsertime
@@ -66,6 +63,10 @@ racetrack:
             - --firefox.android.intentArgument=android.intent.action.VIEW
             - --firefox.android.intentArgument=-d
             - --firefox.android.intentArgument=data:text/html,
+            # XXX
+            - --firefox.profileTemplate
+            - /tmp/firefox-profile-mitmproxy-org.mozilla.geckoview_example
+
 
     # Eventually, https://index.taskcluster.net/v1/task/project.mobile.fenix.signed-nightly.nightly.latest/artifacts/public/target.arm.apk
     # For now, raptorGreenfieldRelease from https://queue.taskcluster.net/v1/task/G-yJwOBQTCmMA_n4yBQE7Q/runs/0/artifacts/public/target.apk
@@ -79,6 +80,9 @@ racetrack:
             - --firefox.android.intentArgument=android.intent.action.VIEW
             - --firefox.android.intentArgument=-d
             - --firefox.android.intentArgument=data:text/html,
+            # XXX
+            - --firefox.profileTemplate
+            - /tmp/firefox-profile-mitmproxy-org.mozilla.fenix
 
     - &fennec
         from: *geckoview
@@ -91,6 +95,9 @@ racetrack:
             - --firefox.android.intentArgument=-d
             - --firefox.android.intentArgument=data:text/html,
             - --firefox.android.activity=org.mozilla.gecko.BrowserApp
+            # XXX
+            - --firefox.profileTemplate
+            - /tmp/firefox-profile-mitmproxy-org.mozilla.firefox
 
     -
         name: org.mozilla.firefox
@@ -137,13 +144,26 @@ racetrack:
         args:
             - --chrome.android.package=com.android.chrome
 
+
+install:
+    org.mozilla.geckoview_example:
+        # From https://index.taskcluster.net/v1/task/gecko.v2.mozilla-central.latest.mobile.android-aarch64-opt/artifacts/public/build/target.apk.
+        url: https://queue.taskcluster.net/v1/task/EbHvScwDQBWnoYHJRwZphQ/artifacts/public%2Fbuild%2Ftarget.apk
+
+    org.mozilla.fenix:
+        # From https://index.taskcluster.net/v1/task/project.mobile.fenix.branch.master.latest.greenfield.aarch64-release-raptor/artifacts/public/target.apk.
+        url: https://queue.taskcluster.net/v1/task/CBrHoLKGR4aW1pN0FJo8nw/artifacts/public%2Ftarget.apk
+
+    org.mozilla.firefox:
+        url: http://archive.mozilla.org/pub/mobile/releases/64.0.2/android-api-16/multi/fennec-64.0.2.multi.android-arm.apk
+
 race:
     description: Chrome 73 vs GVE 68 ARM vs Fenix 68 ARM vs. Fennec 64
     vehicle_names:
-        - com.android.chrome
+        - org.mozilla.geckoview_example
         - org.mozilla.fenix
         - org.mozilla.firefox
-        - org.mozilla.geckoview_example
+        - com.android.chrome
     urls:
         - https://www.amazon.com
         - https://www.google.com

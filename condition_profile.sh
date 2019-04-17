@@ -5,6 +5,7 @@ set -x -e -v
 : TEMPLATE ${TEMPLATE:=browsersupport/$NAME}
 # : PACKAGE ${PACKAGE:=org.mozilla.tv.firefox.gecko.debug}
 : PACKAGE ${PACKAGE:=org.mozilla.firefox}
+: ACTIVITY ${ACTIVITY:=.App}
 : EXTERNAL ${EXTERNAL:=/mnt/sdcard}
 : TMP ${TMP:=/tmp}
 : URL ${URL:=https://example.com}
@@ -16,13 +17,13 @@ adb shell pm clear $PACKAGE
 adb shell pm grant $PACKAGE android.permission.WRITE_EXTERNAL_STORAGE
 adb shell pm grant $PACKAGE android.permission.READ_EXTERNAL_STORAGE
 
-adb shell rm -rf $EXTERNAL/$NAME
-adb push $TEMPLATE $EXTERNAL/$NAME
+adb shell rm -rf $EXTERNAL/$NAME-$PACKAGE
+adb push $TEMPLATE $EXTERNAL/$NAME-$PACKAGE
 
-adb shell am start -W -n $PACKAGE/.App \
+adb shell am start -W -n $PACKAGE/$ACTIVITY \
     -a android.intent.action.VIEW -d $URL \
     --ez skipstartpane true \
-    --es args "'-profile $EXTERNAL/$NAME'"
+    --es args "'-profile $EXTERNAL/$NAME-$PACKAGE'"
 
 sleep $SLEEP
 
@@ -30,5 +31,5 @@ sleep $SLEEP
 # created above.
 adb shell am force-stop $PACKAGE
 
-rm -rf $TMP/$NAME
-adb pull $EXTERNAL/$NAME $TMP/$NAME
+rm -rf $TMP/$NAME-$PACKAGE
+adb pull $EXTERNAL/$NAME-$PACKAGE $TMP/$NAME-$PACKAGE
