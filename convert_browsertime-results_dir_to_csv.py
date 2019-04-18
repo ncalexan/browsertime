@@ -34,6 +34,19 @@ def walk(root, verbose=0):
 
                 try:
                     j = json.load(open(path, 'rt'))
+
+                    vehicle_map = {
+                        'com.android.chrome': 'Chrome 73',
+                        'org.mozilla.geckoview_example': 'GVE 68 aarch64',
+                        'org.mozilla.fenix': 'Fenix 68 aarch64',
+                        'org.mozilla.firefox': 'Fennec 64',
+                    }
+                    for package, vehicle in vehicle_map.items():
+                        if package in path:
+                            break
+                    else:
+                        raise ValueError('vehicle not found')
+
                     for entry in j:
                         site = entry['info']['url'].lower()
                         # proxy = entry['info']['extra']['proxy']
@@ -44,6 +57,7 @@ def walk(root, verbose=0):
                             timestamp = entry['timestamps'][i]
                             yield {'site': site,
                                    'engine': run['browser']['userAgent'],
+                                   'vehicle': vehicle,
                                    'timestamp': timestamp,
                                    'pageLoadTime': pageLoadTime}
                 except Exception as e:
@@ -72,7 +86,7 @@ def main(args):
                 measurement['proxy'] = 'replay'
                 yield measurement
 
-    writer = csv.DictWriter(sys.stdout, ('device', 'run', 'site', 'engine', 'proxy', 'timestamp', 'pageLoadTime'))
+    writer = csv.DictWriter(sys.stdout, ('device', 'run', 'site', 'engine', 'vehicle', 'proxy', 'timestamp', 'pageLoadTime'))
     writer.writeheader()
     writer.writerows(walk_dirs(args.dir))
 

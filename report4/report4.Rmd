@@ -1,0 +1,172 @@
+---
+title: "browsertime: cold page load, Chrome 73 vs GVE 68 aarch 64 vs Fenix 68 aarch64 vs Fennec 64 on the Pixel 2"
+author: Nick Alexander
+date: April 17, 2019
+output:
+  html_document:
+    toc: true
+    toc_float: true
+    theme: cosmo
+    includes:
+      in_header: "html/header.html"
+---
+
+<style>
+select {
+    width: 30%;
+    right: 10px;
+    height: 30px;
+}
+</style>
+
+```{r setup, include=FALSE}
+library(glue)
+library(dplyr)
+library(DT)
+library(ggplot2)
+library(stringr)
+library(tidyr)
+
+btr <- read.csv('data/data.csv')
+by_site <- btr %>%
+  filter(proxy == 'replay') %>%
+  select(-proxy, -timestamp, -engine)
+
+# Ordering the vehicle factor in this way makes the dot-plot below generally "follow reality": Fennec is slowest, then Fenix, then GVE, then Chrome.
+by_site$vehicle <- factor(by_site$vehicle, levels=c("Fennec 64", "Fenix 68 aarch64", "GVE 68 aarch64", "Chrome 73"))
+
+runs <- data.frame(run = c(1),
+                   device = factor(c("Pixel 2")),
+                   iterations = c(9),
+                   min_iterations = c(7))
+
+with_min_iterations <- by_site %>%
+  group_by(run, device, site, vehicle) %>%
+  summarise(num_iterations=n()) %>%
+  ungroup() %>%
+  group_by(run, device, site) %>%
+  # This ensures that every "vehicle" has 0 if there were no runs recorded for that vehicle configuration.
+  spread(vehicle, num_iterations, fill = 0) %>%
+  gather("vehicle", num_iterations, levels(by_site$vehicle)) %>%
+  ungroup() %>%
+  group_by(run, device, site) %>%
+  summarise(min_iterations=min(num_iterations)) %>%
+  ungroup()
+
+# Each (run, device, site) that has sufficient data to draw conclusions.
+sufficient <- left_join(with_min_iterations, runs %>% select(-iterations), by = c("run", "device")) %>%
+  filter(min_iterations.x >= min_iterations.y) %>%
+  select(run, device, site)
+
+insufficient <- left_join(with_min_iterations, runs %>% select(-iterations), by = c("run", "device")) %>%
+  filter(min_iterations.x < min_iterations.y)
+
+# The measurements corresponding to (run, device, site) tuples with sufficient data.
+complete <- semi_join(by_site, sufficient, by = c("run", "device", "site"))
+
+complete_sites <- complete %>% select(site) %>% distinct()
+sites <- by_site %>% select(site) %>% distinct()
+incomplete_sites <- setdiff(sites, complete_sites) 
+```
+
+## Per-device, per-site vehicle comparisons
+
+The following graph gives insight into how the vehicles compare on the
+sites in the test corpus.
+
+```{r, echo=FALSE, fig.width = 12, fig.height=12}
+xx <- complete %>% group_by(device, run, site) %>% summarize(m=mean(pageLoadTime)) %>% ungroup() %>% arrange(m) %>% inner_join(complete, by=c('device', 'run', 'site'))
+xx$site <- sub('https://', '', xx$site)
+xx$site <- sub('http://', '', xx$site)
+xx$site <- xx$site %>% str_trunc(30) %>% str_pad(30, 'right')
+
+p <- ggplot(xx, aes(x=reorder(site, m), y=pageLoadTime))
+p <- p + geom_point(aes(color=vehicle))
+p <- p + facet_wrap(vars(device, run), ncol=1, scales='free', labeller=labeller(.multi_line=FALSE)) + theme(axis.text.x=element_text(angle=-67.5, hjust=0, vjust=0)) + xlab('site')
+p <- p + theme(legend.justification = c(0, 1), legend.position = c(0.04, 0.995))
+p
+```
+
+Here are the median values:
+
+```{r, echo=FALSE, fig.width = 12, fig.height=12}
+xx <- complete %>% group_by(device, run, site) %>% summarize(m=mean(pageLoadTime)) %>% ungroup() %>% arrange(m) %>% inner_join(complete, by=c('device', 'run', 'site'))
+xx$site <- sub('https://', '', xx$site)
+xx$site <- sub('http://', '', xx$site)
+xx$site <- xx$site %>% str_trunc(30) %>% str_pad(30, 'right')
+
+xx <- xx %>%
+  group_by(device, run, site, vehicle) %>%
+  summarize(m=first(m), med=median(pageLoadTime)) %>%
+  ungroup()
+
+# xx$scaled_med <- xx$med * 1.1
+# xx$scaled_med[xx$vehicle != 'Chrome 73'] <- NA
+
+p <- ggplot(xx, aes(x=reorder(site, m), y=med, fill=vehicle))
+# p <- p + geom_errorbar(aes(ymin = 0, ymax = scaled_med), width=0.6)
+p <- p + geom_bar(position="dodge", stat="identity")
+p <- p + facet_wrap(vars(device, run), ncol=1, scales='free', labeller=labeller(.multi_line=FALSE)) + theme(axis.text.x=element_text(angle=-67.5, hjust=0, vjust=0)) + xlab('site')
+p <- p + theme(legend.justification = c(0, 1), legend.position = c(0.04, 0.995))
+p
+```
+
+Here is the noise in the data captured.  What stands out are the sheer number of outliers:
+
+```{r, echo=FALSE, fig.width = 12, fig.height=12}
+xx <- complete %>% group_by(device, run, site) %>% summarize(m=mean(pageLoadTime)) %>% ungroup() %>% arrange(m) %>% inner_join(complete, by=c('device', 'run', 'site'))
+xx$site <- sub('https://', '', xx$site)
+xx$site <- sub('http://', '', xx$site)
+xx$site <- xx$site %>% str_trunc(30) %>% str_pad(30, 'right')
+
+# xx <- xx %>%
+#   group_by(device, run, site, vehicle) %>%
+#   summarize(m=first(m), med=median(pageLoadTime)) %>%
+#   ungroup()
+
+# xx$scaled_med <- xx$med * 1.1
+# xx$scaled_med[xx$vehicle != 'Chrome 73'] <- NA
+
+p <- ggplot(xx, aes(x=reorder(site, m), y=pageLoadTime, fill=vehicle))
+# p <- p + geom_errorbar(aes(ymin = 0, ymax = scaled_med), width=0.6)
+p <- p + geom_boxplot()
+p <- p + facet_wrap(vars(device, run), ncol=1, scales='free', labeller=labeller(.multi_line=FALSE)) + theme(axis.text.x=element_text(angle=-67.5, hjust=0, vjust=0)) + xlab('site')
+p <- p + theme(legend.justification = c(0, 1), legend.position = c(0.04, 0.995))
+p
+```
+However, if we look at individual vehicles, we see that each vehicle has a similar number of outliers.  That is, it's not only one vehicle is less reliable than the others.
+
+```{r, echo=FALSE, fig.width = 12, fig.height=32}
+p <- ggplot(xx, aes(x=reorder(site, m), y=pageLoadTime, fill=vehicle))
+p <- p + geom_boxplot()
+p <- p + facet_wrap(vars(device, run, vehicle), ncol=1, scales='free', labeller=labeller(.multi_line=FALSE)) + theme(axis.text.x=element_text(angle=-67.5, hjust=0, vjust=0)) + xlab('site')
+p <- p + theme(legend.justification = c(0, 1), legend.position = c(0.04, 0.995))
+p
+```
+
+
+## Gecko engine vehicles over Chrome 73
+
+```{r g_over_c, include=FALSE}
+g_over_c <- complete %>%
+  group_by(run, device, site, vehicle) %>%
+  summarise(pageLoadTime_mean=mean(pageLoadTime)) %>% # , pageLoadTime_rsd=sd(pageLoadTime)/mean(pageLoadTime)*100) %>%
+  ungroup() %>%
+  group_by(run, device, site) %>%
+  spread(vehicle, pageLoadTime_mean) %>%
+  ungroup()
+
+levels(g_over_c$vehicle)
+
+g_over_c[levels(complete$vehicle)] <- g_over_c[levels(complete$vehicle)] / g_over_c$`Chrome 73`
+
+g_over_c <- g_over_c %>% select(-`Chrome 73`, -run)
+```
+
+```{r echo=FALSE}
+datatable(g_over_c, options=list(dom='t', pageLength = nrow(g_over_c)),
+          fillContainer = FALSE,
+          caption=('Gecko engine vehicles pageload over Chrome pageload (lower is better)' %>% glue())) %>%
+  # formatRound(c(3, 4), 2) %>%
+  formatPercentage(setdiff(levels(complete$vehicle), c("Chrome 73")))
+```
