@@ -10,8 +10,8 @@ from contextlib import contextmanager
 import errno
 import functools
 import itertools
+
 import json
-import mozprocess
 import os
 import pipes
 import signal
@@ -20,6 +20,10 @@ import sys
 import time
 import urllib
 
+import jsone
+import yaml
+
+import mozprocess
 import with_wpr
 
 
@@ -109,9 +113,6 @@ def main(args):
 
     # print(args)
 
-    import yaml
-    import jsone
-
     config = yaml.safe_load(open('racetrack.yaml', 'rt').read())
     # print(yaml.dump(config))
 
@@ -119,8 +120,8 @@ def main(args):
     http_proxy_host = args.wpr_host or (get_ip())
 
     context = {
-        'geckodriver': args.geckodriver or '',
-        'chromedriver': args.chromedriver or '',
+        'geckodriver': args.geckodriver or os.environ.get('GECKODRIVER') or '',
+        'chromedriver': args.chromedriver or os.environ.get('CHROMEDRIVER') or '',
         'verbosity_flag': '-' + ('v' * (1 + (args.verbose or 0))), # XXX.
         'user': 'nalexander', # XXX.
         'http_proxy_host': http_proxy_host,

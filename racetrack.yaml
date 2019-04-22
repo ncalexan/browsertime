@@ -161,47 +161,47 @@ race:
     description: Chrome 73 vs GVE 68 ARM vs Fenix 68 ARM vs. Fennec 64
     vehicle_names:
         - org.mozilla.geckoview_example
-        - org.mozilla.fenix
-        - org.mozilla.firefox
+        # - org.mozilla.fenix
+        # - org.mozilla.firefox
         - com.android.chrome
     urls:
-        - https://www.amazon.com
-        - https://www.google.com
-        - https://blogger.com/about
-        - https://m.facebook.com
-        - https://booking.com/searchresults.en-gb.html?city=20088325
-        - https://buzzfeed.com/daves4/the-new-york-times-makes-the-nerdiest-correction-e?utm_term=.tlL2KE08L6#.hwrBglaV2A
+        # - https://www.amazon.com
+        # - https://www.google.com
+        # - https://blogger.com/about
+        # - https://m.facebook.com
+        # - https://booking.com/searchresults.en-gb.html?city=20088325
+        # - https://buzzfeed.com/daves4/the-new-york-times-makes-the-nerdiest-correction-e?utm_term=.tlL2KE08L6#.hwrBglaV2A
         - https://www.youtube.com
-        - https://www.instagram.com
-        - https://m.ebay-kleinanzeigen.de
-        - https://eurosport.de
-        - https://eurosport.de/fussball/fifa-wm/2018/wm-2018-spielplan-russland-alle-dfb-spiele-wm-2018-gruppen-wm-2018-termine_sto6691356/story.shtml
-        - https://fashionbeans.com
-        - https://fashionbeans.com/article/coolest-menswear-stores-in-the-world
-        - https://www.bing.com/search?q=restaurants
-        - https://booking.com
-        - https://m.ebay-kleinanzeigen.de/s-anzeigen/auf-zeit-wg-berlin/zimmer/c199-l3331
-        - https://www.amazon.com/s/ref=nb_sb_noss_2/139-6317191-5622045?url=search-alias%3Daps&field-keywords=mobile+phone
-        - https://en.m.wikipedia.org/wiki/Main_Page
-        - https://www.youtube.com/watch?v=COU5T-Wafa4
-        - https://www.bing.com
-        - https://www.reddit.com
-        - https://www.reddit.com/r/firefox/comments/7dkq03/its_been_a_while/
-        - https://stackoverflow.com/
-        - https://stackoverflow.com/questions/927358/how-do-i-undo-the-most-recent-commits-in-git
-        - https://discordapp.com/
-        - https://www.jianshu.com/
-        - https://m.imdb.com/
-        - https://m.imdb.com/find?q=Firefox
-        # - https://www.allrecipes.com/
-        # - https://www.allrecipes.com/recipe/16485/barbs-broccoli-cauliflower-salad/?internalSource=hub%20recipe&referringContentType=Search
-        - https://www.espn.com
-        - http://www.espn.com/nba/story/_/page/allstarweekend25788027/the-comparison-lebron-james-michael-jordan-their-own-words
-        - https://web.de/
-        - https://web.de/magazine/politik/politologe-glaubt-grossen-koalition-herbst-knallen-33563566
-        - https://bbc.co.uk
-        - https://aframe.io/examples/showcase/animation/
-        - https://m.facebook.com/Cristiano
+        # - https://www.instagram.com
+        # - https://m.ebay-kleinanzeigen.de
+        # - https://eurosport.de
+        # - https://eurosport.de/fussball/fifa-wm/2018/wm-2018-spielplan-russland-alle-dfb-spiele-wm-2018-gruppen-wm-2018-termine_sto6691356/story.shtml
+        # - https://fashionbeans.com
+        # - https://fashionbeans.com/article/coolest-menswear-stores-in-the-world
+        # - https://www.bing.com/search?q=restaurants
+        # - https://booking.com
+        # - https://m.ebay-kleinanzeigen.de/s-anzeigen/auf-zeit-wg-berlin/zimmer/c199-l3331
+        # - https://www.amazon.com/s/ref=nb_sb_noss_2/139-6317191-5622045?url=search-alias%3Daps&field-keywords=mobile+phone
+        # - https://en.m.wikipedia.org/wiki/Main_Page
+        # - https://www.youtube.com/watch?v=COU5T-Wafa4
+        # - https://www.bing.com
+        # - https://www.reddit.com
+        # - https://www.reddit.com/r/firefox/comments/7dkq03/its_been_a_while/
+        # - https://stackoverflow.com/
+        # - https://stackoverflow.com/questions/927358/how-do-i-undo-the-most-recent-commits-in-git
+        # - https://discordapp.com/
+        # - https://www.jianshu.com/
+        # - https://m.imdb.com/
+        # - https://m.imdb.com/find?q=Firefox
+        # # - https://www.allrecipes.com/
+        # # - https://www.allrecipes.com/recipe/16485/barbs-broccoli-cauliflower-salad/?internalSource=hub%20recipe&referringContentType=Search
+        # - https://www.espn.com
+        # - http://www.espn.com/nba/story/_/page/allstarweekend25788027/the-comparison-lebron-james-michael-jordan-their-own-words
+        # - https://web.de/
+        # - https://web.de/magazine/politik/politologe-glaubt-grossen-koalition-herbst-knallen-33563566
+        # - https://bbc.co.uk
+        # - https://aframe.io/examples/showcase/animation/
+        # - https://m.facebook.com/Cristiano
 
         # - *browsertime-android
 
