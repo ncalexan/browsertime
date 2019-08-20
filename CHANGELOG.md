@@ -1,5 +1,31 @@
 # Browsertime changelog
 
+## 5.2.0 - 2019-06-07
+### Added
+* Added metric LastMeaningfulPaint that will be there when you collect `--visualElements` [848](https://github.com/sitespeedio/browsertime/pull/848).
+
+* You can get screenshots in your Chrome trace log using `--chrome.enableTraceScreenshots` [#851](https://github.com/sitespeedio/browsertime/pull/851)
+
+* Chrome 75 in the Docker container (and Chromedriver 75). Also updated Firefox to 67.0.1 [#852](https://github.com/sitespeedio/browsertime/pull/852).
+
+### Fixed
+* Fixed the missing timings in the trace log in Chrome. Or rather they where there but you couldn't see them when you drag/drop the log into devtools [#850](https://github.com/sitespeedio/browsertime/pull/850).
+
+## 5.1.3 - 2019-05-31
+### Fixed
+* Upgraded DayJS to 1.8.14
+* Use unmodified Selenium and use CDP outside of Selenium to avoid having our own modified version [#846](https://github.com/sitespeedio/browsertime/pull/846). People have had problem installing the npm package [#2483](https://github.com/sitespeedio/sitespeed.io/issues/2483) and this hopefully fixes that.
+
+## 5.1.2 - 2019-05-29
+
+### Fixed
+* Using CPU metrics on Android phones was broken since 5.0.0, fixed in [#844](https://github.com/sitespeedio/browsertime/pull/844).
+
+## 5.1.1 - 2019-05-27
+
+### Fixed
+* Getting the HTML content into your Chrome HAR included the full content object instead of just the plain text. Fixed in [#842](https://github.com/sitespeedio/browsertime/pull/842).
+
 ## 5.1.0 - 2019-05-27
 
 ### Added
