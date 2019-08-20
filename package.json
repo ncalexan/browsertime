@@ -1,12 +1,12 @@
 {
   "description": "Browsertime",
-  "version": "5.2.0",
+  "version": "5.3.0",
   "bin": "./bin/browsertime.js",
   "dependencies": {
     "@sitespeed.io/throttle": "0.5.1",
-    "adbkit": "2.11.0",
+    "adbkit": "2.11.1",
     "chrome-har": "0.9.1",
-    "chrome-remote-interface": "0.27.1",
+    "chrome-remote-interface": "0.27.2",
     "dayjs": "1.8.14",
     "del": "4.1.0",
     "execa": "1.0.0",
@@ -25,10 +25,10 @@
     "lodash.set": "4.3.2",
     "mkdirp": "0.5.1",
     "selenium-webdriver": "https://github.com/mozilla/selenium/archive/v3.6.0-android.tar.gz",
-    "tracium": "0.2.0",
+    "@sitespeed.io/tracium": "0.3.2",
     "valid-url": "1.0.9",
     "@cypress/xvfb": "1.2.4",
-    "yargs": "13.2.2"
+    "yargs": "13.2.4"
   },
   "optionalDependencies": {
     "@sitespeed.io/chromedriver": "75.0.3770",

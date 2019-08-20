@@ -779,7 +779,7 @@ def is_color_frame(file, color_file):
             # Bottom
             crops.append('{0:d}x{1:d}+{2:d}+{3:d}'.format(
                 int(width / 2), int(height / 5),
-                int(width / 4), height - int(height / 5) - 50))
+                int(width / 4), height - int(height / 5)))
             for crop in crops:
                 command = ('{0} "{1}" "(" "{2}" -crop {3} -resize 200x200! ")"'
                            ' miff:- | {4} -metric AE - -fuzz 15% null:'
@@ -789,7 +789,7 @@ def is_color_frame(file, color_file):
                 out, err = compare.communicate()
                 if re.match('^[0-9]+$', err):
                     different_pixels = int(err)
-                    if different_pixels < 100:
+                    if different_pixels < 200:
                         match = True
                         break
         except Exception:

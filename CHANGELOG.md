@@ -1,5 +1,41 @@
 # Browsertime changelog
 
+## 5.3.0 - 2019-06-29
+### Added
+* Added support for `--injectJs` using Chrome [#864](https://github.com/sitespeedio/browsertime/pull/864).
+
+### Fixed
+* Use CDP to set request headers for Chrome (instead of the Browsertime extension). This enables adding extra headers for Chrome on Android and fixes [#2520](https://github.com/sitespeedio/sitespeed.io/issues/2520). Fixed in [#867](https://github.com/sitespeedio/browsertime/pull/867).
+
+##  5.2.6 - 2019-06-15
+### Fixed
+* Catch if getting the HTML for a resource from Chrome fails [#861](https://github.com/sitespeedio/browsertime/pull/861).
+* A couple of more pixels to know if a orange screen is orange in Visual Metrics [#862](https://github.com/sitespeedio/browsertime/pull/862).
+* Bumped versions if adbkit, chrome-remote-interface & yargs [#863](https://github.com/sitespeedio/browsertime/pull/863).
+
+## 5.2.5 - 2019-06-13
+### Fixed
+* Fixed so that the tracing in Chrome ends before we start to run our JavaScript metrics (so that they aren't picked up in the trace) [#860](https://github.com/sitespeedio/browsertime/pull/860).
+ 
+## 5.2.4 - 2019-06-13
+### Fixed
+* Running a script that started to measure without a URL and used an alias instead missed out on starting some browser services, for example Long Tasks in Chrome was not recorded. That is fixed in [#858](https://github.com/sitespeedio/browsertime/pull/858)
+
+## 5.2.3 - 2019-06-12
+### Fixed
+* The --enableTraceScreenshots should also work under --chrome.enableTraceScreenshots.
+* Updated Tracium to catch error that happens running tests on Wikipedia.
+
+## 5.2.2 - 2019-06-11
+### Fixed
+* For a while we will run our own version of Tracium that doesn't throw errors if the events in the trace log doesn't follow Traciums standard [#856](https://github.com/sitespeedio/browsertime/pull/856).
+
+## 5.2.1 - 2019-06-10
+### Fixed
+* Next version of Chrome brings back the infobar that pushes down content see [upstream](https://bugs.chromium.org/p/chromium/issues/detail?id=818483). Lets remove the automated flag and test how that works [#853](https://github.com/sitespeedio/browsertime/pull/853).
+
+* Include the last 50 pixels when checking if the page is still orange, hopefully fixing the case where First Visual Change happens way too early [#854](https://github.com/sitespeedio/browsertime/pull/854).
+
 ## 5.2.0 - 2019-06-07
 ### Added
 * Added metric LastMeaningfulPaint that will be there when you collect `--visualElements` [848](https://github.com/sitespeedio/browsertime/pull/848).
@@ -1231,7 +1267,6 @@ We have worked a lot to make Browsertime 3.0 the best version so far. Read the [
 ## version 1.0.0-beta.33 2017-04-04
 
 ### Fixed
-
 * Support legacy option for experimental.dumpChromePerflog and chrome.dumpTraceCategoriesLog from the CLI.
 * Catch all type of errors if the browsers fail to start and do a retry.
 
