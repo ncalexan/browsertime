@@ -1,5 +1,59 @@
 # Browsertime changelog
 
+## 6.0.0-alpha.5 - 2019-08-18
+### Fixed
+* Fix to avoid Chrome vsync problem [#928](https://github.com/sitespeedio/browsertime/pull/928).
+
+## 6.0.0-alpha.4 - 2019-08-16
+
+### Added
+* Limited support to run Safari on iOS and OS X. To run on iOS you need iOS 13 and Mac OS Catalina. At the moment you get Navigation Timing and Resource Timing metrics. In the future lets hope we can add more metrics [#872](https://github.com/sitespeedio/browsertime/pull/872). 
+
+### Fixed
+* A better structure for Element Timings data [#926](https://github.com/sitespeedio/browsertime/pull/926) that makes them easier to use.
+
+## 6.0.0-alpha.3 - 2019-08-15
+### Fixed
+* Fixed over optimistic guard for using Performance Observer [#925](https://github.com/sitespeedio/browsertime/pull/925).
+
+## 6.0.0-alpha.2 - 2019-08-15
+### Added
+* Report the tagName (which tag) that was picked for Largest Contentful Paint [#919](https://github.com/sitespeedio/browsertime/pull/919).
+* Collect element timings [#921](https://github.com/sitespeedio/browsertime/pull/921). All elements needs to have a unique identifier for this to work correctly.
+
+### Fixed
+* Fixed so LCP timings are reported as numbers, not strings [#920](https://github.com/sitespeedio/browsertime/pull/920).
+* Guard against Safaris limited PerformanceObserver [#922](https://github.com/sitespeedio/browsertime/pull/922).
+* Removed decimals from FullyLoaded metric [#923](https://github.com/sitespeedio/browsertime/pull/923).
+
+## 6.0.0-alpha.1 - 2019-08-14
+### Added
+* Upgraded to Ubuntu Disco in the Docker container [#908](https://github.com/sitespeedio/browsertime/pull/908).
+* Use Chrome 77 Beta in the Docker container [#913](https://github.com/sitespeedio/browsertime/pull/913).
+* Use [TSProxy](https://github.com/WPO-Foundation/tsproxy) to throttle the connection. You should use TSProxy when you run on Kubernetes. Use it by `--connectivity.engine tsproxy`. We used to have support years ago but it never worked good on Mac/Linux so we dropped it. But it works now so we added it back [#891](https://github.com/sitespeedio/browsertime/pull/891).
+* Using Chrome 77 (or later) you will now get a layout shift score (in percentage), see https://web.dev/layout-instability-api. [#905](https://github.com/sitespeedio/browsertime/pull/905).
+* Get LargestContentfulPaint in Chrome 77 (or later) [#906](https://github.com/sitespeedio/browsertime/pull/906).
+* You can now add your own metrics directly from your script (or post script) using *context.result.extras*. More info coming [#917](https://github.com/sitespeedio/browsertime/pull/917)
+* There's an alternative to collect Visual Metrics using the Chrome trace log, using [SpeedLine](https://github.com/paulirish/speedline) implemented in [#876](https://github.com/sitespeedio/browsertime/pull/876). Using video give more accurate metrics (at least in our testing) but maybe it could help running on Chrome on Android and add less overhead than recording a video. You can enable it with:  `--cpu --chrome.visualMetricsUsingTrace --chrome.enableTraceScreenshots`
+
+### Fixed
+* Avoid using OS tmp dir (we have had people reporting permission errors) [#916](https://github.com/sitespeedio/browsertime/pull/916).
+
+### Changed
+* We changed where the filmstrip screenshots are saved. Before it was *video/images*, now it is *filmstrip* both for VisualMetrics and SpeedLine [#876](https://github.com/sitespeedio/browsertime/pull/876).
+
+## 5.7.3 - 2019-08-03
+### Fixed
+* Fixed bug introduced in 5.6.0 that made it impossible to set multiple cookies when using Chrome [#910](https://github.com/sitespeedio/browsertime/pull/910).
+
+## 5.7.2 - 2019-08-01
+### Fixed
+* If the trace log miss out on a navigationStart event (causing Tracium to fail) we now insert a navigationStart event [#904](https://github.com/sitespeedio/browsertime/pull/904). The missing navigationStart event started to happen more frequently in Chrome 76.
+
+## 5.7.1 - 2019-07-31
+### Fixed
+* New Chrome introduced more errors when parsing the trace log [#902](https://github.com/sitespeedio/browsertime/issues/902). Let us log better if we have problems with the trace [#903](https://github.com/sitespeedio/browsertime/pull/903).
+
 ## 5.7.0 - 2019-07-30
 ### Added
 * Upgraded to Chrome 76 in the Docker container and to Chromedriver 76.
